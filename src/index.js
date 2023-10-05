@@ -49,7 +49,7 @@ function WithNavbar({ children }) {
 function MyNavbar() {
     return <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
         <Container>
-            <NavLink to="/" onlyActiveOnIndex exact activeClassName="active">
+            <NavLink to="/">
                 <Navbar.Brand href="" >ejuet</Navbar.Brand>
             </NavLink>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
