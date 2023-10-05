@@ -35,7 +35,9 @@ const router = createHashRouter([
     },
     {
         path: "/privacy",
-        element: <p>Aaa</p>,
+        element: <WithNavbar>
+            <App />
+        </WithNavbar>,
     },
 ]);
 
@@ -49,21 +51,23 @@ function WithNavbar({ children }) {
 function MyNavbar() {
     return <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
         <Container>
-            <NavLink to="/">
+            <NavLinkLang to="/">
                 <Navbar.Brand href="" >ejuet</Navbar.Brand>
-            </NavLink>
+            </NavLinkLang>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link>
-                        <NavLink to="/home">Home</NavLink>
-                    </Nav.Link>
+                <Nav className="me-auto align-items-center">
+                    <Nav.Item>
+                        <NavLinkLang to="/">Home</NavLinkLang>
+                    </Nav.Item>
                 </Nav>
-                <Nav>
-                    <Nav.Link>
+                <Nav className='align-items-center'>
+                    <Nav.Item>
                         <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
-                    </Nav.Link>
-                    <LanguageToggle />
+                    </Nav.Item>
+                    <Nav.Item>
+                        <LanguageToggle />
+                    </Nav.Item>
                 </Nav>
             </Navbar.Collapse>
         </Container>
@@ -77,7 +81,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 function NavLinkLang(props){
     const [searchParams, setSearchParams] = useSearchParams();
     const language = searchParams.get('lang');
-    return <NavLink {...props} to={props.to+"?lang="+language} />
+    const appendix = language? "?lang="+language : "";
+    return <NavLink {...props} to={props.to+appendix} />
 }
 
 function LanguageToggle() {
