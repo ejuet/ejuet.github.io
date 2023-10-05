@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createHashRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter, useSearchParams } from 'react-router-dom';
 
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import LocalizedStrings from 'react-localization';
 
-const strings = new LocalizedStrings({
-    en:{
-        privacyPolicy:"Privacy Policy"
+var strings = new LocalizedStrings({
+    en: {
+        privacyPolicy: "Privacy Policy",
+        language: "Language",
+        flag: "🇬🇧"
     },
-    de:{
-        privacyPolicy:"Datenschutzerklärung"
+    de: {
+        privacyPolicy: "Datenschutzerklärung",
+        language: "Sprache",
+        flag: "🇩🇪"
     }
 })
 
+//set language in query param
+var quer = window.location.href.match(/lang=(.*)&?/)
+strings.setLanguage(quer ? quer[1] : navigator.language)
+
 const router = createHashRouter([
     {
-        path: "/",
+        path: "",
         element: <WithNavbar>
             <App />
         </WithNavbar>,
@@ -48,11 +56,14 @@ function MyNavbar() {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link>
-                        <NavLink to="/">Home</NavLink>
+                        <NavLink to="/home">Home</NavLink>
                     </Nav.Link>
                 </Nav>
                 <Nav>
-                    <NavLink to="/privacy">{strings.privacyPolicy}</NavLink>
+                    <Nav.Link>
+                        <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
+                    </Nav.Link>
+                    <LanguageToggle />
                 </Nav>
             </Navbar.Collapse>
         </Container>
@@ -62,6 +73,36 @@ function MyNavbar() {
 ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 );
+
+function NavLinkLang(props){
+    const [searchParams, setSearchParams] = useSearchParams();
+    const language = searchParams.get('lang');
+    return <NavLink {...props} to={props.to+"?lang="+language} />
+}
+
+function LanguageToggle() {
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const myParam = searchParams.get('lang');
+
+    useEffect(() => {
+        if (myParam && myParam != strings.getLanguage()) {
+            window.location.reload()
+        }
+    }, [myParam])
+
+    function setLanguage(newLang) {
+        setSearchParams({ lang: newLang })
+    }
+
+    return <Dropdown>
+        <DropdownToggle>{strings.flag}  {strings.language}</DropdownToggle>
+        <DropdownMenu>
+            <DropdownItem onClick={() => { setLanguage("en") }}>English</DropdownItem>
+            <DropdownItem onClick={() => { setLanguage("de") }}>Deutsch</DropdownItem>
+        </DropdownMenu>
+    </Dropdown>
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
