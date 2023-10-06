@@ -15,13 +15,11 @@ const strings = new MyLocalizedStrings({
         privacyPolicy: "Privacy Policy",
         language: "Language",
         flag: "🇬🇧",
-        test:()=>(<h1>Aaa</h1>)
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
         flag: "🇩🇪",
-        test:()=><h1>Bbbb</h1>
     },
 })
 
@@ -29,6 +27,13 @@ const strings = new MyLocalizedStrings({
 const router = createHashRouter([
     {
         path: "",
+        element: <WithNavbar>
+            <App />
+            {postLibrary.getLatestPostCarousel()}
+        </WithNavbar>,
+    },
+    {
+        path: "/blog",
         element: <WithNavbar>
             <App />
             {postLibrary.getPostsAsCards()}
@@ -67,6 +72,9 @@ function MyNavbar() {
                 <Nav className="me-auto align-items-center">
                     <Nav.Item>
                         <NavLinkLang to="/">Home</NavLinkLang>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <NavLinkLang to="/blog">Blog</NavLinkLang>
                     </Nav.Item>
                 </Nav>
                 <Nav className='align-items-center'>
