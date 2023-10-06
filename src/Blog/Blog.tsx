@@ -22,13 +22,24 @@ const generalTexts = new MyLocalizedStrings({
     }
 })
 
-class Post {
-    public translations: BlogTranslations;
-    private link: string
+interface PostData{
+    translations: BlogTranslations;
+    link?: string;
+    published?: Date | undefined;
+    projectStart?: Date;
+    projectEnd?: Date;
+}
 
-    constructor(translations: BlogTranslations) {
-        this.translations = translations;
-        this.link = translations.getString("title", "en");
+class Post {
+
+    private postData : PostData;
+    private link:string;
+
+    constructor(
+        data:PostData
+    ) {
+        this.postData=data;
+        this.link = data.link? data.link : data.translations.getString("title", "en");
     }
 
     getLink() {
@@ -36,12 +47,15 @@ class Post {
     }
 
     getContent() {
-        return this.translations.content
+        return this.postData.translations.content
     }
 
     getPage() {
         return <>
-            <h1>{this.translations.title}</h1>
+            <h1>{this.postData.translations.title}</h1>
+            {this.postData.published &&
+                <small>Published: {this.postData.published.toLocaleDateString()}</small>
+            }
             {this.getContent()}
         </>
 
@@ -50,10 +64,10 @@ class Post {
     getCard() {
         return <NavLinkLang to={this.link}>
             <Card>
-                <Card.Img src="robot.jpg" style={{padding:"15px"}} />
+                <Card.Img src="robot.jpg" style={{ padding: "15px" }} />
                 <Card.Body>
-                    <Card.Title>{this.translations.title}</Card.Title>
-                    <Card.Text>{this.translations.subtitle}</Card.Text>
+                    <Card.Title>{this.postData.translations.title}</Card.Title>
+                    <Card.Text>{this.postData.translations.subtitle}</Card.Text>
                     <NavLinkLang to={this.link}><Button>{generalTexts.readmore}</Button></NavLinkLang>
                 </Card.Body>
             </Card>
@@ -64,8 +78,8 @@ class Post {
 
 class PostLibrary {
     private posts: Post[]
-    constructor(posts: Post[]) {
-        this.posts = posts
+    constructor(postData: PostData[]) {
+        this.posts = postData.map((dat, i)=>new Post(dat))
     }
 
     getPosts() {
@@ -87,21 +101,15 @@ class PostLibrary {
 }
 
 //Posts
-
 export const postLibrary = new PostLibrary([
-    new Post(new LocalizedStrings({
-        en: {
-            title: "title",
-            subtitle: "sub",
-            content: <><p>This is a great Post.</p></>
-        }
-    })),
-    new Post(new LocalizedStrings({
-        en: {
-            title: "waaaa",
-            subtitle: "sub",
-            content: <p>Great Content</p>
-        }
-    })),
+    {
+        translations: new LocalizedStrings({
+            en: {
+                title: "title",
+                subtitle: "sub",
+                content: <><p>This is a great Post.</p></>
+            }
+        }),
+        published: new Date("2023-01-01")
+    }
 ])
-

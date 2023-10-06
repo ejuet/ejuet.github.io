@@ -29,3 +29,14 @@ code {
   text-decoration: inherit !important;
   /* color: inherit !important; */
 }
+
+.navbar.bg-body-tertiary{
+  background-color: transparent !important;
+}
+
+/*Card Hover Animation*/
+
+.card:hover{
+  transform: scale(1.05);
+  transition: all .08s ease-in-out 
+}
