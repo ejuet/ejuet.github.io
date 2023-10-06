@@ -25,7 +25,7 @@ code {
     monospace;
 }
 
-.navbar a{
+.navbar a, a{
   text-decoration: inherit !important;
   /* color: inherit !important; */
 }

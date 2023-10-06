@@ -13,25 +13,25 @@ interface BlogTranslations extends LocalizedStringsMethods {
     content: JSX.Element
 }
 
-const generalTexts=new MyLocalizedStrings({
-    en:{
-        readmore:"Read More"
+const generalTexts = new MyLocalizedStrings({
+    en: {
+        readmore: "Read More"
     },
-    de:{
-        readmore:"Mehr Erfahren"
+    de: {
+        readmore: "Mehr Erfahren"
     }
 })
 
 class Post {
     public translations: BlogTranslations;
-    private link:string
+    private link: string
 
     constructor(translations: BlogTranslations) {
         this.translations = translations;
-        this.link=translations.getString("title", "en");
+        this.link = translations.getString("title", "en");
     }
-    
-    getLink(){
+
+    getLink() {
         return this.link;
     }
 
@@ -39,15 +39,26 @@ class Post {
         return this.translations.content
     }
 
+    getPage() {
+        return <>
+            <h1>{this.translations.title}</h1>
+            {this.getContent()}
+        </>
+
+    }
+
     getCard() {
-        return <Card>
-            <Card.Img src="robot.jpg" className="mt-3"/>
-            <Card.Body>
-                <Card.Title>{this.translations.title}</Card.Title>
-                <Card.Text>{this.translations.subtitle}</Card.Text>
-                <NavLinkLang to={this.link}><Button>{generalTexts.readmore}</Button></NavLinkLang>
-            </Card.Body>
-        </Card>
+        return <NavLinkLang to={this.link}>
+            <Card>
+                <Card.Img src="robot.jpg" style={{padding:"15px"}} />
+                <Card.Body>
+                    <Card.Title>{this.translations.title}</Card.Title>
+                    <Card.Text>{this.translations.subtitle}</Card.Text>
+                    <NavLinkLang to={this.link}><Button>{generalTexts.readmore}</Button></NavLinkLang>
+                </Card.Body>
+            </Card>
+        </NavLinkLang>
+
     }
 }
 
@@ -55,6 +66,10 @@ class PostLibrary {
     private posts: Post[]
     constructor(posts: Post[]) {
         this.posts = posts
+    }
+
+    getPosts() {
+        return this.posts;
     }
 
     getPostsAsCards() {
@@ -78,14 +93,14 @@ export const postLibrary = new PostLibrary([
         en: {
             title: "title",
             subtitle: "sub",
-            content: <h1>Great Content</h1>
+            content: <><p>This is a great Post.</p></>
         }
     })),
     new Post(new LocalizedStrings({
         en: {
-            title: "title",
+            title: "waaaa",
             subtitle: "sub",
-            content: <h1>Great Content</h1>
+            content: <p>Great Content</p>
         }
     })),
 ])

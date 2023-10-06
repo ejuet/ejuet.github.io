@@ -40,7 +40,14 @@ const router = createHashRouter([
             <App />
         </WithNavbar>,
     },
-]);
+].concat(postLibrary.getPosts().map((post, index)=>({
+    path:post.getLink(),
+    element: <WithNavbar>  
+        <div className='App'>
+            {post.getPage()}
+        </div>
+    </WithNavbar>
+}))));
 
 function WithNavbar({ children }) {
     return <>
