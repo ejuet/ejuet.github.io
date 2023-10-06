@@ -31,8 +31,7 @@ const router = createHashRouter([
         path: "",
         element: <WithNavbar>
             <App />
-            {postLibrary.posts[0].getPreview()}
-            {strings.test()}
+            {postLibrary.getPostsAsCards()}
         </WithNavbar>,
     },
     {
