@@ -2,8 +2,19 @@ import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { strings } from '..';
+import { MyLocalizedStrings } from './MyLocalizedStrings';
+//import { strings } from '..';
 
+export const strings = new MyLocalizedStrings({
+    en: {
+        language: "Language",
+        flag: "🇬🇧",
+    },
+    de: {
+        language: "Sprache",
+        flag: "🇩🇪",
+    },
+})
 export function NavLinkLang(props) {
     const [searchParams, setSearchParams] = useSearchParams();
     const language = searchParams.get('lang');
@@ -16,7 +27,7 @@ export function LanguageToggle() {
     const myParam = searchParams.get('lang');
 
     useEffect(() => {
-        if (myParam && myParam != strings.getLanguage()) {
+        if (myParam && myParam!=strings.getLanguage()) {
             window.location.reload();
         }
     }, [myParam]);

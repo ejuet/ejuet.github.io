@@ -8,17 +8,20 @@ import { RouterProvider, createHashRouter } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
+import {postLibrary} from "./Blog/Blog.tsx"
 
-export var strings = new MyLocalizedStrings({
+const strings = new MyLocalizedStrings({
     en: {
         privacyPolicy: "Privacy Policy",
         language: "Language",
-        flag: "🇬🇧"
+        flag: "🇬🇧",
+        test:"(<h1>Aaa</h1>)"
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
-        flag: "🇩🇪"
+        flag: "🇩🇪",
+        test:"(<h1>Bbbb</h1>)"
     },
 })
 
@@ -28,6 +31,8 @@ const router = createHashRouter([
         path: "",
         element: <WithNavbar>
             <App />
+            {postLibrary.posts[0].getPreview()}
+            {strings.test}
         </WithNavbar>,
     },
     {
