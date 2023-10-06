@@ -2,7 +2,6 @@ import LocalizedStrings from 'react-localization';
 
 export class MyLocalizedStrings extends LocalizedStrings {
     constructor(x) {
-        console.log("hi");
         var ret = new LocalizedStrings(x);
 
         //set language in query param
