@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { strings } from '.';
+import { strings } from '..';
 
 export function NavLinkLang(props) {
     const [searchParams, setSearchParams] = useSearchParams();

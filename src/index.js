@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
 
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { MyLocalizedStrings } from './MyLocalizedStrings';
-import { NavLinkLang, LanguageToggle } from './LanguageComponents';
+import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
+import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
 
 export var strings = new MyLocalizedStrings({
     en: {
