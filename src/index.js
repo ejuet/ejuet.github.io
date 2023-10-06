@@ -15,13 +15,13 @@ const strings = new MyLocalizedStrings({
         privacyPolicy: "Privacy Policy",
         language: "Language",
         flag: "🇬🇧",
-        test:"(<h1>Aaa</h1>)"
+        test:()=>(<h1>Aaa</h1>)
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
         flag: "🇩🇪",
-        test:"(<h1>Bbbb</h1>)"
+        test:()=><h1>Bbbb</h1>
     },
 })
 
