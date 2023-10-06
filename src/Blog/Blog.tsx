@@ -1,13 +1,22 @@
 import React from "react";
+import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
+
+interface BlogTranslations extends LocalizedStringsMethods{
+    content:()=>object
+}
 
 class Post{
     private title:string;
     private subtitle:string;
-    constructor(title:string, subtitle:string){
-        this.title=title;
-        this.subtitle=subtitle
-    }
+    public content:()=>object;
+    public translations:BlogTranslations;
 
+    constructor(title:string, subtitle:string, translations:BlogTranslations){
+        this.title=title;
+        this.subtitle=subtitle;
+        this.translations=translations;
+
+    }
 
     getPreview(){
         return <div>
@@ -24,6 +33,10 @@ class PostLibrary{
 }
 
 export const postLibrary = new PostLibrary([
-    new Post("title", "subtitle")
+    new Post("title", "subtitle", new LocalizedStrings({
+        en:{
+            content:()=><h1>Toller Inhalt</h1>
+        }
+    }))
 ])
 

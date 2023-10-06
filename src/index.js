@@ -32,7 +32,7 @@ const router = createHashRouter([
         element: <WithNavbar>
             <App />
             {postLibrary.posts[0].getPreview()}
-            {strings.test}
+            {strings.test()}
         </WithNavbar>,
     },
     {
