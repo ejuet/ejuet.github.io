@@ -30,6 +30,7 @@ interface PostData {
     published?: Date | undefined;
     projectStart?: Date;
     projectEnd?: Date;
+    tags:[]
 }
 
 class Post {
@@ -42,6 +43,10 @@ class Post {
         this.postData = data;
         this.postData.link = this.postData.link || "/"+this.postData.translations.getString("title", "en").replaceAll(" ", "-").replaceAll("/","-");
         this.postData.titleImage = this.postData.titleImage || "robot.jpg";
+    }
+
+    getPostData(){
+        return this.postData;
     }
 
     getLink() {
@@ -100,11 +105,32 @@ class PostLibrary {
         return this.posts;
     }
 
-    getPostsAsCards() {
+    getPostsWithTags(tags: string[]){
+        return this.posts.filter((post)=>{
+            for(var i in tags){
+                if( post.getPostData().tags.includes(tags[i])){
+                    return true;
+                }
+                return false;
+            }
+        })
+    }
+
+    getPostsWithTag(tag:string){
+        return this.getPostsWithTags([tag])
+    }
+
+    getAllTags(){
+        const tags = this.posts.map((post)=>post.getPostData().tags).flat();
+        console.log(tags);
+    }
+
+    getPostsAsCards(posts?:Post[]) {
+        if(!posts){posts=this.posts}
         return <Container>
             <Row xs={2} md={4}>
                 {
-                    this.posts.map((item, i) => <Row key={i}>
+                    posts.map((item, i) => <Row key={i}>
                         {item.getCard()}
                     </Row>
                     )
@@ -113,9 +139,10 @@ class PostLibrary {
         </Container>
     }
 
-    getLatestPostCarousel() {
+    getLatestPostCarousel(posts?:Post[]) {
+        if(!posts){posts=this.posts}
         return <Carousel className="bg-dark">
-            {this.posts.slice(0, 3).map((post, index) => post.getCarouselItem())}
+            {posts.slice(0, 3).map((post, index) => post.getCarouselItem())}
         </Carousel>
     }
 }
@@ -125,6 +152,7 @@ export const postLibrary = new PostLibrary([
     {
         published: new Date("2023-01-01"),
         titleImage: "logo512.png",
+        tags:["cat 2", "cat 1"],
         translations: new LocalizedStrings({
             en: {
                 title: "title",
@@ -135,6 +163,7 @@ export const postLibrary = new PostLibrary([
     },
     {
         published: new Date("2023-01-01"),
+        tags:["cat 1"],
         translations: new LocalizedStrings({
             en: {
                 title: "title 2",

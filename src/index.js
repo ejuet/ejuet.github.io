@@ -37,6 +37,7 @@ const router = createHashRouter([
         element: <WithNavbar>
             <App />
             {postLibrary.getPostsAsCards()}
+            {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag("cat 2"))}
         </WithNavbar>,
     },
     {
