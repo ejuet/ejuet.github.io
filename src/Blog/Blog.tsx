@@ -104,7 +104,7 @@ class PostLibrary {
         return <Container>
             <Row xs={2} md={4}>
                 {
-                    this.posts.map((item, i) => <Row key={i} className="m-2">
+                    this.posts.map((item, i) => <Row key={i}>
                         {item.getCard()}
                     </Row>
                     )
