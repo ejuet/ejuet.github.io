@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
-
-//TODO die sektion highlighten in der man ist
 
 const text = new MyLocalizedStrings({
     en: {
@@ -15,7 +13,8 @@ const text = new MyLocalizedStrings({
 
 export function TableOfContents() {
     const x = useTableOfContents();
-    if(x.children.length==0){
+
+    if(x.children.length == 0) {
         return;
     }
     return <div style={{
@@ -28,6 +27,10 @@ export function TableOfContents() {
 }
 function useTableOfContents() {
     const [root, setRoot] = useState(new Level());
+    const activeElement = useHeadsObserver()
+    
+    root.setActiveElement(activeElement)
+
 
     useEffect(() => {
         var elements = Array.from(document.querySelectorAll(".page h1, h2, h3, h4, h5, h6"));
@@ -44,6 +47,7 @@ function useTableOfContents() {
 class Level {
     element: Element;
     children: Level[];
+    active:boolean;
 
     constructor(element?: Element) {
         if(element) {
@@ -75,11 +79,24 @@ class Level {
         }
     }
 
+    setActiveElement(activeElement?:Element){
+        if(this.element && this.element==activeElement){
+            this.active=true;
+        }
+        else{
+            this.active=false;
+        }
+        this.children.forEach((el)=>{el.setActiveElement(activeElement)})
+    }
+
     getLink() {
         if(!this.element) {
             return;
         }
-        return <NavLink to={"#"+this.element.innerHTML.replaceAll(" ","-")} onClick={(e) => {
+
+        const weight = this.active? "bold" : ""
+
+        return <NavLink key={this.element.innerHTML} style={{fontWeight:weight}} to={"#" + this.element.innerHTML.replaceAll(" ", "-")} onClick={(e) => {
             e.preventDefault()
             this.element.scrollIntoView()
         }}>
@@ -111,4 +128,29 @@ class Level {
         </>
     }
 
+}
+
+export function useHeadsObserver() {
+    const observer = useRef()
+    const [activeElement, setActiveElement] = useState()
+    useEffect(() => {
+        const handleObsever = (entries) => {
+            entries.forEach((entry) => {
+                if(entry?.isIntersecting) {
+                    setActiveElement(entry.target)
+                }
+            })
+        }
+
+        observer.current = new IntersectionObserver(handleObsever, {
+            //rootMargin: "-20% 0% -35% 0px"
+        }
+        )
+
+        const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6")
+        elements.forEach((elem) => observer.current.observe(elem))
+        return () => observer.current?.disconnect()
+    }, [])
+
+    return activeElement;
 }
