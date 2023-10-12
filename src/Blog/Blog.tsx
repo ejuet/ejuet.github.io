@@ -86,15 +86,7 @@ class Post {
                 <Card.Img src={this.postData.titleImage} style={{ padding: "15px" }} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
-                    <Container>
-                        <Row>
-                            {
-                                this.postData.tags.map((tag) => <Col className="col-md-auto p-0">
-                                    <Badge pill>{getTagInfo(tag).translations.title}</Badge>
-                                </Col>)
-                            }
-                        </Row>
-                    </Container>
+                    {this.TagRow()}
 
                     <Card.Text>{this.postData.translations.subtitle}</Card.Text>
 
@@ -105,6 +97,18 @@ class Post {
 
     }
 
+    private TagRow(center:boolean=false) {
+        return <Container>
+            <Row className={center?"justify-content-center":""}>
+                {this.postData.tags.map((tag) => <Col className="col-md-auto p-0">
+                    <Badge bg="" pill style={{ backgroundColor: getTagInfo(tag).color, marginRight: "3px" }}>
+                        {getTagInfo(tag).translations.title}
+                    </Badge>
+                </Col>)}
+            </Row>
+        </Container>;
+    }
+
     getCarouselItem() {
         return <Carousel.Item key={this.postData.translations.title} interval={3500} style={{ textAlign: "center" }}>
             <NavLinkLang to={this.postData.link}>
@@ -113,6 +117,7 @@ class Post {
             <Carousel.Caption>
                 <h5>{this.postData.translations.title}</h5>
                 <p>{this.postData.translations.subtitle}</p>
+                {this.TagRow(true)}
             </Carousel.Caption>
         </Carousel.Item>;
     }
@@ -170,7 +175,7 @@ class PostLibrary {
     }
 }
 
-//Tags
+//Tags Logic
 
 export enum Tag {
     current,
@@ -187,11 +192,13 @@ interface TagTranslations extends LocalizedStringsMethods {
     description: string;
 }
 
+//Tags
+
 function getTagInfo(tag:Tag) : TagInfo{
     switch(tag){
         case Tag.current:
             return {
-                color:"green",
+                color:"var(--bs-primary)",
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Current",
@@ -205,7 +212,7 @@ function getTagInfo(tag:Tag) : TagInfo{
             }
         case Tag.school:
             return {
-                color:"green",
+                color:"lightgray",
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "School",
