@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  font-family: 'Muli' !important;
+}
+
+.posttitle{
+  font-size: 60px !important;
+  background-color:lightgrey;
+}

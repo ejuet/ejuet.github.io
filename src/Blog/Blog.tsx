@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useDeferredValue } from "react";
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization"; import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -30,7 +30,7 @@ interface PostData {
     published?: Date | undefined;
     projectStart?: Date;
     projectEnd?: Date;
-    tags:[]
+    tags: []
 }
 
 class Post {
@@ -41,11 +41,11 @@ class Post {
         data: PostData
     ) {
         this.postData = data;
-        this.postData.link = this.postData.link || "/"+this.postData.translations.getString("title", "en").replaceAll(" ", "-").replaceAll("/","-");
+        this.postData.link = this.postData.link || "/" + this.postData.translations.getString("title", "en").replaceAll(" ", "-").replaceAll("/", "-");
         this.postData.titleImage = this.postData.titleImage || "robot.jpg";
     }
 
-    getPostData(){
+    getPostData() {
         return this.postData;
     }
 
@@ -58,13 +58,14 @@ class Post {
     }
 
     getPage() {
-        return <>
-            <h1>{this.postData.translations.title}</h1>
+        return <div className="page">
+            <div className="posttitle">{this.postData.translations.title}</div>
+            <p>{this.postData.translations.subtitle}</p>
             {this.postData.published &&
                 <small>Published: {this.postData.published.toLocaleDateString()}</small>
             }
             {this.getContent()}
-        </>
+        </div>
 
     }
 
@@ -83,9 +84,9 @@ class Post {
     }
 
     getCarouselItem() {
-        return <Carousel.Item key={this.postData.translations.title} interval={3500} style={{textAlign:"center"}}>
+        return <Carousel.Item key={this.postData.translations.title} interval={3500} style={{ textAlign: "center" }}>
             <NavLinkLang to={this.postData.link}>
-                <img src={this.postData.titleImage} style={{height:"80vh", filter:"brightness(50%)"}}/>
+                <img src={this.postData.titleImage} style={{ height: "80vh", filter: "brightness(50%)" }} />
             </NavLinkLang>
             <Carousel.Caption>
                 <h5>{this.postData.translations.title}</h5>
@@ -105,10 +106,10 @@ class PostLibrary {
         return this.posts;
     }
 
-    getPostsWithTags(tags: string[]){
-        return this.posts.filter((post)=>{
-            for(var i in tags){
-                if( post.getPostData().tags.includes(tags[i])){
+    getPostsWithTags(tags: string[]) {
+        return this.posts.filter((post) => {
+            for(var i in tags) {
+                if(post.getPostData().tags.includes(tags[i])) {
                     return true;
                 }
                 return false;
@@ -116,17 +117,17 @@ class PostLibrary {
         })
     }
 
-    getPostsWithTag(tag:string){
+    getPostsWithTag(tag: string) {
         return this.getPostsWithTags([tag])
     }
 
-    getAllTags(){
-        const tags = this.posts.map((post)=>post.getPostData().tags).flat();
+    getAllTags() {
+        const tags = this.posts.map((post) => post.getPostData().tags).flat();
         console.log(tags);
     }
 
-    getPostsAsCards(posts?:Post[]) {
-        if(!posts){posts=this.posts}
+    getPostsAsCards(posts?: Post[]) {
+        if(!posts) { posts = this.posts }
         return <Container>
             <Row xs={2} md={4}>
                 {
@@ -139,8 +140,8 @@ class PostLibrary {
         </Container>
     }
 
-    getLatestPostCarousel(posts?:Post[]) {
-        if(!posts){posts=this.posts}
+    getLatestPostCarousel(posts?: Post[]) {
+        if(!posts) { posts = this.posts }
         return <Carousel className="bg-dark">
             {posts.slice(0, 3).map((post, index) => post.getCarouselItem())}
         </Carousel>
@@ -152,18 +153,61 @@ export const postLibrary = new PostLibrary([
     {
         published: new Date("2023-01-01"),
         titleImage: "logo512.png",
-        tags:["cat 2", "cat 1"],
+        tags: ["cat 2", "cat 1"],
         translations: new LocalizedStrings({
             en: {
                 title: "title",
                 subtitle: "sub",
-                content: <><p>This is a great Post.</p></>
+                content: <>
+                    <p>This is a great Post.</p>
+                    <h1>H1 Header</h1>
+                    <h2>Blibliblubb h2 header</h2>
+                    <p>irgendein content</p>
+                    <p>irgendein content 2</p>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <h3>blubb h3</h3>
+                    <h1>H1 Header no 2</h1>
+                </>
             }
         }),
     },
     {
         published: new Date("2023-01-01"),
-        tags:["cat 1"],
+        tags: ["cat 1"],
         translations: new LocalizedStrings({
             en: {
                 title: "title 2",
@@ -173,3 +217,5 @@ export const postLibrary = new PostLibrary([
         }),
     },
 ])
+
+
