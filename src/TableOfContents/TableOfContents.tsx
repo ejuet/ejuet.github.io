@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
 
+//TODO die sektion highlighten in der man ist
+
 const text = new MyLocalizedStrings({
     en: {
         content: "Content"
