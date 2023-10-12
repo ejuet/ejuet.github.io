@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
 import { NavLinkLang } from "../Language/LanguageComponents";
+import { Utterances } from "utterances-react-component";
 
 interface BlogTranslations extends LocalizedStringsMethods {
     title: string;
@@ -16,10 +17,14 @@ interface BlogTranslations extends LocalizedStringsMethods {
 
 const generalTexts = new MyLocalizedStrings({
     en: {
-        readmore: "Read More"
+        readmore: "Read More",
+        comments: "Comments",
+        pleasecomment: "Feel free to leave your opinion or questions in the comment section below."
     },
     de: {
-        readmore: "Mehr Erfahren"
+        readmore: "Mehr Erfahren",
+        comments: "Kommentare",
+        pleasecomment: "Noch Fragen?"
     }
 })
 
@@ -65,6 +70,10 @@ class Post {
                 <small>Published: {this.postData.published.toLocaleDateString()}</small>
             }
             {this.getContent()}
+            <h1>{generalTexts.comments}</h1>
+            {generalTexts.pleasecomment}
+            <Utterances repo="ejuet/utterances" theme="github-light" issueTerm={["["+this.getLink()+"]"]} />
+            <div></div>
         </div>
 
     }
