@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
 import { NavLinkLang } from "../Language/LanguageComponents";
 import { Utterances } from "utterances-react-component";
@@ -12,7 +14,7 @@ import { Utterances } from "utterances-react-component";
 interface BlogTranslations extends LocalizedStringsMethods {
     title: string;
     subtitle: string;
-    content: JSX.Element
+    content: () => JSX.Element
 }
 
 const generalTexts = new MyLocalizedStrings({
@@ -35,7 +37,7 @@ interface PostData {
     published?: Date | undefined;
     projectStart?: Date;
     projectEnd?: Date;
-    tags: []
+    tags: Tag[]
 }
 
 class Post {
@@ -59,7 +61,7 @@ class Post {
     }
 
     getContent() {
-        return this.postData.translations.content
+        return this.postData.translations.content()
     }
 
     getPage() {
@@ -72,7 +74,7 @@ class Post {
             {this.getContent()}
             <h1>{generalTexts.comments}</h1>
             {generalTexts.pleasecomment}
-            <Utterances repo="ejuet/utterances" theme="github-light" issueTerm={["["+this.getLink()+"]"]} />
+            <Utterances repo="ejuet/utterances" theme="github-light" issueTerm={["[" + this.getLink() + "]"]} />
             <div></div>
         </div>
 
@@ -84,7 +86,18 @@ class Post {
                 <Card.Img src={this.postData.titleImage} style={{ padding: "15px" }} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
+                    <Container>
+                        <Row>
+                            {
+                                this.postData.tags.map((tag) => <Col className="col-md-auto p-0">
+                                    <Badge pill>{getTagInfo(tag).translations.title}</Badge>
+                                </Col>)
+                            }
+                        </Row>
+                    </Container>
+
                     <Card.Text>{this.postData.translations.subtitle}</Card.Text>
+
                     <NavLinkLang to={this.postData.link}><Button>{generalTexts.readmore}</Button></NavLinkLang>
                 </Card.Body>
             </Card>
@@ -115,7 +128,7 @@ class PostLibrary {
         return this.posts;
     }
 
-    getPostsWithTags(tags: string[]) {
+    getPostsWithTags(tags: Tag[]) {
         return this.posts.filter((post) => {
             for(var i in tags) {
                 if(post.getPostData().tags.includes(tags[i])) {
@@ -126,7 +139,7 @@ class PostLibrary {
         })
     }
 
-    getPostsWithTag(tag: string) {
+    getPostsWithTag(tag: Tag) {
         return this.getPostsWithTags([tag])
     }
 
@@ -157,17 +170,67 @@ class PostLibrary {
     }
 }
 
+//Tags
+
+export enum Tag {
+    current,
+    school,
+}
+
+interface TagInfo {
+    color: string;
+    translations: TagTranslations;
+}
+
+interface TagTranslations extends LocalizedStringsMethods {
+    title: string;
+    description: string;
+}
+
+function getTagInfo(tag:Tag) : TagInfo{
+    switch(tag){
+        case Tag.current:
+            return {
+                color:"green",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "Current",
+                        description: "Current Projects",
+                    },
+                    de: {
+                        title: "Aktuell",
+                        description: "Aktuelle Projekte",
+                    }
+                })
+            }
+        case Tag.school:
+            return {
+                color:"green",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "School",
+                        description: "Current Projects",
+                    },
+                    de: {
+                        title: "Schule",
+                        description: "Aktuelle Projekte",
+                    }
+                })
+            }
+        }
+}
+
 //Posts
 export const postLibrary = new PostLibrary([
     {
         published: new Date("2023-01-01"),
         titleImage: "logo512.png",
-        tags: ["cat 2", "cat 1"],
-        translations: new LocalizedStrings({
+        tags: [Tag.current, Tag.school],
+        translations: MyLocalizedStrings.create({ //ursprünglich new LocalizedStrings(), dann auch typecheck TODO fixen sodass new MyLocalizedStrings geht
             en: {
                 title: "title",
                 subtitle: "sub",
-                content: <>
+                content: () => <>
                     <p>This is a great Post.</p>
                     <h1>H1 Header</h1>
                     <h2>Blibliblubb h2 header</h2>
@@ -216,12 +279,17 @@ export const postLibrary = new PostLibrary([
     },
     {
         published: new Date("2023-01-01"),
-        tags: ["cat 1"],
-        translations: new LocalizedStrings({
+        tags: [Tag.current],
+        translations: MyLocalizedStrings.create({
             en: {
                 title: "title 2",
                 subtitle: "sub",
-                content: <><p>This is a great Post.</p></>
+                content: () => <><p>This is a great Post.</p></>
+            },
+            de: {
+                title: "aha",
+                subtitle: "sub",
+                content: () => <><p>Toller Post.</p></>
             }
         }),
     },

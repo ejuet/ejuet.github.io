@@ -34,5 +34,6 @@ code {
 
 .card:hover{
   transform: scale(1.05);
-  transition: all .08s ease-in-out 
+  transition: all .08s ease-in-out;
+  z-index: 100;
 }

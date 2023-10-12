@@ -8,7 +8,7 @@ import { RouterProvider, createHashRouter } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
-import {postLibrary} from "./Blog/Blog.tsx"
+import {Tag, postLibrary} from "./Blog/Blog.tsx"
 import { TableOfContents } from "./TableOfContents/TableOfContents.tsx";
 
 const strings = new MyLocalizedStrings({
@@ -38,7 +38,7 @@ const router = createHashRouter([
         element: <WithNavbar>
             <App />
             {postLibrary.getPostsAsCards()}
-            {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag("cat 2"))}
+            {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag.school))}
         </WithNavbar>,
     },
     {
