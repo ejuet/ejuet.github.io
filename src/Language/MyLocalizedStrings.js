@@ -9,9 +9,13 @@ export class MyLocalizedStrings extends LocalizedStrings {
         var ret = new LocalizedStrings(x);
 
         //set language in query param
-        var quer = window.location.href.match(/lang=(.*)&?/);
-        ret.setLanguage(quer ? quer[1] : navigator.language);
+        ret.setLanguage(getCurrentLanguage());
 
         return ret;
     }
+}
+
+export function getCurrentLanguage(){
+    var quer = window.location.href.match(/lang=(.*)&?/);
+    return quer ? quer[1] : navigator.language;
 }

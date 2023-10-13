@@ -10,6 +10,7 @@ import Stack from 'react-bootstrap/Stack';
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
 import { NavLinkLang } from "../Language/LanguageComponents";
 import { Utterances } from "utterances-react-component";
+import { CommentSection } from "./CommentSection.tsx";
 
 interface BlogTranslations extends LocalizedStringsMethods {
     title: string;
@@ -17,16 +18,18 @@ interface BlogTranslations extends LocalizedStringsMethods {
     content: () => JSX.Element
 }
 
-const generalTexts = new MyLocalizedStrings({
+export const generalTexts = new MyLocalizedStrings({
     en: {
         readmore: "Read More",
         comments: "Comments",
-        pleasecomment: "Feel free to leave your opinion or questions in the comment section below."
+        pleasecomment: "Feel free to leave your opinion or questions in the comment section below.",
+        commentcookie: "By clicking on 'Sign in with Github', a login cookie is created."
     },
     de: {
         readmore: "Mehr Erfahren",
         comments: "Kommentare",
-        pleasecomment: "Noch Fragen?"
+        pleasecomment: "Noch Fragen?",
+        commentcookie:"Durch das Anmelden mit Github wird ein Login-Cookie erstellt und gespeichert."
     }
 })
 
@@ -74,7 +77,7 @@ class Post {
             {this.getContent()}
             <h1>{generalTexts.comments}</h1>
             {generalTexts.pleasecomment}
-            <Utterances repo="ejuet/utterances" theme="github-light" issueTerm={["[" + this.getLink() + "]"]} />
+            <CommentSection issueTerm={this.getLink()}/>
             <div></div>
         </div>
 
