@@ -17,5 +17,9 @@ export class MyLocalizedStrings extends LocalizedStrings {
 
 export function getCurrentLanguage(){
     var quer = window.location.href.match(/lang=(.*)&?/);
-    return quer ? quer[1] : navigator.language;
+    var navLanguage = navigator.language
+    if(navLanguage.includes("-")){
+        navLanguage=navLanguage.split("-")[0]
+    }
+    return quer ? quer[1] : navLanguage;
 }
