@@ -140,7 +140,6 @@ class Level {
             return this.getChildrenLists();
         } else {
             return <>
-                {this.getLink()}
                 {this.getChildrenLists()}
             </>
         }
