@@ -32,7 +32,7 @@ export const generalTexts = new MyLocalizedStrings({
         comments: "Kommentare",
         pleasecomment: "Noch Fragen?",
         commentcookie: "Durch das Anmelden mit Github wird ein Login-Cookie erstellt und gespeichert.",
-        published:"Veröffentlicht"
+        published: "Veröffentlicht"
     }
 })
 
@@ -311,11 +311,6 @@ export const postLibrary = new PostLibrary([
                 title: "Das Geheimnis der Glühwürmchen",
                 subtitle: "Biolumineszenz in der Tierwelt",
                 content: () => <>
-                    <header>
-                        <h1>Das Geheimnis der Glühwürmchen: Biolumineszenz in der Tierwelt</h1>
-                        <p>Von [Dein Name] - Veröffentlicht am 14. Oktober 2023</p>
-                    </header>
-
                     <article>
                         <h2>Einleitung</h2>
                         <p>Biolumineszenz ist ein faszinierendes Phänomen in der Tierwelt, das uns seit jeher in Staunen versetzt hat. Die Möglichkeit von Lebewesen, Licht aus sich selbst heraus zu erzeugen, ist in der Tat ungewöhnlich. In diesem Blogpost werden wir das Geheimnis der Glühwürmchen und anderer biolumineszenter Organismen erkunden.</p>

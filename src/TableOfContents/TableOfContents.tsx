@@ -69,13 +69,20 @@ class Level {
 
     addChild(element: Element) {
         let n = new Level(element);
-        if(true) {
-            if(n.getLevel() - this.getLevel() == 1) {
+        if(n.getLevel() - this.getLevel() <= 0) {
+            return false;
+        }
+        else if(n.getLevel() - this.getLevel() == 1) {
+            this.children.push(n);
+            return true;
+        }
+        else {
+            var wasAdded = false;
+            wasAdded = this.getLastChild()?.addChild(element);
+            if(!wasAdded){
                 this.children.push(n);
             }
-            else {
-                this.getLastChild().addChild(element);
-            }
+            return true;
         }
     }
 
