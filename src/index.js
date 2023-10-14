@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -10,6 +10,7 @@ import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
 import { Tag, postLibrary } from "./Blog/Blog.tsx"
 import { TableOfContents } from "./TableOfContents/TableOfContents.tsx";
+import { useScrollbarActive } from './useScrollbarActive';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -93,23 +94,21 @@ function MyNavbar() {
 }
 
 function MyFooter() {
-    const [scrollbarIsActive, setSc] = useState(false);
-    useEffect(()=>{
-        setSc(document.body.clientHeight > window.innerHeight)
-    }) 
+    const scrollbarIsActive = useScrollbarActive()
 
-    return <Container fluid="xxl" style={scrollbarIsActive?{}:{position:"absolute", bottom:0}} className="footer navbar-static-bottom bg-tertiary border-top" >
-    <Row className='justify-content-center p-3'>
-        <Col xs={12} md={"auto"}>
-            <NavLinkLang>Ganz langer toller Name oh wow wirklich super</NavLinkLang>
-        </Col>
-        <Col className='justify-content-center d-flex'>
-            <NavLinkLang>Test</NavLinkLang>
-            {JSON.stringify(scrollbarIsActive)}
-        </Col>
-    </Row>
+    const fixAtBottomResp=scrollbarIsActive ? {} : { position: "absolute", bottom: 0 }
 
-</Container>
+    return <Container fluid="xxl" style={{...fixAtBottomResp, marginTop:5, zIndex:0}} className="footer navbar-static-bottom bg-tertiary border-top" >
+        <Row className='p-3'>
+            <Col xs={12} md={6} >
+                <p className='m-0'>© ejuet 2023</p>
+            </Col>
+            <Col xs={12} md={6} className='justify-content-end d-flex'>
+                <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
+            </Col>
+        </Row>
+
+    </Container>
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
