@@ -1,14 +1,14 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
 
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar, Col, Row, Button } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
-import {Tag, postLibrary} from "./Blog/Blog.tsx"
+import { Tag, postLibrary } from "./Blog/Blog.tsx"
 import { TableOfContents } from "./TableOfContents/TableOfContents.tsx";
 
 const strings = new MyLocalizedStrings({
@@ -29,14 +29,12 @@ const router = createHashRouter([
     {
         path: "",
         element: <WithNavbar>
-            <App />
             {postLibrary.getLatestPostCarousel()}
         </WithNavbar>,
     },
     {
         path: "/blog",
         element: <WithNavbar>
-            <App />
             {postLibrary.getPostsAsCards()}
             {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag.school))}
         </WithNavbar>,
@@ -47,12 +45,12 @@ const router = createHashRouter([
             <App />
         </WithNavbar>,
     },
-].concat(postLibrary.getPosts().map((post, index)=>({
-    path:post.getLink(),
-    element: <WithNavbar>  
+].concat(postLibrary.getPosts().map((post, index) => ({
+    path: post.getLink(),
+    element: <WithNavbar>
         <div className='App'>
             {post.getPage()}
-            <TableOfContents/>
+            <TableOfContents />
         </div>
     </WithNavbar>
 }))));
@@ -61,6 +59,7 @@ function WithNavbar({ children }) {
     return <>
         <MyNavbar />
         {children}
+        <MyFooter />
     </>
 }
 
@@ -91,6 +90,26 @@ function MyNavbar() {
             </Navbar.Collapse>
         </Container>
     </Navbar>
+}
+
+function MyFooter() {
+    const [scrollbarIsActive, setSc] = useState(false);
+    useEffect(()=>{
+        setSc(document.body.clientHeight > window.innerHeight)
+    }) 
+
+    return <Container fluid="xxl" style={scrollbarIsActive?{}:{position:"absolute", bottom:0}} className="footer navbar-static-bottom bg-tertiary border-top" >
+    <Row className='justify-content-center p-3'>
+        <Col xs={12} md={"auto"}>
+            <NavLinkLang>Ganz langer toller Name oh wow wirklich super</NavLinkLang>
+        </Col>
+        <Col className='justify-content-center d-flex'>
+            <NavLinkLang>Test</NavLinkLang>
+            {JSON.stringify(scrollbarIsActive)}
+        </Col>
+    </Row>
+
+</Container>
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(

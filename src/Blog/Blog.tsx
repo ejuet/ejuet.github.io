@@ -29,7 +29,7 @@ export const generalTexts = new MyLocalizedStrings({
         readmore: "Mehr Erfahren",
         comments: "Kommentare",
         pleasecomment: "Noch Fragen?",
-        commentcookie:"Durch das Anmelden mit Github wird ein Login-Cookie erstellt und gespeichert."
+        commentcookie: "Durch das Anmelden mit Github wird ein Login-Cookie erstellt und gespeichert."
     }
 })
 
@@ -77,8 +77,7 @@ class Post {
             {this.getContent()}
             <h1>{generalTexts.comments}</h1>
             {generalTexts.pleasecomment}
-            <CommentSection issueTerm={this.getLink()}/>
-            <div></div>
+            <CommentSection issueTerm={this.getLink()} />
         </div>
 
     }
@@ -100,9 +99,9 @@ class Post {
 
     }
 
-    private TagRow(center:boolean=false) {
+    private TagRow(center: boolean = false) {
         return <Container>
-            <Row className={center?"justify-content-center":""}>
+            <Row className={center ? "justify-content-center" : ""}>
                 {this.postData.tags.map((tag) => <Col className="col-md-auto p-0">
                     <Badge bg="" pill style={{ backgroundColor: getTagInfo(tag).color, marginRight: "3px" }}>
                         {getTagInfo(tag).translations.title}
@@ -197,11 +196,11 @@ interface TagTranslations extends LocalizedStringsMethods {
 
 //Tags
 
-function getTagInfo(tag:Tag) : TagInfo{
-    switch(tag){
+function getTagInfo(tag: Tag): TagInfo {
+    switch(tag) {
         case Tag.current:
             return {
-                color:"var(--bs-primary)",
+                color: "var(--bs-primary)",
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Current",
@@ -215,7 +214,7 @@ function getTagInfo(tag:Tag) : TagInfo{
             }
         case Tag.school:
             return {
-                color:"lightgray",
+                color: "lightgray",
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "School",
@@ -227,7 +226,7 @@ function getTagInfo(tag:Tag) : TagInfo{
                     }
                 })
             }
-        }
+    }
 }
 
 //Posts
