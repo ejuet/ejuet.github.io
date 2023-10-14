@@ -82,7 +82,7 @@ class Post {
             <div className="page">
                 <Container fluid="xxl">
                     <Row className="p-0">
-                        <Col xs={12} lg={9} className="d-flex justify-content-center">
+                        <Col xs={12} lg={8} className="d-flex justify-content-center">
                             <div className="page-content">
                                 <img style={{ height: "50vh" }} src={this.getPostData().titleImage} />
                                 {this.TagRow(true)}
@@ -95,9 +95,11 @@ class Post {
                                 <h1>{generalTexts.comments}</h1>
                                 {generalTexts.pleasecomment}
                                 <CommentSection issueTerm={this.getLink()} />
+
+                                <div style={{ width: "80%" }} dangerouslySetInnerHTML={{ __html: testcontent }}></div>
                             </div>
                         </Col>
-                        <Col lg={{ order: 'last' }} sm={{ order: 'first' }} xs={{ order: 'first' }}>
+                        <Col lg={{ span: 3, order: 'last' }} sm={{ order: 'first' }} xs={{ order: 'first' }}>
                             <TableOfContents />
                         </Col>
                     </Row>
@@ -112,7 +114,7 @@ class Post {
     getCard() {
         return <NavLinkLang to={this.postData.link}>
             <Card>
-                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius:"20px" }} />
+                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px" }} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
                     {this.TagRow()}
@@ -141,9 +143,11 @@ class Post {
     getCarouselItem() {
         return <Carousel.Item key={this.postData.translations.title} interval={3500} style={{ textAlign: "center" }}>
             <NavLinkLang to={this.postData.link}>
-                <div style={{backgroundImage:"url("+this.getPostData().titleImage+")", backgroundRepeat:"no-repeat",
-                backgroundSize:"cover", filter:"brightness(50%)",
-                  height:"80vh", width:"100%"}} />
+                <div style={{
+                    backgroundImage: "url(" + this.getPostData().titleImage + ")", backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover", filter: "brightness(50%)",
+                    height: "80vh", width: "100%"
+                }} />
             </NavLinkLang>
             <Carousel.Caption>
                 <h5>{this.postData.translations.title}</h5>
@@ -310,7 +314,7 @@ export const postLibrary = new PostLibrary([
             },
         }),
     },
-    
+
     //glühwürmchen
     {
         titleImage: "pexels/firefly.jpg",
@@ -648,7 +652,23 @@ export const postLibrary = new PostLibrary([
             },
         }),
     },
-
+    /*
+    //post: wordpress
+    {
+        published: new Date("2023-10-14"),
+        tags: [Tag.chatgptauthor],
+        translations: MyLocalizedStrings.create({
+            en: {
+                title: "example title",
+                subtitle: "subtitle of post",
+                content: () => <>
+                    
+                </>
+            },
+        }),
+    },
+    */
 ])
 
 
+const testcontent = ""

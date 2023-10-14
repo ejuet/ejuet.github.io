@@ -55,3 +55,7 @@ body {
 .page-content {
   max-width: 750px;
 }
+
+pre {
+  text-align: left;
+}
