@@ -79,12 +79,12 @@ class Post {
                 </div>
                 <p>{this.postData.translations.subtitle}</p>
             </div>
-
             <div className="page">
                 <Container fluid="xxl">
                     <Row className="p-0">
                         <Col xs={12} lg={9} className="d-flex justify-content-center">
                             <div className="page-content">
+                                <img style={{ height: "50vh" }} src={this.getPostData().titleImage} />
                                 {this.TagRow(true)}
                                 {this.postData.published &&
                                     <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
@@ -112,7 +112,7 @@ class Post {
     getCard() {
         return <NavLinkLang to={this.postData.link}>
             <Card>
-                <Card.Img src={this.postData.titleImage} style={{ padding: "15px" }} />
+                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius:"20px" }} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
                     {this.TagRow()}
@@ -141,7 +141,9 @@ class Post {
     getCarouselItem() {
         return <Carousel.Item key={this.postData.translations.title} interval={3500} style={{ textAlign: "center" }}>
             <NavLinkLang to={this.postData.link}>
-                <img src={this.postData.titleImage} style={{ height: "80vh", filter: "brightness(50%)" }} />
+                <div style={{backgroundImage:"url("+this.getPostData().titleImage+")", backgroundRepeat:"no-repeat",
+                backgroundSize:"cover", filter:"brightness(50%)",
+                  height:"80vh", width:"100%"}} />
             </NavLinkLang>
             <Carousel.Caption>
                 <h5>{this.postData.translations.title}</h5>
@@ -198,7 +200,7 @@ class PostLibrary {
 
     getLatestPostCarousel(posts?: Post[]) {
         if(!posts) { posts = this.posts }
-        return <Carousel className="bg-dark">
+        return <Carousel className="bg-light">
             {posts.slice(0, 3).map((post, index) => post.getCarouselItem())}
         </Carousel>
     }
@@ -273,6 +275,7 @@ function getTagInfo(tag: Tag): TagInfo {
 
 //Posts
 export const postLibrary = new PostLibrary([
+    //erster post
     {
         published: new Date("2023-01-01"),
         titleImage: "logo512.png",
@@ -307,42 +310,10 @@ export const postLibrary = new PostLibrary([
             },
         }),
     },
-    //post: title
-    {
-        published: new Date("2023-10-14"),
-        tags: [Tag.chatgptauthor],
-        translations: MyLocalizedStrings.create({
-            en: {
-                title: "example title",
-                subtitle: "subtitle of post",
-                content: () => <>
-                    <p>This is a great Post.</p>
-                    <h1>H1 Header</h1>
-                    <h2>Blibliblubb h2 header</h2>
-                    <p>fdsfds</p>
-                    <p>dfsfdsfds</p>
-                    <h3>blubb h3</h3>
-                    <h1>H1 Header no 2</h1>
-                </>
-            },
-            de: {
-                title: "Beispielhafter Titel",
-                subtitle: "Untertitel des Posts",
-                content: () => <>
-                    <p>Das ist ein toller post</p>
-                    <h1>H1 Header</h1>
-                    <h2>Blibliblubb h2 header</h2>
-                    <p>fdsfds</p>
-                    <p>dfsfdsfds</p>
-                    <h3>blubb h3</h3>
-                    <h1>H1 Header no 2</h1>
-                </>
-            },
-        }),
-    },
+    
     //glühwürmchen
     {
-        titleImage:"pexels/firefly.jpg",
+        titleImage: "pexels/firefly.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
@@ -408,7 +379,7 @@ export const postLibrary = new PostLibrary([
     },
     //extrembügeln
     {
-        titleImage:"pexels/iron.jpg",
+        titleImage: "pexels/iron.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
@@ -483,7 +454,7 @@ export const postLibrary = new PostLibrary([
     },
     //library cats
     {
-        titleImage:"pexels/cat.jpg",
+        titleImage: "pexels/cat.jpg",
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
             en: {
@@ -571,7 +542,7 @@ export const postLibrary = new PostLibrary([
     },
     //post: "Pumpkin People: The Enigmatic Tradition"
     {
-        titleImage:"pexels/pumpkin.jpg",
+        titleImage: "pexels/pumpkin.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
@@ -642,7 +613,41 @@ export const postLibrary = new PostLibrary([
                 </>
             },
         }),
-    }
+    },
+
+    //post: title
+    {
+        published: new Date("2023-10-14"),
+        tags: [Tag.chatgptauthor],
+        translations: MyLocalizedStrings.create({
+            en: {
+                title: "example title",
+                subtitle: "subtitle of post",
+                content: () => <>
+                    <p>This is a great Post.</p>
+                    <h1>H1 Header</h1>
+                    <h2>Blibliblubb h2 header</h2>
+                    <p>fdsfds</p>
+                    <p>dfsfdsfds</p>
+                    <h3>blubb h3</h3>
+                    <h1>H1 Header no 2</h1>
+                </>
+            },
+            de: {
+                title: "Beispielhafter Titel",
+                subtitle: "Untertitel des Posts",
+                content: () => <>
+                    <p>Das ist ein toller post</p>
+                    <h1>H1 Header</h1>
+                    <h2>Blibliblubb h2 header</h2>
+                    <p>fdsfds</p>
+                    <p>dfsfdsfds</p>
+                    <h3>blubb h3</h3>
+                    <h1>H1 Header no 2</h1>
+                </>
+            },
+        }),
+    },
 
 ])
 
