@@ -18,9 +18,9 @@ export function TableOfContents() {
         return;
     }
     return <div style={{
-        width: "20vw", position: "fixed", right: 5, top: 150, backgroundColor: "transparent",
+        //width: "260px", position: "fixed", right: 5, top: 150, backgroundColor: "transparent",
         textAlign: "left"
-    }} className="d-none d-md-block">
+    }} className="d-lg-block sticky-top pt-3">
         <h1 style={{ textAlign: "center" }}>{text.content}</h1>
         {x.getAsList()}
     </div>;
@@ -48,6 +48,7 @@ class Level {
     element: Element;
     children: Level[];
     active:boolean;
+    parent: Level;
 
     constructor(element?: Element) {
         if(element) {
@@ -73,17 +74,24 @@ class Level {
             return false;
         }
         else if(n.getLevel() - this.getLevel() == 1) {
-            this.children.push(n);
+            this.appendChild(n);
             return true;
         }
         else {
             var wasAdded = false;
             wasAdded = this.getLastChild()?.addChild(element);
             if(!wasAdded){
-                this.children.push(n);
+                this.appendChild(n);
             }
             return true;
         }
+
+        
+    }
+
+    appendChild(n:Level) {
+        this.children.push(n);
+        n.parent=this;
     }
 
     setActiveElement(activeElement?:Element){
@@ -148,9 +156,9 @@ class Level {
     getChildrenLists() {
         return <>
             {this.getLink()}
-            <div style={{ marginLeft: '20px' }}>
+            <div style={{ marginLeft: this.parent ? '20px' : 0  }}>
                 {this.children.map((childLevel) => (
-                    <div style={{ marginLeft: '20px' }}>
+                    <div style={{ marginLeft: this.parent ? '20px' : 0 }}>
                         {childLevel.getAsList()}
                     </div>
                 ))}

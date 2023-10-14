@@ -41,11 +41,17 @@ body {
   font-family: 'Muli' !important;
 }
 
-.posttitle{
-  font-size: 60px !important;
-  background-color:lightgrey;
-}
 
 .page-content p{
   text-align: left;
+}
+
+.page {
+  /* Additional styles for readability, e.g., padding, margin, and background color */
+  padding: 20px; /* Adjust padding as needed */
+  width:100%;
+}
+
+.page-content {
+  max-width: 750px;
 }
