@@ -51,7 +51,6 @@ const router = createHashRouter([
     element: <WithNavbar>
         <div className='App'>
             {post.getPage()}
-            <TableOfContents />
         </div>
     </WithNavbar>
 }))));
