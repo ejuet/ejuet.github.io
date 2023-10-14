@@ -45,3 +45,7 @@ body {
   font-size: 60px !important;
   background-color:lightgrey;
 }
+
+.page-content p{
+  text-align: left;
+}

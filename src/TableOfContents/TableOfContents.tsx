@@ -18,9 +18,9 @@ export function TableOfContents() {
         return;
     }
     return <div style={{
-        width: "20vw", position: "fixed", left: 5, top: 150, backgroundColor: "transparent",
+        width: "20vw", position: "fixed", right: 5, top: 150, backgroundColor: "transparent",
         textAlign: "left"
-    }}>
+    }} className="d-none d-md-block">
         <h1 style={{ textAlign: "center" }}>{text.content}</h1>
         {x.getAsList()}
     </div>;
