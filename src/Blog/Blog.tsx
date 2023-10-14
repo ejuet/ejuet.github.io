@@ -84,7 +84,7 @@ class Post {
                     <Row className="p-0">
                         <Col xs={12} lg={8} className="d-flex justify-content-center">
                             <div className="page-content">
-                                <img style={{ height: "50vh" }} src={this.getPostData().titleImage} />
+                                <img style={{ maxHeight: "50vh", maxWidth: "100%" }} src={this.getPostData().titleImage} />
                                 {this.TagRow(true)}
                                 {this.postData.published &&
                                     <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
@@ -95,8 +95,7 @@ class Post {
                                 <h1>{generalTexts.comments}</h1>
                                 {generalTexts.pleasecomment}
                                 <CommentSection issueTerm={this.getLink()} />
-
-                                <div style={{ width: "80%" }} dangerouslySetInnerHTML={{ __html: testcontent }}></div>
+                            
                             </div>
                         </Col>
                         <Col lg={{ span: 3, order: 'last' }} sm={{ order: 'first' }} xs={{ order: 'first' }}>

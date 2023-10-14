@@ -59,3 +59,7 @@ body {
 pre {
   text-align: left;
 }
+
+.wp-block-image > img{
+  max-width: 100%;
+}
