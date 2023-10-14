@@ -342,6 +342,7 @@ export const postLibrary = new PostLibrary([
     },
     //glühwürmchen
     {
+        titleImage:"pexels/firefly.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
@@ -407,6 +408,7 @@ export const postLibrary = new PostLibrary([
     },
     //extrembügeln
     {
+        titleImage:"pexels/iron.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
@@ -481,6 +483,7 @@ export const postLibrary = new PostLibrary([
     },
     //library cats
     {
+        titleImage:"pexels/cat.jpg",
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
             en: {
@@ -568,6 +571,7 @@ export const postLibrary = new PostLibrary([
     },
     //post: "Pumpkin People: The Enigmatic Tradition"
     {
+        titleImage:"pexels/pumpkin.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
         translations: MyLocalizedStrings.create({
