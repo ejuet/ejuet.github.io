@@ -97,41 +97,65 @@ class Level {
     }
 
     getLink() {
-        if(!this.element) {
+        if (!this.element) {
             return;
         }
+    
+        const weight = this.active ? "bold" : "";
+        const headingLevel = this.getLevel(); // Assuming this.getLevel() returns the desired heading level.
+    
+        const HeadingComponent = `h${headingLevel}`;
 
-        const weight = this.active? "bold" : ""
-
-        return <NavLink key={this.element.innerHTML} style={{fontWeight:weight}} to={"#" + this.element.innerHTML.replaceAll(" ", "-")} onClick={(e) => {
-            e.preventDefault()
-            this.element.scrollIntoView()
-        }}>
-            {this.element.innerHTML}
-        </NavLink>
+        //const fontSize = `${(6-headingLevel) * 0.25}rem`; // Set the font size to half of the usual font size.
+        const fontSize="1rem"
+        const headingStyle = {
+            fontSize: fontSize,
+        };
+    
+        return (
+            <HeadingComponent style={headingStyle}>
+                <NavLink
+                    key={this.element.innerHTML}
+                    style={{ fontWeight: weight }}
+                    to={"#" + this.element.innerHTML.replaceAll(" ", "-")}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        this.element.scrollIntoView();
+                    }}
+                >
+                    {this.element.innerHTML}
+                </NavLink>
+            </HeadingComponent>
+        );
     }
 
     getAsList() {
-        if(!this.element && this.children.length == 0) {
+        if (!this.element && this.children.length === 0) {
             return <></>;
         }
-        if(this.children.length == 0) {
-            return <li>{this.getLink()}</li>;
+        if (this.children.length === 0) {
+            return <>{this.getLink()}</>;
         }
-        if(!this.element) {
+        if (!this.element) {
             return this.getChildrenLists();
-        }
-        else {
-            return <li>{this.getChildrenLists()}</li>
+        } else {
+            return <>
+                {this.getLink()}
+                {this.getChildrenLists()}
+            </>
         }
     }
-
+    
     getChildrenLists() {
         return <>
             {this.getLink()}
-            <ul>
-                {this.children.map((childLevel) => childLevel.getAsList())}
-            </ul>
+            <div style={{ marginLeft: '20px' }}>
+                {this.children.map((childLevel) => (
+                    <div style={{ marginLeft: '20px' }}>
+                        {childLevel.getAsList()}
+                    </div>
+                ))}
+            </div>
         </>
     }
 
