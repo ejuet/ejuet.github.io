@@ -125,13 +125,13 @@ class Level {
                 <NavLink
                     key={this.element.innerHTML}
                     style={{ fontWeight: weight }}
-                    to={"#" + this.element.innerHTML.replaceAll(" ", "-")}
+                    to={"#" + this.element.innerText.replaceAll(" ", "-")}
                     onClick={(e) => {
                         e.preventDefault();
                         this.element.scrollIntoView();
                     }}
                 >
-                    {this.element.innerHTML}
+                    {this.element.innerText}
                 </NavLink>
             </HeadingComponent>
         );
