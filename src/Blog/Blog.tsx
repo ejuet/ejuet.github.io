@@ -13,6 +13,8 @@ import { NavLinkLang } from "../Language/LanguageComponents";
 import { Utterances } from "utterances-react-component";
 import { CommentSection } from "./CommentSection.tsx";
 import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { getPathToTag } from "..";
 
 interface BlogTranslations extends LocalizedStringsMethods {
     title: string;
@@ -95,7 +97,7 @@ class Post {
                                 <h1>{generalTexts.comments}</h1>
                                 {generalTexts.pleasecomment}
                                 <CommentSection issueTerm={this.getLink()} />
-                            
+
                             </div>
                         </Col>
                         <Col lg={{ span: 3, order: 'last' }} sm={{ order: 'first' }} xs={{ order: 'first' }}>
@@ -131,9 +133,13 @@ class Post {
         return <Container>
             <Row className={center ? "justify-content-center" : ""}>
                 {this.postData.tags.map((tag) => <Col className="col-md-auto p-0">
-                    <Badge bg="" pill style={{ backgroundColor: getTagInfo(tag).color, marginRight: "3px" }}>
-                        {getTagInfo(tag).translations.title}
-                    </Badge>
+                    <NavLinkLang to={getPathToTag(Tag[tag])}>
+                        <Badge bg="" pill style={{ backgroundColor: getTagInfo(tag).color, marginRight: "3px" }}>
+                            {getTagInfo(tag).translations.title}
+                        </Badge>
+
+                    </NavLinkLang>
+
                 </Col>)}
             </Row>
         </Container>;
@@ -229,7 +235,7 @@ interface TagTranslations extends LocalizedStringsMethods {
 
 //Tags
 
-function getTagInfo(tag: Tag): TagInfo {
+export function getTagInfo(tag: Tag): TagInfo {
     switch(tag) {
         case Tag.current:
             return {
@@ -237,11 +243,11 @@ function getTagInfo(tag: Tag): TagInfo {
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Current",
-                        description: "Current Projects",
+                        description: "My current projects.",
                     },
                     de: {
                         title: "Aktuell",
-                        description: "Aktuelle Projekte",
+                        description: "Meine aktuellen Projekte.",
                     }
                 })
             }
@@ -251,11 +257,11 @@ function getTagInfo(tag: Tag): TagInfo {
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "School",
-                        description: "Current Projects",
+                        description: "These are projects i made when I was still in school.",
                     },
                     de: {
                         title: "Schule",
-                        description: "Aktuelle Projekte",
+                        description: "Meine Projekte aus der Schulzeit.",
                     }
                 })
             }
@@ -265,15 +271,26 @@ function getTagInfo(tag: Tag): TagInfo {
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Written by ChatGPT",
-                        description: "W",
+                        description: "Instead of using Lorem Ipsum Texts when creating this page, I asked ChatGPT to write some posts. I quite like it.",
                     },
                     de: {
                         title: "Von ChatGPT geschrieben",
-                        description: "aaa",
+                        description: "Anstatt beim Erstellen dieser Seite Lorem Ipsum Texte zu verwenden, habe ich ChatGPT ein paar Beiträge schreiben lassen. Mir gefallen sie.",
                     }
                 })
             }
     }
+}
+
+export function getTags() {
+    return Object.keys(Tag).map((t, index) => {
+        if(!isNaN(Number(t))) {
+            var tag = Tag[t as keyof typeof Tag]
+            console.log(tag as Tag)
+            return tag as Tag;
+        }
+        return;
+    }).filter((el) => el)
 }
 
 //Posts

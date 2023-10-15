@@ -8,7 +8,7 @@ import { RouterProvider, createHashRouter } from 'react-router-dom';
 import { Container, Nav, Navbar, Col, Row, Button } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
-import { Tag, postLibrary } from "./Blog/Blog.tsx"
+import { Tag, getTagInfo, getTags, postLibrary } from "./Blog/Blog.tsx"
 import { TableOfContents } from "./TableOfContents/TableOfContents.tsx";
 import { useScrollbarActive } from './useScrollbarActive';
 
@@ -36,8 +36,16 @@ const router = createHashRouter([
     {
         path: "/blog",
         element: <WithNavbar>
-            {postLibrary.getPostsAsCards()}
-            {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag.school))}
+            <div className='App'>
+                {//postLibrary.getPostsAsCards()
+                }
+                {
+                    getTags().reverse().map((tagKey, index) => {
+                        return <PostsWithTagCards tagKey={tagKey} />
+                    })
+                }
+            </div>
+
         </WithNavbar>,
     },
     {
@@ -46,6 +54,8 @@ const router = createHashRouter([
             <App />
         </WithNavbar>,
     },
+
+    //pages for posts:
 ].concat(postLibrary.getPosts().map((post, index) => ({
     path: post.getLink(),
     element: <WithNavbar>
@@ -53,7 +63,31 @@ const router = createHashRouter([
             {post.getPage()}
         </div>
     </WithNavbar>
-}))));
+}))).concat(getTags().map((tagKey, index) => {
+    return {
+        path: getPathToTag(tagKey),
+        element: <WithNavbar>
+            <div className='App'>
+                <PostsWithTagCards tagKey={tagKey} />
+            </div>
+        </WithNavbar>
+    };
+}))
+
+);
+
+export function getPathToTag(tagKey) {
+    return "/blog/tag/" + tagKey;
+}
+
+function PostsWithTagCards({ tagKey }) {
+    var tagInfo = getTagInfo(Tag[tagKey])
+    return <>
+        <h1 style={{ color: tagInfo.color }}>{tagInfo.translations.title}</h1>
+        <p>{tagInfo.translations.description}</p>
+        {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag[tagKey]))}
+    </>
+}
 
 function WithNavbar({ children }) {
     return <>
@@ -95,9 +129,9 @@ function MyNavbar() {
 function MyFooter() {
     const scrollbarIsActive = useScrollbarActive()
 
-    const fixAtBottomResp=scrollbarIsActive ? {} : { position: "absolute", bottom: 0 }
+    const fixAtBottomResp = scrollbarIsActive ? {} : { position: "absolute", bottom: 0 }
 
-    return <Container fluid="xxl" style={{...fixAtBottomResp, marginTop:5, zIndex:0}} className="footer navbar-static-bottom bg-tertiary border-top" >
+    return <Container fluid="xxl" style={{ ...fixAtBottomResp, marginTop: 5, zIndex: 0 }} className="footer navbar-static-bottom bg-tertiary border-top" >
         <Row className='p-3'>
             <Col xs={12} md={6} >
                 <p className='m-0'>© ejuet 2023</p>
