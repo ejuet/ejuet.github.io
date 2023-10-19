@@ -1,19 +1,19 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import './App.css';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createHashRouter } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals.js';
+import { RouterProvider, createHashRouter, useSearchParams, } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-import { Container, Nav, Navbar, Col, Row, Button } from 'react-bootstrap';
-import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
-import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
-import { postLibrary } from "./Blog/Blog.tsx"
-import { TableOfContents } from "./TableOfContents/TableOfContents.tsx";
-import { useScrollbarActive } from './useScrollbarActive';
-import {  Tag, getTagInfo, getTags } from './Blog/Tags';
+import { Container, Nav, Navbar, Col, Row, Button, Badge } from 'react-bootstrap';
+import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
+import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents.js';
+import { postLibrary } from "./Blog/Blog"
+import { TableOfContents } from "./TableOfContents/TableOfContents";
+import { useScrollbarActive } from './useScrollbarActive.js';
+import { Tag, getTagInfo, getTags } from './Blog/Tags';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -45,6 +45,14 @@ const router = createHashRouter([
                 getTags().reverse().map((tagKey, index) => {
                     return <PostsWithTagCards tagKey={tagKey} />
                 })
+            }
+        </WithNavbar>,
+    },
+    {
+        path: "/selector",
+        element: <WithNavbar>
+            {
+                <PostsWithTagsByQueryParams />
             }
         </WithNavbar>,
     },
@@ -88,6 +96,58 @@ function PostsWithTagCards({ tagKey }) {
         {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag[tagKey]))}
     </>
 }
+
+function PostsWithTagsByQueryParams() {
+
+    const [params, setSearchParams] = useSearchParams();
+    const tagParam = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")) : []
+    const tags = tagParam.map((stringt) => Tag[stringt]);
+
+    //console.log(params)
+
+    return <>
+        <Container>
+            <Row>
+                {
+                    getTags().map((tagString) => <TagBadge tagString={tagString} />)
+                }
+            </Row>
+        </Container>
+        {
+            postLibrary.getPostsAsCards(postLibrary.getPostsWithTags(tags))
+        }
+    </>
+}
+
+function TagBadge({ tagString }) {
+    const [params, setSearchParams] = useSearchParams();
+    const active = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")).includes(tagString) : false
+    const tagInfo = getTagInfo(Tag[tagString]);
+    return <h2 style={{ width: "fit-content" }}>
+        <Badge as={NavLinkLang} to={window.location} pill bg="" style={{"backgroundColor": tagInfo.color}} onClick={(e) => {
+            e.preventDefault()
+
+            setSearchParams(searchParams => {
+                //const currentTags = (Array.from(searchParams.entries()).filter((elArr) => elArr[0] == "tags").flat()[1].replaceAll("'", "\"")) //instead of searchParams.get("tags") we have to do this so string stays the same
+
+                var tags = searchParams.get("tags") ? JSON.parse(searchParams.get("tags").replaceAll("'", "\"")) : []
+                if (active) {
+                    tags.splice(tags.indexOf(tagString), 1)
+                }
+                else {
+                    if (!tags.includes(tagString)) tags.push(tagString)
+                }
+                searchParams.set("tags", JSON.stringify(tags).replaceAll("\"", "'"));
+                return searchParams;
+            });
+
+        }}>
+            {active && "X "}{tagInfo.translations.title}
+        </Badge>
+    </h2>
+}
+
+
 
 function WithNavbar({ children }) {
     return <>

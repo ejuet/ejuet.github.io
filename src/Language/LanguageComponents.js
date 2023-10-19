@@ -33,7 +33,7 @@ export function LanguageToggle() {
     }, [myParam]);
 
     function setLanguage(newLang) {
-        setSearchParams({ lang: newLang });
+        setSearchParams({ lang: newLang }); //TODO fix other params disappearing on setting
     }
 
     return <Dropdown>

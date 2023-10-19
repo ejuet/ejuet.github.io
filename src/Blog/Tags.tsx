@@ -59,7 +59,7 @@ export function getTags() {
     return Object.keys(Tag).map((t, index) => {
         if(!isNaN(Number(t))) {
             var tag = Tag[t as keyof typeof Tag];
-            console.log(tag as Tag);
+            //console.log(tag as Tag);
             return tag as Tag;
         }
         return;
