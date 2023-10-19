@@ -28,7 +28,7 @@ export function TableOfContents() {
 function useTableOfContents() {
     const [root, setRoot] = useState(new Level());
     const activeElement = useHeadsObserver()
-    
+
     root.setActiveElement(activeElement)
 
 
@@ -37,7 +37,7 @@ function useTableOfContents() {
 
         var nRoot = new Level();
         elements.forEach((el) => {
-            nRoot.addChild(el);
+            nRoot.addChild(el as HTMLElement);
         });
         setRoot(nRoot);
     }, []);
@@ -45,12 +45,12 @@ function useTableOfContents() {
     return root;
 }
 class Level {
-    element: Element;
+    element: HTMLElement;
     children: Level[];
-    active:boolean;
+    active: boolean;
     parent: Level;
 
-    constructor(element?: Element) {
+    constructor(element?: HTMLElement) {
         if(element) {
             this.element = element;
         }
@@ -68,7 +68,7 @@ class Level {
         return this.children[this.children.length - 1];
     }
 
-    addChild(element: Element) {
+    addChild(element: HTMLElement) {
         let n = new Level(element);
         if(n.getLevel() - this.getLevel() <= 0) {
             return false;
@@ -80,47 +80,48 @@ class Level {
         else {
             var wasAdded = false;
             wasAdded = this.getLastChild()?.addChild(element);
-            if(!wasAdded){
+            if(!wasAdded) {
                 this.appendChild(n);
             }
             return true;
         }
 
-        
+
     }
 
-    appendChild(n:Level) {
+    appendChild(n: Level) {
         this.children.push(n);
-        n.parent=this;
+        n.parent = this;
     }
 
-    setActiveElement(activeElement?:Element){
-        if(this.element && this.element==activeElement){
-            this.active=true;
+    setActiveElement(activeElement?: Element) {
+        if(this.element && this.element == activeElement) {
+            this.active = true;
         }
-        else{
-            this.active=false;
+        else {
+            this.active = false;
         }
-        this.children.forEach((el)=>{el.setActiveElement(activeElement)})
+        this.children.forEach((el) => { el.setActiveElement(activeElement) })
     }
 
     getLink() {
-        if (!this.element) {
+        if(!this.element) {
             return;
         }
-    
+
         const weight = this.active ? "bold" : "";
         const headingLevel = this.getLevel(); // Assuming this.getLevel() returns the desired heading level.
-    
+
         const HeadingComponent = `h${headingLevel}`;
 
         //const fontSize = `${(6-headingLevel) * 0.25}rem`; // Set the font size to half of the usual font size.
-        const fontSize="1rem"
+        const fontSize = "1rem"
         const headingStyle = {
             fontSize: fontSize,
         };
-    
+
         return (
+            //@ts-ignore
             <HeadingComponent style={headingStyle}>
                 <NavLink
                     key={this.element.innerHTML}
@@ -138,13 +139,13 @@ class Level {
     }
 
     getAsList() {
-        if (!this.element && this.children.length === 0) {
+        if(!this.element && this.children.length === 0) {
             return <></>;
         }
-        if (this.children.length === 0) {
+        if(this.children.length === 0) {
             return <>{this.getLink()}</>;
         }
-        if (!this.element) {
+        if(!this.element) {
             return this.getChildrenLists();
         } else {
             return <>
@@ -152,11 +153,11 @@ class Level {
             </>
         }
     }
-    
+
     getChildrenLists() {
         return <>
             {this.getLink()}
-            <div style={{ marginLeft: this.parent ? '20px' : 0  }}>
+            <div style={{ marginLeft: this.parent ? '20px' : 0 }}>
                 {this.children.map((childLevel) => (
                     <div style={{ marginLeft: this.parent ? '20px' : 0 }}>
                         {childLevel.getAsList()}
@@ -180,14 +181,20 @@ export function useHeadsObserver() {
             })
         }
 
+        //@ts-ignore
         observer.current = new IntersectionObserver(handleObsever, {
             //rootMargin: "-20% 0% -35% 0px"
         }
         )
 
         const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6")
-        elements.forEach((elem) => observer.current.observe(elem))
-        return () => observer.current?.disconnect()
+        elements.forEach((elem) =>
+             //@ts-ignore
+            observer.current.observe(elem)
+        )
+        return () =>
+            //@ts-ignore
+            observer.current?.disconnect()
     }, [])
 
     return activeElement;

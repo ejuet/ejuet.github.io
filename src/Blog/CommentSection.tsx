@@ -67,7 +67,8 @@ function Comments({ term }) {
         });
 
         setTimeout(() => {
-            ref.current?.append(script);
+            //@ts-ignore
+            ref.current.append(script);
         }, 300);
     }, []);
 

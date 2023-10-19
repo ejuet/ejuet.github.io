@@ -1,16 +1,19 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import './App.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import { Container, Nav, Navbar, Col, Row, Button } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents';
-import { Tag, getTagInfo, getTags, postLibrary } from "./Blog/Blog.tsx"
+import { postLibrary } from "./Blog/Blog.tsx"
 import { TableOfContents } from "./TableOfContents/TableOfContents.tsx";
 import { useScrollbarActive } from './useScrollbarActive';
+import {  Tag, getTagInfo, getTags } from './Blog/Tags';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -36,22 +39,19 @@ const router = createHashRouter([
     {
         path: "/blog",
         element: <WithNavbar>
-            <div className='App'>
-                {//postLibrary.getPostsAsCards()
-                }
-                {
-                    getTags().reverse().map((tagKey, index) => {
-                        return <PostsWithTagCards tagKey={tagKey} />
-                    })
-                }
-            </div>
-
+            {//postLibrary.getPostsAsCards()
+            }
+            {
+                getTags().reverse().map((tagKey, index) => {
+                    return <PostsWithTagCards tagKey={tagKey} />
+                })
+            }
         </WithNavbar>,
     },
     {
         path: "/privacy",
         element: <WithNavbar>
-            <App />
+            <div>Hallo</div>
         </WithNavbar>,
     },
 
@@ -91,9 +91,11 @@ function PostsWithTagCards({ tagKey }) {
 
 function WithNavbar({ children }) {
     return <>
-        <MyNavbar />
-        {children}
-        <MyFooter />
+        <div className='App'>
+            <MyNavbar />
+            {children}
+            <MyFooter />
+        </div>
     </>
 }
 
@@ -131,16 +133,17 @@ function MyFooter() {
 
     const fixAtBottomResp = scrollbarIsActive ? {} : { position: "absolute", bottom: 0 }
 
-    return <Container fluid="xxl" style={{ ...fixAtBottomResp, marginTop: 5, zIndex: 0 }} className="footer navbar-static-bottom bg-tertiary border-top" >
-        <Row className='p-3'>
-            <Col xs={12} md={6} >
-                <p className='m-0'>© ejuet 2023</p>
-            </Col>
-            <Col xs={12} md={6} className='justify-content-end d-flex'>
-                <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
-            </Col>
-        </Row>
-
+    return <Container> {/* Extra Container is needed to center footer */}
+        <Container fluid="xxl" style={{ ...fixAtBottomResp, marginTop: 5, zIndex: 0 }} className="footer navbar-static-bottom bg-tertiary border-top" >
+            <Row className='p-3'>
+                <Col xs={12} md={6} >
+                    <p className='m-0'>© ejuet 2023</p>
+                </Col>
+                <Col xs={12} md={6} className='justify-content-end d-flex'>
+                    <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
+                </Col>
+            </Row>
+        </Container>
     </Container>
 }
 
