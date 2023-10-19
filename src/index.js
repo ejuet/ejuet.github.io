@@ -127,6 +127,7 @@ function TagBadge({ tagString }) {
         <Badge as={NavLinkLang} to={window.location} pill bg="" style={{"backgroundColor": tagInfo.color}} onClick={(e) => {
             e.preventDefault()
 
+            //muss über useSearchParams passieren weil sonst nicht mit HashRouter umgehen kann
             setSearchParams(searchParams => {
                 //const currentTags = (Array.from(searchParams.entries()).filter((elArr) => elArr[0] == "tags").flat()[1].replaceAll("'", "\"")) //instead of searchParams.get("tags") we have to do this so string stays the same
 
