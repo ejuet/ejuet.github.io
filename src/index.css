@@ -37,3 +37,11 @@ code {
   transition: all .08s ease-in-out;
   z-index: 100;
 }
+
+a.active{
+  font-weight: 600;
+}
+
+.active .navname{
+  font-weight: normal;
+}

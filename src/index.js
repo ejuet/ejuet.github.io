@@ -170,8 +170,8 @@ function WithNavbar({ children }) {
 function MyNavbar() {
     return <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
         <Container>
-            <NavLinkLang to="/">
-                <Navbar.Brand href="" >ejuet</Navbar.Brand>
+            <NavLinkLang activeClassName="holladiewaldfee" to="/">
+                <Navbar.Brand href="" className='navname' >ejuet</Navbar.Brand>
             </NavLinkLang>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -180,7 +180,10 @@ function MyNavbar() {
                         <NavLinkLang to="/">Home</NavLinkLang>
                     </Nav.Item>
                     <Nav.Item>
-                        <NavLinkLang to="/blog">Blog</NavLinkLang>
+                        <NavLinkLang to="/selector">Blog</NavLinkLang>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <NavLinkLang to="/blog">All Posts</NavLinkLang>
                     </Nav.Item>
                 </Nav>
                 <Nav className='align-items-center'>
