@@ -20,11 +20,13 @@ const strings = new MyLocalizedStrings({
         privacyPolicy: "Privacy Policy",
         language: "Language",
         flag: "🇬🇧",
+        blogPosts:"Blog Posts"
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
         flag: "🇩🇪",
+        blogPosts:"Beiträge"
     },
 })
 
@@ -106,7 +108,8 @@ function PostsWithTagsByQueryParams() {
     //console.log(params)
 
     return <>
-        <Container>
+        <Container className='mb-4'>
+            <Row className='mb-3'><h1>{strings.blogPosts}</h1></Row>
             <Row>
                 {
                     getTags().map((tagString) => <TagBadge tagString={tagString} />)
@@ -124,7 +127,11 @@ function TagBadge({ tagString }) {
     const active = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")).includes(tagString) : false
     const tagInfo = getTagInfo(Tag[tagString]);
     return <h2 style={{ width: "fit-content" }}>
-        <Badge as={NavLinkLang} to={window.location} pill bg="" style={{"backgroundColor": tagInfo.color}} onClick={(e) => {
+        <Badge as={NavLinkLang} to={window.location} pill bg="" style={{
+            "backgroundColor": tagInfo.color,
+            "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
+            zIndex:100
+            }} onClick={(e) => {
             e.preventDefault()
 
             //muss über useSearchParams passieren weil sonst nicht mit HashRouter umgehen kann
