@@ -182,8 +182,8 @@ class PostLibrary {
                 if(post.getPostData().tags.includes(tags[i])) {
                     return true;
                 }
-                return false;
             }
+            return false;
         })
     }
 
