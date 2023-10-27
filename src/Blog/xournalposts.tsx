@@ -6,12 +6,13 @@ import { EmbedCode } from "./EmgithubCode";
 
 export const xournalPosts: PostData[] = [
     {
-        tags: [Tag.current],
+        tags: [Tag.current, Tag.lua],
         titleImage:"img/xournal.jpg",
+        published: new Date(2023, 10, 27),
         translations: MyLocalizedStrings.create({
             en: {
                 title: "Xournal Plugins for Students",
-                subtitle: "Plugins I have written for using Xournal while studying",
+                subtitle: "Plugins I've written for using Xournal to study",
                 content: function (): JSX.Element {
                     return <>
                         <h1>Xournal</h1>

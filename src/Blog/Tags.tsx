@@ -5,7 +5,9 @@ import { MyLocalizedStrings } from "../Language/MyLocalizedStrings.js";
 export enum Tag {
     current,
     school,
-    chatgptauthor
+    chatgptauthor,
+    lua,
+    java
 }
 
 export function getTagInfo(tag: Tag): TagInfo {
@@ -52,6 +54,23 @@ export function getTagInfo(tag: Tag): TagInfo {
                     }
                 })
             };
+        //Programming Languages:
+        case Tag.java:
+        case Tag.lua:
+            const languageName = Tag[tag].charAt(0).toLocaleUpperCase()+Tag[tag].slice(1)
+            return {
+                color: "#000000",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: languageName,
+                        description: "Projects with "+languageName+" Code",
+                    },
+                    de: {
+                        title: "Lua",
+                        description: "Projekte mit "+languageName+" Code",
+                    }
+                })
+            }
     }
 }
 
