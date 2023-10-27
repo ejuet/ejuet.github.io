@@ -2,6 +2,7 @@ import React from "react";
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
 import { PostData } from "./Blog";
 import { Tag } from "./Tags";
+import { EmbedCode } from "./EmgithubCode";
 
 export const xournalPosts: PostData[] = [
     {
@@ -32,6 +33,7 @@ export const xournalPosts: PostData[] = [
                             However, I have only found a built-in way to change the background of one page at a time instead of all pages of my document.
                             Now, I can do this with my plugin.
                         </p>
+                        <EmbedCode repo={"xournal-plugins"} file="/BatchToggleGrid/main.lua" />
 
                         <h2>Batch Horizontal</h2>
                         <p>
@@ -39,6 +41,7 @@ export const xournalPosts: PostData[] = [
                             but created a portrait oriented document. If I want to rotate my pages by 90 degrees, I have to do so for each page.
                             Here comes my plugin.
                         </p>
+                        <EmbedCode repo={"xournal-plugins"} file="/BatchHorizontal/main.lua" />
 
                         <h2>Page Progress Plugin</h2>
                         <p>
@@ -47,6 +50,7 @@ export const xournalPosts: PostData[] = [
                             It's useful to see how far you've come and want to know how much you've progressed in the document.
                             Therefore, I've written a plugin that calculates the percentage of slides you've already scrolled through.
                         </p>
+                        <EmbedCode repo={"xournal-plugins"} file="/PrintProgress/main.lua" />
 
                         <h2>Bookmark Pages</h2>
                         <p>
@@ -55,6 +59,7 @@ export const xournalPosts: PostData[] = [
                             I've written a plugin that lets you bookmark the current page and gives you the option to jump to it,
                             even after reopening the document.
                         </p>
+                        <EmbedCode repo={"xournal-plugins"} file="/BookmarkPage/main.lua" />
                     </>
                 },
             }
