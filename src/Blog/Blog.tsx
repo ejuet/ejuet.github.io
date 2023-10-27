@@ -178,6 +178,24 @@ class PostLibrary {
         return this.posts;
     }
 
+    getLatestPosts(descending=true){
+        var ret = Array.from(this.getPosts());
+        ret.sort((a,b)=>{
+            if(!a.getPostData().published) return -1;
+            if(!b.getPostData().published) return 1;
+            if(a.getPostData().published<b.getPostData().published){
+                return -1;
+            }
+            else if(a.getPostData().published>b.getPostData().published){
+                return 1;
+            }
+            return 0;
+        })
+        if(descending) ret.reverse();
+        console.log(ret);
+        return ret;
+    }
+
     getPostsWithTags(tags: Tag[]) {
         return this.posts.filter((post) => {
             for(var i in tags) {

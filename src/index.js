@@ -35,7 +35,7 @@ const router = createHashRouter([
     {
         path: "",
         element: <WithNavbar>
-            {postLibrary.getLatestPostCarousel(postLibrary.getPostsWithTag(Tag.chatgptauthor))}
+            {postLibrary.getLatestPostCarousel(postLibrary.getLatestPosts())}
         </WithNavbar>,
     },
     {
