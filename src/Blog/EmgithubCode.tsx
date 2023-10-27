@@ -33,7 +33,17 @@ export function EmbedCode({ repo, file, branch="main", lines="" }) {
             ref.current.append(script);
         }, 300);
 
-        setW(document.getElementsByClassName("page-content")[0].clientWidth)
+
+        setW(document.getElementsByClassName("page-content")[0].clientWidth);
+        window.addEventListener("resize", onResize)
+
+        //return window.removeEventListener("resize", onResize)
+
+        function onResize() {
+            setW(0) //set width to 0 so container can rescale
+            setW(document.getElementsByClassName("page-content")[0].clientWidth); //fit iframe to container
+        }
+
     }, []);
 
 
