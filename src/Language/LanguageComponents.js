@@ -26,7 +26,6 @@ export function LanguageToggle() {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const myParam = searchParams.get('lang');
-    console.log(searchParams)
 
     useEffect(() => {
         if (myParam && myParam!=strings.getLanguage()) {
