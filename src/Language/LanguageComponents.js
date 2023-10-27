@@ -16,9 +16,10 @@ export const strings = new MyLocalizedStrings({
     },
 })
 export function NavLinkLang(props) {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams(props.to);
     const language = searchParams.get('lang');
-    const appendix = language ? "?lang=" + language : "";
+    const appendSymbol = (props.to.includes && (/(\?)(?=(?:[^'"]|'[^']*'|"[^"]*")*$)/).test(props.to)) ? "&" : "?"
+    const appendix = language ? appendSymbol+"lang=" + language : "";
     return <NavLink {...props} to={props.to + appendix} />;
 }
 export function LanguageToggle() {

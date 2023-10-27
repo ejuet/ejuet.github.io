@@ -39,7 +39,7 @@ const router = createHashRouter([
         </WithNavbar>,
     },
     {
-        path: "/blog",
+        path: "/blog_all",
         element: <WithNavbar>
             {//postLibrary.getPostsAsCards()
             }
@@ -51,7 +51,7 @@ const router = createHashRouter([
         </WithNavbar>,
     },
     {
-        path: "/selector",
+        path: "/blog",
         element: <WithNavbar>
             {
                 <PostsWithTagsByQueryParams />
@@ -180,10 +180,10 @@ function MyNavbar() {
                         <NavLinkLang to="/">Home</NavLinkLang>
                     </Nav.Item>
                     <Nav.Item>
-                        <NavLinkLang to="/selector">Blog</NavLinkLang>
+                        <NavLinkLang to="/blog?tags=['current']" search="hello=4">Blog</NavLinkLang>
                     </Nav.Item>
                     <Nav.Item>
-                        <NavLinkLang to="/blog">All Posts</NavLinkLang>
+                        <NavLinkLang to="/blog_all">All Posts</NavLinkLang>
                     </Nav.Item>
                 </Nav>
                 <Nav className='align-items-center'>
