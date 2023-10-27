@@ -59,7 +59,7 @@ const router = createHashRouter([
         </WithNavbar>,
     },
     {
-        path: "/privacy",
+        path: "/privacy", //TODO datenschutzerklärung schreiben: erwähnung von giscus, emgithub
         element: <WithNavbar>
             <div>Hallo</div>
         </WithNavbar>,

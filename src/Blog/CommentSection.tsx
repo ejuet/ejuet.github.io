@@ -45,7 +45,7 @@ function Comments({ term }) {
         const script = document.createElement('script');
 
         const config = {
-            src: 'https://giscus.app/client.js',
+            src: 'https://giscus.app/client.js', //TODO client herunterladen in src folder
             "data-repo":"ejuet/giscus",
             "data-repo-id":"R_kgDOKgEKcw",
             "data-category":"Announcements",

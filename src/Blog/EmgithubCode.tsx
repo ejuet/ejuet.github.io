@@ -20,7 +20,7 @@ export function EmbedCode({ repo, file, branch="main", lines="" }) {
         const repoUrl = 'https://github.com/ejuet/'+repo+'/blob/'+branch+file+(lines!=""?"%23L"+lines:"");
         console.log(repoUrl)
 
-        const config = {
+        const config = { //TODO emgithub selbst hosten
             src: "https://emgithub.com/embed-v2.js?target="+repoUrl+'&style=default&type=code&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on',
         };
 
