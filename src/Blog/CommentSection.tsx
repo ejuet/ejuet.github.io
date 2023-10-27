@@ -26,15 +26,12 @@ export function CommentSection({ issueTerm }) {
     </>;
     */
 
-    return <div className="d-flex justify-content-center">
-        <div style={{ width: "70vw" }}>
-            {
-                !localStorage.getItem("giscus-session") &&
-                <Alert variant="warning">{generalTexts.commentcookie}</Alert>
-            }
+    return <div>
+        {
+            !localStorage.getItem("giscus-session") &&
+            <Alert variant="warning">{generalTexts.commentcookie}</Alert>
+        }
         <Comments term={issueTerm} />
-
-        </div>
     </div>
 }
 
@@ -46,20 +43,20 @@ function Comments({ term }) {
 
         const config = {
             src: 'https://giscus.app/client.js', //TODO client herunterladen in src folder
-            "data-repo":"ejuet/giscus",
-            "data-repo-id":"R_kgDOKgEKcw",
-            "data-category":"Announcements",
-            "data-category-id":"DIC_kwDOKgEKc84CaHlh",
-            "data-mapping":"specific",
-            "data-term":"["+term+"]",
-            "data-strict":"0",
-            "data-reactions-enabled":"1",
-            "data-emit-metadata":"0",
-            "data-input-position":"top",
-            "data-theme":"light",
-            "data-lang":getCurrentLanguage(),
-            "data-loading":"lazy",
-            "crossorigin":"anonymous",
+            "data-repo": "ejuet/giscus",
+            "data-repo-id": "R_kgDOKgEKcw",
+            "data-category": "Announcements",
+            "data-category-id": "DIC_kwDOKgEKc84CaHlh",
+            "data-mapping": "specific",
+            "data-term": "[" + term + "]",
+            "data-strict": "0",
+            "data-reactions-enabled": "1",
+            "data-emit-metadata": "0",
+            "data-input-position": "top",
+            "data-theme": "light",
+            "data-lang": getCurrentLanguage(),
+            "data-loading": "lazy",
+            "crossorigin": "anonymous",
         };
 
         Object.entries(config).forEach(([key, value]) => {

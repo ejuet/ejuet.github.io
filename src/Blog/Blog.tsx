@@ -96,6 +96,19 @@ class Post {
                                 {this.postData.published &&
                                     <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
                                 }
+                                <p>
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                    fdsfdsf fjdskfjds soaif ds,jiods
+                                </p>
                                 <div className="page-content">
                                     {this.getContent()}
                                 </div>
@@ -178,18 +191,18 @@ class PostLibrary {
         return this.posts;
     }
 
-    getLatestPosts(descending=true){
+    getLatestPosts(descending = true) {
         var ret = Array.from(this.getPosts());
-        ret.sort((a,b)=>{
+        ret.sort((a, b) => {
             const aDate = a.getPostData().published;
             const bDate = b.getPostData().published;
 
             if(!aDate) return -1;
             if(!bDate) return 1;
-            if(aDate<bDate){
+            if(aDate < bDate) {
                 return -1;
             }
-            else if(aDate>bDate){
+            else if(aDate > bDate) {
                 return 1;
             }
             return 0;
@@ -244,7 +257,7 @@ class PostLibrary {
 //Posts
 export const postLibrary = new PostLibrary([
     //example posts i only want to see if im working on the website
-    ...(window.location.hostname=="localhost"?examplePosts:[]),
+    ...(window.location.hostname == "localhost" ? examplePosts : []),
 
     ...chatGPTPosts,
 
