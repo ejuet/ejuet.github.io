@@ -19,6 +19,7 @@ import { chatGPTPosts } from "./chatGPTPosts.tsx";
 import { getTagInfo } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
 import { examplePosts } from "./examplePosts.tsx";
+import { xournalPosts } from "./xournalposts.tsx";
 
 interface BlogTranslations extends LocalizedStringsMethods {
     title: string;
@@ -226,6 +227,8 @@ export const postLibrary = new PostLibrary([
     ...(window.location.hostname=="localhost"?examplePosts:[]),
 
     ...chatGPTPosts,
+
+    ...xournalPosts
 
     /*
     //post: wordpress
