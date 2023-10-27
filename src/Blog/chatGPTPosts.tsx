@@ -305,38 +305,4 @@ export const chatGPTPosts: PostData[] = [
             },
         }),
     },
-
-    //post: title
-    {
-        published: new Date("2023-10-14"),
-        tags: [Tag.chatgptauthor],
-        translations: MyLocalizedStrings.create({
-            en: {
-                title: "example title",
-                subtitle: "subtitle of post",
-                content: () => <>
-                    <p>This is a great Post.</p>
-                    <h1>H1 Header</h1>
-                    <h2>Blibliblubb h2 header</h2>
-                    <p>fdsfds</p>
-                    <p>dfsfdsfds</p>
-                    <h3>blubb h3</h3>
-                    <h1>H1 Header no 2</h1>
-                </>
-            },
-            de: {
-                title: "Beispielhafter Titel",
-                subtitle: "Untertitel des Posts",
-                content: () => <>
-                    <p>Das ist ein toller post</p>
-                    <h1>H1 Header</h1>
-                    <h2>Blibliblubb h2 header</h2>
-                    <p>fdsfds</p>
-                    <p>dfsfdsfds</p>
-                    <h3>blubb h3</h3>
-                    <h1>H1 Header no 2</h1>
-                </>
-            },
-        }),
-    },
 ];
