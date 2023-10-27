@@ -20,13 +20,13 @@ const strings = new MyLocalizedStrings({
         privacyPolicy: "Privacy Policy",
         language: "Language",
         flag: "🇬🇧",
-        blogPosts:"Blog Posts"
+        blogPosts: "Blog Posts"
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
         flag: "🇩🇪",
-        blogPosts:"Beiträge"
+        blogPosts: "Beiträge"
     },
 })
 
@@ -130,8 +130,8 @@ function TagBadge({ tagString }) {
         <Badge as={NavLinkLang} to={window.location} pill bg="" style={{
             "backgroundColor": tagInfo.color,
             "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
-            zIndex:100
-            }} onClick={(e) => {
+            zIndex: 100
+        }} onClick={(e) => {
             e.preventDefault()
 
             //muss über useSearchParams passieren weil sonst nicht mit HashRouter umgehen kann
@@ -150,7 +150,7 @@ function TagBadge({ tagString }) {
             });
 
         }}>
-            {active && "X "}{tagInfo.translations.title}
+            {tagInfo.translations.title}
         </Badge>
     </h2>
 }
