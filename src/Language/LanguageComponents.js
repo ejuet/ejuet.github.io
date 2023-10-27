@@ -26,6 +26,7 @@ export function LanguageToggle() {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const myParam = searchParams.get('lang');
+    console.log(searchParams)
 
     useEffect(() => {
         if (myParam && myParam!=strings.getLanguage()) {
@@ -34,7 +35,8 @@ export function LanguageToggle() {
     }, [myParam]);
 
     function setLanguage(newLang) {
-        setSearchParams({ lang: newLang }); //TODO fix other params disappearing on setting
+        searchParams.set("lang", newLang)
+        setSearchParams(searchParams); //TODO fix other params disappearing on setting
     }
 
     return <Dropdown>
