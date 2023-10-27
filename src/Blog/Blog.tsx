@@ -181,18 +181,20 @@ class PostLibrary {
     getLatestPosts(descending=true){
         var ret = Array.from(this.getPosts());
         ret.sort((a,b)=>{
-            if(!a.getPostData().published) return -1;
-            if(!b.getPostData().published) return 1;
-            if(a.getPostData().published<b.getPostData().published){
+            const aDate = a.getPostData().published;
+            const bDate = b.getPostData().published;
+
+            if(!aDate) return -1;
+            if(!bDate) return 1;
+            if(aDate<bDate){
                 return -1;
             }
-            else if(a.getPostData().published>b.getPostData().published){
+            else if(aDate>bDate){
                 return 1;
             }
             return 0;
         })
         if(descending) ret.reverse();
-        console.log(ret);
         return ret;
     }
 
