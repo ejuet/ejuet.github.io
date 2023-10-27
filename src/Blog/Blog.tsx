@@ -78,7 +78,7 @@ class Post {
         return this.postData.translations.content()
     }
 
-    getPage() {
+    getPage() { //TODO fix text being wider than window on resize => sth wrong with columns?
         return <>
             <div className="text-light bg-primary">
                 <div style={{ fontSize: 60 }}>
