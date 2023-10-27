@@ -96,19 +96,6 @@ class Post {
                                 {this.postData.published &&
                                     <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
                                 }
-                                <p>
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                    fdsfdsf fjdskfjds soaif ds,jiods
-                                </p>
                                 <div className="page-content">
                                     {this.getContent()}
                                 </div>
