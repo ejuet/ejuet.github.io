@@ -14,6 +14,7 @@ import { postLibrary } from "./Blog/Blog"
 import { TableOfContents } from "./TableOfContents/TableOfContents";
 import { useScrollbarActive } from './useScrollbarActive.js';
 import { Tag, getTagInfo, getTags } from './Blog/Tags';
+import { MyPrivacy } from './MyPrivacy.js';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -59,9 +60,9 @@ const router = createHashRouter([
         </WithNavbar>,
     },
     {
-        path: "/privacy", //TODO datenschutzerklärung schreiben: erwähnung von giscus, emgithub
+        path: "/privacy",
         element: <WithNavbar>
-            <div>Hallo</div>
+            <MyPrivacy />
         </WithNavbar>,
     },
 
@@ -199,7 +200,7 @@ function MyNavbar() {
     </Navbar>
 }
 
-function MyFooter() {
+function MyFooter() { //TODO Footer privacy page too wide
     const scrollbarIsActive = useScrollbarActive()
 
     const fixAtBottomResp = scrollbarIsActive ? {} : { position: "absolute", bottom: 0 }

@@ -29,10 +29,14 @@ export function CommentSection({ issueTerm }) {
     return <div>
         {
             !localStorage.getItem("giscus-session") &&
-            <Alert variant="warning">{generalTexts.commentcookie}</Alert>
+            <GiscusCookieAlert />
         }
         <Comments term={issueTerm} />
     </div>
+}
+
+export function GiscusCookieAlert(): React.ReactNode {
+    return <Alert variant="warning">{generalTexts.commentcookie}</Alert>;
 }
 
 function Comments({ term }) {
