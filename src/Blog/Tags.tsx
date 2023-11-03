@@ -66,7 +66,7 @@ export function getTagInfo(tag: Tag): TagInfo {
                         description: "Projects with "+languageName+" Code",
                     },
                     de: {
-                        title: "Lua",
+                        title: languageName,
                         description: "Projekte mit "+languageName+" Code",
                     }
                 })
