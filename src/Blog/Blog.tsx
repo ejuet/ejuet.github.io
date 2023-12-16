@@ -80,10 +80,28 @@ class Post {
         return this.postData.translations.content()
     }
 
+    getOneTag(){
+        if(this.postData.tags.length<=0) return null;
+        if(this.postData.tags.length==1) return this.postData.tags[0];
+        return this.postData.tags.filter((tag)=>tag!=Tag.current)[0];
+    }
+
+    getColor(){
+        let t:Tag=this.getOneTag();
+        if(t){
+            return getTagInfo(t).color
+        }
+        return "bg-primary";
+    }
+
     getPage() {
         return <>
-            <div className="text-light bg-primary">
-                <div style={{ fontSize: 60 }}>
+            <div className="text-light" style={{
+                backgroundColor: this.getColor(),
+                backgroundImage:'url(' + require('./GreenscreenedSnow.apng') + ')',
+                backgroundSize: "contain"
+                }}>
+                <div style={{ fontSize: 60}}>
                     {this.postData.translations.title}
                 </div>
                 <p>{this.postData.translations.subtitle}</p>
