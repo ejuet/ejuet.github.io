@@ -7,7 +7,8 @@ export enum Tag {
     school,
     chatgptauthor,
     lua,
-    java
+    java,
+    git
 }
 
 export function getTagInfo(tag: Tag): TagInfo {
@@ -71,6 +72,20 @@ export function getTagInfo(tag: Tag): TagInfo {
                     }
                 })
             }
+        case Tag.git:
+            return {
+                color: "#f05033",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "Git",
+                        description: "Blogposts related to the versioning tool git.",
+                    },
+                    de: {
+                        title: "Git",
+                        description: "Blogposts über git.",
+                    }
+                })
+            };
     }
 }
 

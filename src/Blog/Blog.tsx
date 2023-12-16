@@ -20,6 +20,7 @@ import { getTagInfo } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
 import { examplePosts } from "./examplePosts.tsx";
 import { xournalPosts } from "./xournalposts.tsx";
+import { gitPosts } from "./gitposts.tsx";
 
 interface BlogTranslations extends LocalizedStringsMethods {
     title: string;
@@ -248,7 +249,9 @@ export const postLibrary = new PostLibrary([
 
     ...chatGPTPosts,
 
-    ...xournalPosts
+    ...xournalPosts,
+    
+    ... gitPosts
 
     /*
     //post: wordpress
