@@ -1,5 +1,5 @@
 import React from 'react';
-import { Parallax, Background } from 'react-parallax';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 //TODO parallax macht table of contents zu headings springen pautt
 //TODO parallax macht toc sticky kaputt
@@ -10,6 +10,26 @@ export function WithParallax({ children }) {
         {children}
     </Parallax>
     */
+    return <>
+        <Parallax pages={1} style={{ top: '0', left: '0', overflow:"auto" }}>
+            <ParallaxLayer offset={0} speed={2.5}>
+            <div style={{
+                    width: "100vw",
+                    height: "2000vh",
+                    backgroundImage: 'url(' + require('./sterne.png') + ')',
+                    backgroundSize: "50%",
+                    filter: "brightness(80%)"
+                }}>
+
+                </div>
+            </ParallaxLayer>
+            <ParallaxLayer offset={0} speed={2.5} style={{overflow: "auto"}} id="parallaxcontent">
+                {children}
+            </ParallaxLayer>
+        </Parallax>
+
+    </>
+    /*
     return <>
         <Parallax strength={1700} style={{ backgroundColor: "#19132A" }}>
             <Background>
@@ -35,10 +55,13 @@ export function WithParallax({ children }) {
 
                     </div>
                 </Background>
-                <div style={{ minHeight: "100vh" }}> {/* Page should always take up the full screen */}
+                <div style={{ minHeight: "100vh" }}> {
+                    // Page should always take up the full screen
+                }
                     {children}
                 </div>
             </Parallax>
         </Parallax>
     </>;
+    */
 }

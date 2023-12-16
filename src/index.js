@@ -211,7 +211,7 @@ function MyFooter() { //TODO Footer privacy page too wide
 
     const fixAtBottomResp = scrollbarIsActive ? {} : { position: "absolute", bottom: 0 }
 
-    return <Container> {/* Extra Container is needed to center footer */}
+    return <Container className='d-flex justify-content-center'> {/* Extra Container is needed to center footer */}
         <Container fluid="xxl" style={{ ...fixAtBottomResp, marginTop: 5, zIndex: 0 }} className="footer navbar-static-bottom bg-tertiary border-top" >
             <Row className='p-3'>
                 <Col xs={12} md={6} >
