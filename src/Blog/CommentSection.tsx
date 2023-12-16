@@ -57,7 +57,7 @@ function Comments({ term }) {
             "data-reactions-enabled": "1",
             "data-emit-metadata": "0",
             "data-input-position": "top",
-            "data-theme": "light",
+            "data-theme": "noborder_dark",
             "data-lang": getCurrentLanguage(),
             "data-loading": "lazy",
             "crossorigin": "anonymous",
