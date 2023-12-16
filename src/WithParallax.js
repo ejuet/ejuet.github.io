@@ -1,6 +1,9 @@
 import React from 'react';
 import { Parallax, Background } from 'react-parallax';
 
+//TODO parallax macht table of contents zu headings springen pautt
+//TODO parallax macht toc sticky kaputt
+
 export function WithParallax({ children }) {
     /*
     return <Parallax strength={1000} bgImage='img/sterne.png' style={{backgroundColor:"black"}}>
