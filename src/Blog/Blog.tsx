@@ -52,7 +52,8 @@ export interface PostData {
     published?: Date | undefined;
     projectStart?: Date;
     projectEnd?: Date;
-    tags: Tag[]
+    tags: Tag[];
+    ignoreInDisplays?: boolean;
 }
 
 class Post {
@@ -79,7 +80,7 @@ class Post {
         return this.postData.translations.content()
     }
 
-    getPage() { 
+    getPage() {
         return <>
             <div className="text-light bg-primary">
                 <div style={{ fontSize: 60 }}>
@@ -195,7 +196,11 @@ class PostLibrary {
             }
             return 0;
         })
+
         if(descending) ret.reverse();
+
+        //ignore all posts that should be ignored in latest posts
+        ret = ret.filter((post)=> !post.getPostData().ignoreInDisplays || post.getPostData().ignoreInDisplays==false);
         return ret;
     }
 
@@ -236,7 +241,7 @@ class PostLibrary {
     getLatestPostCarousel(posts?: Post[]) {
         if(!posts) { posts = this.posts }
         return <Carousel className="bg-light">
-            {posts.slice(0, 3).map((post, index) => post.getCarouselItem())}
+            {posts.slice(0, 10).map((post, index) => post.getCarouselItem())}
         </Carousel>
     }
 }
@@ -250,8 +255,8 @@ export const postLibrary = new PostLibrary([
     ...chatGPTPosts,
 
     ...xournalPosts,
-    
-    ... gitPosts
+
+    ...gitPosts
 
     /*
     //post: wordpress

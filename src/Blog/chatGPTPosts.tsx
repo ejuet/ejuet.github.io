@@ -9,6 +9,7 @@ export const chatGPTPosts: PostData[] = [
         titleImage: "pexels/firefly.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
+        ignoreInDisplays:true,
         translations: MyLocalizedStrings.create({
             en: {
                 title: "The Secret of Fireflies",
@@ -75,6 +76,7 @@ export const chatGPTPosts: PostData[] = [
         titleImage: "pexels/iron.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
+        ignoreInDisplays:true,
         translations: MyLocalizedStrings.create({
             en: {
                 title: "Ironing on the Edge: Extreme Ironing",
@@ -148,6 +150,7 @@ export const chatGPTPosts: PostData[] = [
     {
         titleImage: "pexels/cat.jpg",
         tags: [Tag.chatgptauthor],
+        ignoreInDisplays:true,
         translations: MyLocalizedStrings.create({
             en: {
                 title: "The Mystique of Library Cats",
@@ -236,6 +239,7 @@ export const chatGPTPosts: PostData[] = [
         titleImage: "pexels/pumpkin.jpg",
         published: new Date("2023-10-14"),
         tags: [Tag.chatgptauthor],
+        ignoreInDisplays:true,
         translations: MyLocalizedStrings.create({
             en: {
                 title: "Pumpkin People: The Enigmatic Tradition",
