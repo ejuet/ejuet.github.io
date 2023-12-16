@@ -21,6 +21,7 @@ import { Tag } from "./Tags.tsx";
 import { examplePosts } from "./examplePosts.tsx";
 import { xournalPosts } from "./xournalposts.tsx";
 import { gitPosts } from "./gitposts.tsx";
+import { Parallax } from 'react-parallax';
 
 interface BlogTranslations extends LocalizedStringsMethods {
     title: string;
@@ -80,15 +81,15 @@ class Post {
         return this.postData.translations.content()
     }
 
-    getOneTag(){
-        if(this.postData.tags.length<=0) return null;
-        if(this.postData.tags.length==1) return this.postData.tags[0];
-        return this.postData.tags.filter((tag)=>tag!=Tag.current)[0];
+    getOneTag() {
+        if(this.postData.tags.length <= 0) return null;
+        if(this.postData.tags.length == 1) return this.postData.tags[0];
+        return this.postData.tags.filter((tag) => tag != Tag.current)[0];
     }
 
-    getColor(){
-        let t:Tag=this.getOneTag();
-        if(t){
+    getColor() {
+        let t: Tag = this.getOneTag();
+        if(t) {
             return getTagInfo(t).color
         }
         return "bg-primary";
@@ -98,10 +99,10 @@ class Post {
         return <>
             <div className="text-light" style={{
                 backgroundColor: this.getColor(),
-                backgroundImage:'url(' + require('./GreenscreenedSnow.apng') + ')',
+                backgroundImage: 'url(' + require('./GreenscreenedSnow.apng') + ')',
                 backgroundSize: "contain"
-                }}>
-                <div style={{ fontSize: 60}}>
+            }}>
+                <div style={{ fontSize: 60 }}>
                     {this.postData.translations.title}
                 </div>
                 <p>{this.postData.translations.subtitle}</p>
@@ -218,7 +219,7 @@ class PostLibrary {
         if(descending) ret.reverse();
 
         //ignore all posts that should be ignored in latest posts
-        ret = ret.filter((post)=> !post.getPostData().ignoreInDisplays || post.getPostData().ignoreInDisplays==false);
+        ret = ret.filter((post) => !post.getPostData().ignoreInDisplays || post.getPostData().ignoreInDisplays == false);
         return ret;
     }
 

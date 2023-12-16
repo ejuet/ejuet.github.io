@@ -16,6 +16,7 @@
     "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",
     "react-localization": "^1.0.19",
+    "react-parallax": "^3.5.1",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
     "typescript": "^5.2.2",
@@ -35,7 +36,7 @@
   },
   "eslintConfig": {
     "rules": {
-      "no-useless-escape":"off"
+      "no-useless-escape": "off"
     },
     "extends": [
       "react-app",

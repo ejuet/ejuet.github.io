@@ -15,6 +15,7 @@ import { TableOfContents } from "./TableOfContents/TableOfContents";
 import { useScrollbarActive } from './useScrollbarActive.js';
 import { Tag, getTagInfo, getTags } from './Blog/Tags';
 import { MyPrivacy } from './MyPrivacy.js';
+import { Parallax, Background } from 'react-parallax';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -94,9 +95,10 @@ export function getPathToTag(tagKey) {
 function PostsWithTagCards({ tagKey }) {
     var tagInfo = getTagInfo(Tag[tagKey])
     return <>
-        <h1 style={{ color: tagInfo.color }}>{tagInfo.translations.title}</h1>
+        <h1 style={{ backgroundColor: tagInfo.color, marginTop:"20px" }}>{tagInfo.translations.title}</h1>
         <p>{tagInfo.translations.description}</p>
         {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag[tagKey]))}
+        <br></br>
     </>
 }
 
@@ -161,10 +163,37 @@ function TagBadge({ tagString }) {
 function WithNavbar({ children }) {
     return <>
         <div className='App'>
-            <MyNavbar />
-            {children}
-            <MyFooter />
+            <WithParallax>
+                <MyNavbar />
+                {children}
+                <MyFooter />
+            </WithParallax>
         </div>
+    </>
+}
+
+function WithParallax({ children }) {
+    /*
+    return <Parallax strength={1000} bgImage='img/sterne.png' style={{backgroundColor:"black"}}>
+        {children}
+    </Parallax>
+    */
+    return <>
+        <Parallax strength={1000} style={{ backgroundColor: "black" }}>
+            <Background>
+                <div style={{
+                    width: "100vw",
+                    height: "2000vh",
+                    backgroundImage: 'url(' + require('./sterne.png') + ')',
+                    backgroundSize: "50%"
+                }}>
+
+                </div>
+            </Background>
+            <div style={{ minHeight: "100vh" }}> {/* Page should always take up the full screen */}
+                {children}
+            </div>
+        </Parallax>
     </>
 }
 
