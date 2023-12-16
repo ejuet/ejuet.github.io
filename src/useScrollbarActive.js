@@ -5,9 +5,11 @@ export function useScrollbarActive() {
 
     useEffect(() => {
         const resizeObserver = new ResizeObserver(entries => {
-            setSc(document.body.clientHeight > window.innerHeight);
+            var height = Math.max(document.body.clientHeight, document.getElementById("parallaxcontent")?.scrollHeight)
+            setSc(height > window.innerHeight);
         });
-        resizeObserver.observe(document.body);
+        var toObserve = document.getElementById("parallaxcontent")? document.getElementById("parallaxcontent") : document.body;
+        resizeObserver.observe(toObserve);
 
         return () => {
             resizeObserver.disconnect();
