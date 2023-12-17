@@ -54,6 +54,16 @@ body {
 
 .page-content {
   max-width: 750px;
+  padding: 15px;
+  padding-top: 30px;
+}
+
+.table-of-contents{
+  padding: 15px;
+}
+
+.table-of-contents, .page-content{
+  backdrop-filter: blur(6px);
 }
 
 pre {

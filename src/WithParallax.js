@@ -1,11 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Background, Parallax } from 'react-parallax';
-import { ParallaxBanner, ParallaxBannerLayer, ParallaxProvider, useParallax } from 'react-scroll-parallax';
-
-
-//TODO parallax macht table of contents zu headings springen pautt
-//TODO parallax macht toc sticky kaputt
 
 export function WithParallax({ children }) {
 
@@ -41,7 +35,7 @@ export function WithParallax({ children }) {
                 height: "2000vh",
                 backgroundImage: 'url(' + require('./sterne.png') + ')',
                 backgroundSize: backgroundSize,
-                filter: "brightness(50%)",
+                filter: "brightness(100%)",
                 translate: "0px " + (scroll * speed) + "px",
             }} />
         </div>;

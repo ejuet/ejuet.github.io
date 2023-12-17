@@ -117,7 +117,7 @@ class Post {
                                 {this.postData.published &&
                                     <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
                                 }
-                                <div className="page-content">
+                                <div>
                                     {this.getContent()}
                                 </div>
                                 <h1>{generalTexts.comments}</h1>
