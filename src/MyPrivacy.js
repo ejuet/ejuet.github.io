@@ -143,7 +143,7 @@ const strings = new MyLocalizedStrings({
 export function MyPrivacy() {
     return <>
         <div className='d-flex justify-content-center'>
-            <div style={{ maxWidth: "670px" }}>
+            <div style={{ maxWidth: "670px" }} className='blur p-3'>
                 {strings.privacy()}
                 {strings.moreinfo()}
             </div>
