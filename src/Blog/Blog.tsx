@@ -38,7 +38,7 @@ export const generalTexts = new MyLocalizedStrings({
         published: "Published"
     },
     de: {
-        readmore: "Mehr Erfahren",
+        readmore: "Lesen",
         comments: "Kommentare",
         pleasecomment: "Noch Fragen?",
         commentcookie: "Durch das Anmelden mit Github wird ein Login-Cookie erstellt und gespeichert.",
@@ -140,8 +140,8 @@ class Post {
 
     getCard() {
         return <NavLinkLang to={this.postData.link}>
-            <Card>
-                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px" }} />
+            <Card className="mb-4">
+                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px"}} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
                     {this.TagRow()}
@@ -247,7 +247,7 @@ class PostLibrary {
     getPostsAsCards(posts?: Post[]) {
         if(!posts) { posts = this.posts }
         return <Container>
-            <Row xs={2} md={4}>
+            <Row xs={1} sm={2} md={3} xl={4} className="justify-content-center">
                 {
                     posts.map((item, i) => <Row key={i}>
                         {item.getCard()}
