@@ -113,7 +113,7 @@ function PostsWithTagsByQueryParams() {
     return <>
         <Container className='mb-4'>
             <Row className='mb-3'><h1>{strings.blogPosts}</h1></Row>
-            <Row>
+            <Row className='justify-content-center'>
                 {
                     getTags().map((tagString) => <TagBadge tagString={tagString} />)
                 }
