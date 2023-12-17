@@ -90,7 +90,7 @@ class Post {
 
     getColor() {
         let t: Tag = this.getOneTag();
-        if(t!=null) {
+        if(t != null) {
             return getTagInfo(t).color
         }
         return "var(--bs-primary)";
@@ -142,7 +142,7 @@ class Post {
     getCard() {
         return <NavLinkLang to={this.postData.link}>
             <Card className="mb-4">
-                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px"}} />
+                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px" }} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
                     {this.TagRow(true)}
@@ -205,18 +205,19 @@ function compareDates(aDate: Date, bDate: Date): 1 | -1 | 0 {
 
 class PostLibrary {
     private posts: Post[]
-    constructor(postData: PostData[]) {
-        this.posts = postData.map((dat, i) => new Post(dat))
+    constructor(postData: PostData[], postgroups: PostGroup[] = []) {
+        var postdatas = postData.concat(postgroups.flatMap((project)=>project.getPostDatas()))
+        this.posts = postdatas.map((dat, i) => new Post(dat))
     }
 
     getPosts() {
-        this.posts.sort((a, b)=>compareDates(a.getPostData().published, b.getPostData().published)).reverse()
+        this.posts.sort((a, b) => compareDates(a.getPostData().published, b.getPostData().published)).reverse()
         return this.posts;
     }
 
     getLatestPosts(descending = true) {
         var ret = Array.from(this.getPosts());
-        ret.sort((a, b)=>compareDates(a.getPostData().published, b.getPostData().published))
+        ret.sort((a, b) => compareDates(a.getPostData().published, b.getPostData().published))
 
         if(descending) ret.reverse();
 
@@ -267,35 +268,82 @@ class PostLibrary {
     }
 }
 
+class PostGroup {
+    private postDatas: PostData[]
+    constructor(groupName: string, groupTags: Tag[] = [], postData: PostData[]) {
+        this.postDatas = postData.map((dat, i) => dat)
+        this.postDatas.forEach((postdata=>{
+            postdata.tags=postdata.tags.concat(groupTags);
+        }))
+    }
+
+    getPostDatas() {
+        return this.postDatas;
+    }
+}
+
 
 //Posts
-export const postLibrary = new PostLibrary([
-    //example posts i only want to see if im working on the website
-    ...(false && window.location.hostname == "localhost" ? examplePosts : []),
+export const postLibrary = new PostLibrary(
+    [
+        //example posts i only want to see if im working on the website
+        ...(false && window.location.hostname == "localhost" ? examplePosts : []),
 
-    ...chatGPTPosts,
+        ...chatGPTPosts,
 
-    ...xournalPosts,
+        ...xournalPosts,
 
-    ...gitPosts
+        ...gitPosts
 
-    /*
-    //post: wordpress
-    {
-        published: new Date("2023-10-14"),
-        tags: [Tag.chatgptauthor],
-        translations: MyLocalizedStrings.create({
-            en: {
-                title: "example title",
-                subtitle: "subtitle of post",
-                content: () => <>
-                    
-                </>
-            },
-        }),
-    },
-    */
-])
+        /*
+        //post: wordpress
+        {
+            published: new Date("2023-10-14"),
+            tags: [Tag.chatgptauthor],
+            translations: MyLocalizedStrings.create({
+                en: {
+                    title: "example title",
+                    subtitle: "subtitle of post",
+                    content: () => <>
+                        
+                    </>
+                },
+            }),
+        },
+        */
+    ],
+    //Projects:
+    [
+        new PostGroup(
+            "Creation  of this website",
+            [Tag.javascript],
+            [
+                {
+                    published: new Date("2023-12-18"),
+                    tags: [],
+                    translations: MyLocalizedStrings.create({
+                        en: {
+                            title: "This website",
+                            subtitle: "",
+                            content: () => <>
+                                <p>As Halloween approaches, the air becom </p>
+                        
+                            </>
+                        },
+                        de: {
+                            title: "Diese webseite",
+                            subtitle: "",
+                            content: () => <>
+                                <p>Da Halloween näher rückt, füllt sich die Luft m</p>
+                                
+                            </>
+                        },
+                    }),
+                },
+            ]
+        )
+    ]
+)
 
 
 const testcontent = ""
