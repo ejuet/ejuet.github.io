@@ -13,7 +13,7 @@ export function WithParallax({ children }) {
 
     return <div>
         <Layer speed={0.5} backgroundSize='50%' backgroundColor='#292d3e' url={require('./sterne.png')} />
-        <Layer speed={0.4} backgroundSize='70%' url={require('./sterne.png')} />
+        <Layer speed={0.4} backgroundSize='50%' url={require('./sterne.png')} />
         <Layer speed={0.3} backgroundSize='100%' url={require('./sterne.png')}/>
 
         <div id="parallaxcontent" ref={content}>

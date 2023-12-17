@@ -62,7 +62,9 @@ body {
   padding: 15px;
 }
 
-.table-of-contents, .page-content, .blur{
+.blur,
+.table-of-contents, .page-content
+{
   backdrop-filter: blur(6px);
 }
 

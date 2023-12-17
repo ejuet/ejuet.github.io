@@ -29,7 +29,7 @@ export function getTagInfo(tag: Tag): TagInfo {
             };
         case Tag.school:
             return {
-                color: "lightgray",
+                color: "gray",
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "School",
@@ -57,21 +57,9 @@ export function getTagInfo(tag: Tag): TagInfo {
             };
         //Programming Languages:
         case Tag.java:
+            return getProgrammingLanguageTagInfo("#f58312");
         case Tag.lua:
-            const languageName = Tag[tag].charAt(0).toLocaleUpperCase()+Tag[tag].slice(1)
-            return {
-                color: "#000000",
-                translations: MyLocalizedStrings.create({
-                    en: {
-                        title: languageName,
-                        description: "Projects with "+languageName+" Code",
-                    },
-                    de: {
-                        title: languageName,
-                        description: "Projekte mit "+languageName+" Code",
-                    }
-                })
-            }
+            return getProgrammingLanguageTagInfo("#03027d");
         case Tag.git:
             return {
                 color: "#f05033",
@@ -86,6 +74,23 @@ export function getTagInfo(tag: Tag): TagInfo {
                     }
                 })
             };
+    }
+
+    function getProgrammingLanguageTagInfo(color="#000000") {
+        const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+        return {
+            color: color,
+            translations: MyLocalizedStrings.create({
+                en: {
+                    title: languageName,
+                    description: "Projects with " + languageName + " Code",
+                },
+                de: {
+                    title: languageName,
+                    description: "Projekte mit " + languageName + " Code",
+                }
+            })
+        };
     }
 }
 

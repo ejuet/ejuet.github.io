@@ -1,0 +1,30 @@
+
+// Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$primary: #e851b2;
+$dark: #272635;
+$success: #01f769;
+$warning: #f7fa4d;
+
+// merge with existing $theme-colors map
+$theme-colors: map-merge($theme-colors, (
+    "primary": $primary,
+    "dark": $dark
+));
+
+// --- set variables depending on theme ---
+$body-bg: $dark; //background color of many elements
+$body-color: $light; //text color
+
+$link-color: $primary;
+$link-hover-color: darken($primary, 10%);
+$navbar-light-brand-color: $primary;
+
+$enable-gradients: true;
+
+@import '~bootstrap/scss/bootstrap';
+@import './App.css';
+@import './index.css';

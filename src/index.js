@@ -1,10 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import './App.css';
+import './App.scss';
 import reportWebVitals from './reportWebVitals.js';
 import { RouterProvider, createHashRouter, useSearchParams, } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import { Container, Nav, Navbar, Col, Row, Button, Badge } from 'react-bootstrap';
