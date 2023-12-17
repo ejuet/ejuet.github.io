@@ -1,111 +1,106 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
 import { Background, Parallax } from 'react-parallax';
+import { ParallaxBanner, ParallaxBannerLayer, ParallaxProvider, useParallax } from 'react-scroll-parallax';
+
 
 //TODO parallax macht table of contents zu headings springen pautt
 //TODO parallax macht toc sticky kaputt
 
 export function WithParallax({ children }) {
-    /*
-    return <Parallax strength={1000} bgImage='img/sterne.png' style={{backgroundColor:"black"}}>
-        {children}
-    </Parallax>
-    */
-    /*
-    return <>
-        <Parallax pages={1} style={{ top: '0', left: '0', overflow:"auto" }}>
-            <ParallaxLayer offset={0} speed={2.5}>
-            <div style={{
-                    width: "100vw",
-                    height: "2000vh",
-                    backgroundImage: 'url(' + require('./sterne.png') + ')',
-                    backgroundSize: "50%",
-                    filter: "brightness(80%)"
-                }}>
 
-                </div>
-            </ParallaxLayer>
-            <ParallaxLayer offset={0} speed={2.5} style={{overflow: "auto"}} id="parallaxcontent">
-                {children}
-            </ParallaxLayer>
-        </Parallax>
+    const scroll = useDelayedScroll();
+    const content = useRef();
+    const h = useElementHeight(content)
+    const height = Math.max(h, window.innerHeight)
+    const w = useElementWidth(content)
+    const width = w && w>0 ? w : 80
 
-    </>
-     */
-    /*
-    return <ParallaxProvider>
-        <div>
-            <ParallaxBanner style={{overflow:"auto !important"}}>
-                
-            <ParallaxBannerLayer speed={-50}>
-                    <div style={{
-                        width: "100%",
-                        height: "1000vh",
-                        backgroundImage: 'url(' + require('./sterne.png') + ')',
-                        backgroundSize: "50%",
-                        filter: "brightness(80%)",
-                    }} />
-                </ParallaxBannerLayer>
 
-                {
-                    
-                    
-
-<ParallaxBannerLayer speed={-20}>
-                    <div style={{
-                        width: "90vw",
-                        height: "2000vh",
-                        backgroundImage: 'url(' + require('./sterne.png') + ')',
-                        backgroundSize: "90%",
-                        filter: "brightness(80%)",
-                        overflow:"hidden"
-                    }} />
-                </ParallaxBannerLayer>
-                    
-                }
-                
-                <ParallaxBanner style={{
-                        overflow:"visible"
-                    }} id="parallaxcontent">
-                    {children}
-                </ParallaxBanner>
-            </ParallaxBanner>
+    return <div>
+        <Layer speed={0.5} backgroundSize='50%' backgroundColor='#292d3e' />
+        <Layer speed={0.3} backgroundSize='100%' />
+        
+        <div id="parallaxcontent" ref={content}>
+            {children}
         </div>
+    </div>
 
-    </ParallaxProvider>
-    */
-    
-    return <>
-        <Parallax strength={1700} style={{ backgroundColor: "#19132A", overflow:"visible !important" }}>
-            <Background>
-                <div style={{
-                    width: "100vw",
-                    height: "2000vh",
-                    backgroundImage: 'url(' + require('./sterne.png') + ')',
-                    backgroundSize: "50%",
-                    filter: "brightness(80%)"
-                }}>
 
-                </div>
-            </Background>
-            <Parallax strength={700} style={{overflow:"visible !important"}}>
-                <Background>
-                    <div style={{
-                        width: "100vw",
-                        height: "2000vh",
-                        backgroundImage: 'url(' + require('./sterne.png') + ')',
-                        backgroundSize: "100%",
-                        filter: "brightness(80%)"
-                    }}>
+    function Layer({speed, backgroundSize="100%", backgroundColor="transparent"}) {
+        return <div style={{
+            backgroundColor: backgroundColor,
+            position: "absolute",
+            top: 0, left: 0,
+            overflow: "hidden",
+            zIndex: -20,
+            height: height,
+            width: width
+        }}>
+            <div style={{
+                height: "2000vh",
+                backgroundImage: 'url(' + require('./sterne.png') + ')',
+                backgroundSize: backgroundSize,
+                filter: "brightness(50%)",
+                translate: "0px " + (scroll * speed) + "px",
+            }} />
+        </div>;
+    }
+}
 
-                    </div>
-                </Background>
-                <div style={{ minHeight: "100vh" }} id="parallaxcontent"> {
-                    // Page should always take up the full screen
-                }
-                    {children}
-                </div>
-            </Parallax>
-        </Parallax>
-    </>;
-    
+function useScroll() {
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    return scrollPosition;
+}
+
+function useDelayedScroll(){
+    const scroll = useScroll();
+    const [delayedScroll, setDelayedScroll] = useState(scroll);
+
+    useEffect(()=>{
+        //new Promise(resolve => setTimeout(resolve, 500)).then(()=>setDelayedScroll(scroll))
+        if(Math.abs(scroll-delayedScroll)>10){
+            setDelayedScroll(scroll)
+        }
+    }, [scroll])
+    return delayedScroll;
+}
+
+function useElementHeight(ref) {
+    return useElementProp(ref, (el)=>el.scrollHeight)
+}
+
+function useElementWidth(ref) {
+    return useElementProp(ref, (el)=>el.scrollWidth)
+}
+
+function useElementProp(ref, fn) {
+    const [height, setHeight] = useState(undefined);
+
+    useEffect(() => {
+        const resizeObserver = new ResizeObserver(entries => {
+            setHeight(fn(ref.current));
+        });
+        var toObserve = ref.current
+        resizeObserver.observe(toObserve);
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, []);
+
+    return height;
 }
