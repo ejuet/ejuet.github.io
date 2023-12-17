@@ -54,6 +54,7 @@ export function EmbedCode({ repo, file, branch = "main", lines = "" }) {
 
 function getWidth(): React.SetStateAction<number> {
     var element = document.getElementsByClassName("page-content")[0];
+    if(document.getElementsByClassName("page-content").length==0) return 0;
     var computedStyle = getComputedStyle(element);
 
     var elementHeight = element.clientHeight;  // height with padding
