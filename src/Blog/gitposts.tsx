@@ -11,7 +11,7 @@ export const gitPosts: PostData[] = [
         published: new Date(2023, 7, 7),
         translations: MyLocalizedStrings.create({
             de: {
-                title: "git rebase",
+                title: "Daten aus der Git-Historie entfernen",
                 subtitle: "Wie man die Commit-Historie bearbeitet ohne alles kaputt zu machen (hoffentlich)",
                 content: function (): JSX.Element {
                     return <>
@@ -67,7 +67,7 @@ export const gitPosts: PostData[] = [
                 },
             },
             en: {
-                title: "git rebase",
+                title: "Removing data from git history",
                 subtitle: "How to edit the commit history without breaking everything (hopefully)",
                 content: function (): JSX.Element {
                     return <>

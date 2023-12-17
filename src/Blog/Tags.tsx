@@ -62,7 +62,7 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getProgrammingLanguageTagInfo("#03027d");
         case Tag.git:
             return {
-                color: "#f05033",
+                color: "#c9281a",
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Git",
