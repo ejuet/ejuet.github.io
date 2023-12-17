@@ -8,7 +8,7 @@ export const xournalPosts: PostData[] = [
     {
         tags: [Tag.current, Tag.lua],
         titleImage:"img/xournal.jpg",
-        published: new Date(2023, 10, 27),
+        published: new Date("2023-11-27"),
         translations: MyLocalizedStrings.create({
             en: {
                 title: "Xournal Plugins for Students",

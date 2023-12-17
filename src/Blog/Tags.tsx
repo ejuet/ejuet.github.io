@@ -8,7 +8,8 @@ export enum Tag {
     chatgptauthor,
     lua,
     java,
-    git
+    git,
+    javascript
 }
 
 export function getTagInfo(tag: Tag): TagInfo {
@@ -60,6 +61,8 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getProgrammingLanguageTagInfo("#f58312");
         case Tag.lua:
             return getProgrammingLanguageTagInfo("#03027d");
+        case Tag.javascript:
+            return getProgrammingLanguageTagInfo("#f3ce00");
         case Tag.git:
             return {
                 color: "#c9281a",

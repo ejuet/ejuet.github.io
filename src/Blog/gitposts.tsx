@@ -8,7 +8,7 @@ export const gitPosts: PostData[] = [
     {
         tags: [Tag.git],
         titleImage: "pexels/git.jpg",
-        published: new Date(2023, 7, 7),
+        published: new Date("2023-8-7"),
         translations: MyLocalizedStrings.create({
             de: {
                 title: "Daten aus der Git-Historie entfernen",
