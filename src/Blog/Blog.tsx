@@ -82,17 +82,18 @@ class Post {
     }
 
     getOneTag() {
-        if(this.postData.tags.length <= 0) return null;
-        if(this.postData.tags.length == 1) return this.postData.tags[0];
-        return this.postData.tags.filter((tag) => tag != Tag.current)[0];
+        const tags = this.postData.tags.filter((tag) => tag != Tag.current);
+        //var tags = this.postData.tags
+        if(tags.length <= 0) return null;
+        return tags[0];
     }
 
     getColor() {
         let t: Tag = this.getOneTag();
-        if(t) {
+        if(t!=null) {
             return getTagInfo(t).color
         }
-        return "bg-primary";
+        return "var(--bs-primary)";
     }
 
     getPage() {
@@ -144,7 +145,7 @@ class Post {
                 <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px"}} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
-                    {this.TagRow()}
+                    {this.TagRow(true)}
 
                     <Card.Text>{this.postData.translations.subtitle}</Card.Text>
 
@@ -156,7 +157,7 @@ class Post {
     }
 
     private TagRow(center: boolean = false) {
-        return <Container>
+        return <Container className="m-1">
             <Row className={center ? "justify-content-center" : ""}>
                 {this.postData.tags.map((tag) => <Col className="col-md-auto p-0">
                     <NavLinkLang to={getPathToTag(Tag[tag])}>
