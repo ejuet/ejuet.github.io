@@ -1,5 +1,6 @@
 import React from 'react';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { Parallax, ParallaxBanner, ParallaxBannerLayer } from 'react-scroll-parallax';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 //TODO parallax macht table of contents zu headings springen pautt
 //TODO parallax macht toc sticky kaputt
@@ -10,6 +11,7 @@ export function WithParallax({ children }) {
         {children}
     </Parallax>
     */
+    /*
     return <>
         <Parallax pages={1} style={{ top: '0', left: '0', overflow:"auto" }}>
             <ParallaxLayer offset={0} speed={2.5}>
@@ -29,6 +31,47 @@ export function WithParallax({ children }) {
         </Parallax>
 
     </>
+     */
+    return <ParallaxProvider>
+        <div>
+            <ParallaxBanner style={{overflow:"auto !important"}}>
+                
+            <ParallaxBannerLayer speed={-50}>
+                    <div style={{
+                        width: "100%",
+                        height: "1000vh",
+                        backgroundImage: 'url(' + require('./sterne.png') + ')',
+                        backgroundSize: "50%",
+                        filter: "brightness(80%)",
+                    }} />
+                </ParallaxBannerLayer>
+
+                {
+                    /*
+                    
+
+<ParallaxBannerLayer speed={-20}>
+                    <div style={{
+                        width: "90vw",
+                        height: "2000vh",
+                        backgroundImage: 'url(' + require('./sterne.png') + ')',
+                        backgroundSize: "90%",
+                        filter: "brightness(80%)",
+                        overflow:"hidden"
+                    }} />
+                </ParallaxBannerLayer>
+                    */
+                }
+                
+                <ParallaxBanner style={{
+                        overflow:"visible"
+                    }} id="parallaxcontent">
+                    {children}
+                </ParallaxBanner>
+            </ParallaxBanner>
+        </div>
+
+    </ParallaxProvider>
     /*
     return <>
         <Parallax strength={1700} style={{ backgroundColor: "#19132A" }}>
