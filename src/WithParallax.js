@@ -1,6 +1,5 @@
 import React from 'react';
-import { Parallax, ParallaxBanner, ParallaxBannerLayer } from 'react-scroll-parallax';
-import { ParallaxProvider } from 'react-scroll-parallax';
+import { Background, Parallax } from 'react-parallax';
 
 //TODO parallax macht table of contents zu headings springen pautt
 //TODO parallax macht toc sticky kaputt
@@ -32,6 +31,7 @@ export function WithParallax({ children }) {
 
     </>
      */
+    /*
     return <ParallaxProvider>
         <div>
             <ParallaxBanner style={{overflow:"auto !important"}}>
@@ -47,7 +47,7 @@ export function WithParallax({ children }) {
                 </ParallaxBannerLayer>
 
                 {
-                    /*
+                    
                     
 
 <ParallaxBannerLayer speed={-20}>
@@ -60,7 +60,7 @@ export function WithParallax({ children }) {
                         overflow:"hidden"
                     }} />
                 </ParallaxBannerLayer>
-                    */
+                    
                 }
                 
                 <ParallaxBanner style={{
@@ -72,9 +72,10 @@ export function WithParallax({ children }) {
         </div>
 
     </ParallaxProvider>
-    /*
+    */
+    
     return <>
-        <Parallax strength={1700} style={{ backgroundColor: "#19132A" }}>
+        <Parallax strength={1700} style={{ backgroundColor: "#19132A", overflow:"visible !important" }}>
             <Background>
                 <div style={{
                     width: "100vw",
@@ -86,7 +87,7 @@ export function WithParallax({ children }) {
 
                 </div>
             </Background>
-            <Parallax strength={700}>
+            <Parallax strength={700} style={{overflow:"visible !important"}}>
                 <Background>
                     <div style={{
                         width: "100vw",
@@ -98,7 +99,7 @@ export function WithParallax({ children }) {
 
                     </div>
                 </Background>
-                <div style={{ minHeight: "100vh" }}> {
+                <div style={{ minHeight: "100vh" }} id="parallaxcontent"> {
                     // Page should always take up the full screen
                 }
                     {children}
@@ -106,5 +107,5 @@ export function WithParallax({ children }) {
             </Parallax>
         </Parallax>
     </>;
-    */
+    
 }
