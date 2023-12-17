@@ -96,7 +96,7 @@ function PostsWithTagCards({ tagKey }) {
     var tagInfo = getTagInfo(Tag[tagKey])
     return <>
     <div className='d-flex justify-content-center'>
-        <h1 className='bg-dark' style={{ color: tagInfo.color, marginTop:"20px", padding:"5px" }}>{tagInfo.translations.title}</h1>
+        <h1 className='blur' style={{ color: tagInfo.color, marginTop:"20px", padding:"5px" }}>{tagInfo.translations.title}</h1>
     </div>
         <p>{tagInfo.translations.description}</p>
         {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag[tagKey]))}

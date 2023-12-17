@@ -8,20 +8,20 @@ export function WithParallax({ children }) {
     const h = useElementHeight(content)
     const height = Math.max(h, window.innerHeight)
     const w = useElementWidth(content)
-    const width = w && w>0 ? w : 80
+    const width = w && w > 0 ? w : 80
 
 
     return <div>
         <Layer speed={0.5} backgroundSize='50%' backgroundColor='#292d3e' />
         <Layer speed={0.3} backgroundSize='100%' />
-        
+
         <div id="parallaxcontent" ref={content}>
             {children}
         </div>
     </div>
 
 
-    function Layer({speed, backgroundSize="100%", backgroundColor="transparent"}) {
+    function Layer({ speed, backgroundSize = "100%", backgroundColor = "transparent" }) {
         return <div style={{
             backgroundColor: backgroundColor,
             position: "absolute",
@@ -60,25 +60,50 @@ function useScroll() {
     return scrollPosition;
 }
 
-function useDelayedScroll(){
+function lerp(start, end, amt) {
+    return (1 - amt) * start + amt * end
+}
+
+function useDelayedScroll() {
     const scroll = useScroll();
     const [delayedScroll, setDelayedScroll] = useState(scroll);
+    const [isMoving, setIsMoving] = useState(false);
+    const [lastMoved, setLastMoved] = useState(0);
 
-    useEffect(()=>{
+    useEffect(() => {
         //new Promise(resolve => setTimeout(resolve, 500)).then(()=>setDelayedScroll(scroll))
-        if(Math.abs(scroll-delayedScroll)>10){
-            setDelayedScroll(scroll)
-        }
+
+
+        setDelayedScroll(scroll)
+        /*
+        console.log(scroll)
+        if(!isMoving){
+            setIsMoving(true);
+            setLastMoved(Date.now())
+            setInterval(move, 300)
+        */
+
     }, [scroll])
     return delayedScroll;
+
+    function move() {
+        var currentVal = delayedScroll;
+        var goal = scroll;
+        setDelayedScroll(lerp(currentVal, goal, Math.max(0, Math.min(Date.now() - lastMoved) / 3000, 1)))
+        console.log("hallop")
+        if (Date.now() - lastMoved > 3000) {
+            clearInterval(move);
+            setIsMoving(false);
+        }
+    }
 }
 
 function useElementHeight(ref) {
-    return useElementProp(ref, (el)=>el.scrollHeight)
+    return useElementProp(ref, (el) => el.scrollHeight)
 }
 
 function useElementWidth(ref) {
-    return useElementProp(ref, (el)=>el.scrollWidth)
+    return useElementProp(ref, (el) => el.scrollWidth)
 }
 
 function useElementProp(ref, fn) {
