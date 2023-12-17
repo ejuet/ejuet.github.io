@@ -9,7 +9,7 @@ export enum Tag {
     lua,
     java,
     git,
-    javascript
+    javaScript
 }
 
 export function getTagInfo(tag: Tag): TagInfo {
@@ -61,7 +61,7 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getProgrammingLanguageTagInfo("#f58312");
         case Tag.lua:
             return getProgrammingLanguageTagInfo("#03027d");
-        case Tag.javascript:
+        case Tag.javaScript:
             return getProgrammingLanguageTagInfo("#f3ce00");
         case Tag.git:
             return {

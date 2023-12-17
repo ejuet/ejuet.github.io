@@ -316,7 +316,7 @@ export const postLibrary = new PostLibrary(
     [
         new PostGroup(
             "Creation  of this website",
-            [Tag.javascript],
+            [Tag.javaScript],
             [
                 {
                     published: new Date("2023-12-18"),
