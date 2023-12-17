@@ -9,8 +9,13 @@ export enum Tag {
     lua,
     java,
     git,
-    javaScript
+    javaScript,
+    webdev
 }
+
+export const tagGroups = new Map<Tag, Tag[]>([
+    [Tag.webdev, [Tag.javaScript]]
+]);
 
 export function getTagInfo(tag: Tag): TagInfo {
     switch(tag) {
@@ -77,6 +82,8 @@ export function getTagInfo(tag: Tag): TagInfo {
                     }
                 })
             };
+        default:
+            return getProgrammingLanguageTagInfo()
     }
 
     function getProgrammingLanguageTagInfo(color="#000000") {

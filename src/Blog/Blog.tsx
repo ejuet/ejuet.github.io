@@ -16,7 +16,7 @@ import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { getPathToTag } from "..";
 import { chatGPTPosts } from "./chatGPTPosts.tsx";
-import { getTagInfo } from "./Tags.tsx";
+import { getTagInfo, tagGroups } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
 import { examplePosts } from "./examplePosts.tsx";
 import { xournalPosts } from "./xournalposts.tsx";
@@ -207,6 +207,13 @@ class PostLibrary {
     private posts: Post[]
     constructor(postData: PostData[], postgroups: PostGroup[] = []) {
         var postdatas = postData.concat(postgroups.flatMap((project)=>project.getPostDatas()))
+        postdatas.forEach((dat)=>{
+            dat.tags.forEach(tag=>{
+                if(tagGroups.get(tag)!=undefined){
+                    dat.tags=dat.tags.concat(tagGroups.get(tag))
+                }
+            })
+        })
         this.posts = postdatas.map((dat, i) => new Post(dat))
     }
 
@@ -293,7 +300,30 @@ export const postLibrary = new PostLibrary(
 
         ...xournalPosts,
 
-        ...gitPosts
+        ...gitPosts,
+
+        {
+            published: new Date("2023-12-18"),
+            tags: [Tag.webdev],
+            translations: MyLocalizedStrings.create({
+                en: {
+                    title: "This website",
+                    subtitle: "",
+                    content: () => <>
+                        <p>As Halloween approaches, the air becom </p>
+                
+                    </>
+                },
+                de: {
+                    title: "Diese webseite",
+                    subtitle: "",
+                    content: () => <>
+                        <p>Da Halloween näher rückt, füllt sich die Luft m</p>
+                        
+                    </>
+                },
+            }),
+        }
 
         /*
         //post: wordpress
@@ -312,37 +342,6 @@ export const postLibrary = new PostLibrary(
         },
         */
     ],
-    //Projects:
-    [
-        new PostGroup(
-            "Creation  of this website",
-            [Tag.javaScript],
-            [
-                {
-                    published: new Date("2023-12-18"),
-                    tags: [],
-                    translations: MyLocalizedStrings.create({
-                        en: {
-                            title: "This website",
-                            subtitle: "",
-                            content: () => <>
-                                <p>As Halloween approaches, the air becom </p>
-                        
-                            </>
-                        },
-                        de: {
-                            title: "Diese webseite",
-                            subtitle: "",
-                            content: () => <>
-                                <p>Da Halloween näher rückt, füllt sich die Luft m</p>
-                                
-                            </>
-                        },
-                    }),
-                },
-            ]
-        )
-    ]
 )
 
 
