@@ -20,7 +20,8 @@ export function TableOfContents() {
     return <div style={{
         //width: "260px", position: "fixed", right: 5, top: 150, backgroundColor: "transparent",
         textAlign: "left",
-        top: "30px"
+        top: "30px",
+        marginBottom: "30px"
     }} className="d-lg-block sticky-top pt-3 table-of-contents">
         <h1 style={{ textAlign: "center" }}>{text.content}</h1>
         {x.getAsList()}
