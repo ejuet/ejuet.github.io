@@ -145,6 +145,9 @@ class Post {
                 <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px" }} />
                 <Card.Body>
                     <Card.Title>{this.postData.translations.title}</Card.Title>
+                    {this.postData.published &&
+                        <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
+                    }
                     {this.TagRow(true)}
 
                     <Card.Text>{this.postData.translations.subtitle}</Card.Text>
@@ -207,12 +210,12 @@ class PostLibrary {
     private posts: Post[]
     constructor(postData: PostData[]) {
         var postdatas = postData
-        
+
         // add tags from tag groups
-        postdatas.forEach((dat)=>{
-            dat.tags.forEach(tag=>{
-                if(tagGroups.get(tag)!=undefined){
-                    dat.tags=dat.tags.concat(tagGroups.get(tag))
+        postdatas.forEach((dat) => {
+            dat.tags.forEach(tag => {
+                if(tagGroups.get(tag) != undefined) {
+                    dat.tags = dat.tags.concat(tagGroups.get(tag))
                 }
             })
         })
@@ -298,7 +301,7 @@ export const postLibrary = new PostLibrary(
                     subtitle: "",
                     content: () => <>
                         <p>As Halloween approaches, the air becom </p>
-                
+
                     </>
                 },
                 de: {
@@ -306,7 +309,7 @@ export const postLibrary = new PostLibrary(
                     subtitle: "",
                     content: () => <>
                         <p>Da Halloween näher rückt, füllt sich die Luft m</p>
-                        
+
                     </>
                 },
             }),
