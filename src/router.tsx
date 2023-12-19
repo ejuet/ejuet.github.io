@@ -7,7 +7,7 @@ import { postLibrary } from "./Blog/Content/PostLibrary.tsx";
 import { useScrollbarActive } from './useScrollbarActive.js';
 import { Tag, getTagInfo, getTags } from './Blog/Tags.tsx';
 import { MyPrivacy } from './MyPrivacy.js';
-import { WithParallax } from './Parallax/WithParallax.js';
+import { StarParallax } from './Parallax/WithParallax.js';
 import { LatestPostCarousel, PostPage, PostsAsCards } from "./Blog/BlogComponents.tsx";
 import { PostsWithTagCards } from './Blog/BlogComponents.tsx';
 
@@ -129,11 +129,11 @@ function TagBadge({ tagString }) {
 function WithNavbar({ children }) {
     return <>
         <div className='App'>
-            <WithParallax>
+            <StarParallax>
                 <MyNavbar />
                 {children}
                 <MyFooter />
-            </WithParallax>
+            </StarParallax>
         </div>
     </>;
 }

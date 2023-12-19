@@ -1,7 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+export function StarParallax({ children }) {
+    return <Parallax layers={[
+            <Layer speed={0.5} backgroundSize='50%' backgroundColor='#292d3e' url={require('./sterne.png')} />,
+            <Layer speed={0.4} backgroundSize='70%' url={require('./sterne.png')} />,
+            <Layer speed={0.3} backgroundSize='100%' url={require('./sterne.png')} />
+    ]}>
+        {children}
+    </Parallax>
+}
 
-export function WithParallax({ children }) {
+function Parallax({ children, layers }) {
 
     const scroll = useDelayedScroll();
     const content = useRef();
@@ -12,35 +21,40 @@ export function WithParallax({ children }) {
 
 
     return <div>
-        <Layer speed={0.5} backgroundSize='50%' backgroundColor='#292d3e' url={require('./sterne.png')} />
-        <Layer speed={0.4} backgroundSize='70%' url={require('./sterne.png')} />
-        <Layer speed={0.3} backgroundSize='100%' url={require('./sterne.png')}/>
+        {layers.map((layer, index)=>{
+            return React.cloneElement(layer, {
+                key:index,
+                height:height,
+                width:width,
+                scroll:scroll
+            })
+        })}
 
         <div id="parallaxcontent" ref={content}>
             {children}
         </div>
     </div>
 
+}
 
-    function Layer({ speed, backgroundSize = "100%", backgroundColor = "transparent", url=require('./sterne.png') }) {
-        return <div style={{
-            backgroundColor: backgroundColor,
-            position: "absolute",
-            top: 0, left: 0,
-            overflow: "hidden",
-            zIndex: -20,
-            height: height,
-            width: width
-        }}>
-            <div style={{
-                height: "2000vh",
-                backgroundImage: 'url(' + url + ')',
-                backgroundSize: backgroundSize,
-                filter: "brightness(100%)",
-                translate: "0px " + (scroll * speed) + "px",
-            }} />
-        </div>;
-    }
+function Layer({ speed, backgroundSize = "100%", backgroundColor = "transparent", url = require('./sterne.png'), height, width, scroll }) {
+    return <div style={{
+        backgroundColor: backgroundColor,
+        position: "absolute",
+        top: 0, left: 0,
+        overflow: "hidden",
+        zIndex: -20,
+        height: height,
+        width: width
+    }}>
+        <div style={{
+            height: "2000vh",
+            backgroundImage: 'url(' + url + ')',
+            backgroundSize: backgroundSize,
+            filter: "brightness(100%)",
+            translate: "0px " + (scroll * speed) + "px",
+        }} />
+    </div>;
 }
 
 function useScroll() {
