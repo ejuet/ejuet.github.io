@@ -6,6 +6,8 @@ import { examplePosts } from "./examplePosts.tsx";
 import { xournalPosts } from "./xournalposts.tsx";
 import { gitPosts } from "./gitposts.tsx";
 import { PostLibrary } from "../Blog/Blog.tsx";
+import { EmbedCode } from "../Blog/EmgithubCode.tsx";
+import Gist from "super-react-gist"
 
 //Posts
 
@@ -58,6 +60,7 @@ export const postLibrary = new PostLibrary(
                                 </li>
                             </ul>
                             The first well-working version looked like this:
+                            <Gist url="https://gist.github.com/ejuet/89066537575d1447069d0c17a0b2e9bb" />
                         </p>
 
                     </>
