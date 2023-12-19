@@ -16,7 +16,7 @@ export enum Tag {
 }
 
 export const tagGroups = new Map<Tag, Tag[]>([
-    [Tag.thisWebsite, [Tag.javaScript, Tag.typeScript, Tag.react]]
+    [Tag.thisWebsite, [Tag.current, Tag.javaScript, Tag.typeScript, Tag.react]],
 ]);
 
 export function getTagInfo(tag: Tag): TagInfo {
@@ -70,6 +70,10 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getProgrammingLanguageTagInfo("#03027d");
         case Tag.javaScript:
             return getProgrammingLanguageTagInfo("#f3ce00");
+        case Tag.typeScript:
+            return getProgrammingLanguageTagInfo("#2f74c0");
+        case Tag.react:
+            return getDefault("#5ed3f3");
         case Tag.git:
             return {
                 color: "#c9281a",
@@ -81,6 +85,20 @@ export function getTagInfo(tag: Tag): TagInfo {
                     de: {
                         title: "Git",
                         description: "Blogposts über git.",
+                    }
+                })
+            };
+        case Tag.thisWebsite:
+            return {
+                color: "var(--bs-primary)",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "This Website",
+                        description: "Blogposts related to the creation of this website.",
+                    },
+                    de: {
+                        title: "Diese Webseite",
+                        description: "Blogposts über das Erstellen dieser Website.",
                     }
                 })
             };
@@ -105,8 +123,7 @@ export function getTagInfo(tag: Tag): TagInfo {
         };
     }
 
-    function getDefault() {
-        const color="rgba(0,0,0,0.5)";
+    function getDefault(color="rgba(0,0,0,0.5)") {
         const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
         return {
             color: color,
