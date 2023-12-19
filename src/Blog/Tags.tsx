@@ -12,7 +12,10 @@ export enum Tag {
     javaScript,
     react,
     typeScript,
-    thisWebsite
+    thisWebsite,
+
+    //categories:
+    projects
 }
 
 export const tagGroups = new Map<Tag, Tag[]>([
@@ -102,11 +105,18 @@ export function getTagInfo(tag: Tag): TagInfo {
                     }
                 })
             };
+        case Tag.projects:
+            return {
+                ...getDefault(),
+                subcategories: [
+                    Tag.thisWebsite
+                ]
+            }
         default:
             return getDefault()
     }
 
-    function getProgrammingLanguageTagInfo(color="#000000") {
+    function getProgrammingLanguageTagInfo(color = "#000000") {
         const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
         return {
             color: color,
@@ -123,14 +133,14 @@ export function getTagInfo(tag: Tag): TagInfo {
         };
     }
 
-    function getDefault(color="rgba(0,0,0,0.5)") {
+    function getDefault(color = "rgba(0,0,0,0.5)") {
         const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
         return {
             color: color,
             translations: MyLocalizedStrings.create({
                 en: {
                     title: languageName,
-                    description: "Projects with " + languageName ,
+                    description: "Projects with " + languageName,
                 },
                 de: {
                     title: languageName,
@@ -152,10 +162,27 @@ export function getTags() {
     }).filter((el) => el);
 }//Tags Logic
 
+export function getCategories() {
+    return getTags().filter((tag) => getTagInfo(Tag[tag] as unknown as Tag).subcategories && getTagInfo(Tag[tag] as unknown as Tag).subcategories.length > 0)
+}
+
+export function getTagsWithCategory(cat) {
+    return getTags().filter((tag) => {
+        for(let x in getTagInfo(Tag[cat] as unknown as Tag).subcategories) {
+            var t = getTagInfo(Tag[cat] as unknown as Tag).subcategories[x]
+            if(t == Tag[tag] as unknown as Tag) {
+                return true;
+            }
+            return false;
+        }
+    })
+}
+
 
 export interface TagInfo {
     color: string;
     translations: TagTranslations;
+    subcategories?: Tag[]
 }
 export interface TagTranslations extends LocalizedStringsMethods {
     title: string;

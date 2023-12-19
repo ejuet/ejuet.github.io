@@ -5,7 +5,7 @@ import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents.js';
 import { postLibrary } from "./BlogContent/PostLibrary.tsx";
 import { useScrollbarActive } from './useScrollbarActive.js';
-import { Tag, getTagInfo, getTags } from './Blog/Tags.tsx';
+import { Tag, getCategories, getTagInfo, getTags, getTagsWithCategory } from './Blog/Tags.tsx';
 import { MyPrivacy } from './MyPrivacy.js';
 import { StarParallax } from './Parallax/Parallax.tsx';
 import { LatestPostCarousel, PostPage, PostsAsCards } from "./Blog/BlogComponents.tsx";
@@ -89,6 +89,15 @@ function PostsWithTagsByQueryParams() {
             <Row className='justify-content-center'>
                 {getTags().map((tagString, index) => <TagBadge key={index} tagString={tagString} />)}
             </Row>
+            <p>
+                {
+                    getCategories().map((categorytag) => {
+                        return <p>{categorytag}{
+                            getTagsWithCategory(categorytag).map((tag) => <p>{tag}</p>)
+                        }</p>
+                    })
+                }
+            </p>
         </Container>
         <PostsAsCards posts={postLibrary.getPostsWithTags(tags)} />
     </>;
