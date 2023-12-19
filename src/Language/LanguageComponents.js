@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { MyLocalizedStrings } from './MyLocalizedStrings';
 //import { strings } from '..';
@@ -20,7 +20,16 @@ export function NavLinkLang(props) {
     const language = searchParams.get('lang');
     const appendSymbol = (props.to.includes && (/(\?)(?=(?:[^'"]|'[^']*'|"[^"]*")*$)/).test(props.to)) ? "&" : "?"
     const appendix = language ? appendSymbol+"lang=" + language : "";
-    return <NavLink {...props} to={props.to + appendix} />;
+
+    return <div {...props}
+    style={{cursor: 'pointer'}}
+    className='navlinklang'
+    onClick={(e)=>{
+        console.log(e.nativeEvent?.target)
+        e.preventDefault();
+        console.log(window.location.origin)
+        window.location = window.origin + "/#" + props.to + appendix
+    }} />
 }
 export function LanguageToggle() {
 

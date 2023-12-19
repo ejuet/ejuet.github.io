@@ -1,5 +1,5 @@
 import React from 'react';
-import { createHashRouter, useSearchParams } from 'react-router-dom';
+import { Link, createHashRouter, useSearchParams } from 'react-router-dom';
 import { Container, Nav, Navbar, Col, Row, Badge } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents.js';
@@ -99,7 +99,7 @@ function TagBadge({ tagString }) {
     const active = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")).includes(tagString) : false;
     const tagInfo = getTagInfo(Tag[tagString as keyof typeof Tag]);
     return <h2 style={{ width: "fit-content" }}>
-        <Badge as={NavLinkLang} to={window.location} pill bg="" style={{
+        <Badge as={Link} to={""} pill bg="" style={{
             "backgroundColor": tagInfo.color,
             "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
             zIndex: 100
