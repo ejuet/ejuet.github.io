@@ -80,3 +80,7 @@ pre {
 .navbar{
   background-image: none !important;
 }
+
+.navbar-nav a{
+  margin-left: 2vw !important;
+}
