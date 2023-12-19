@@ -25,9 +25,10 @@ export function NavLinkLang(props) {
     style={{cursor: 'pointer'}}
     className='navlinklang'
     onClick={(e)=>{
-        console.log(e.nativeEvent?.target)
         e.preventDefault();
-        console.log(window.location.origin)
+        e.stopPropagation();
+
+        //TODO extract to router.tsx:
         window.location = window.origin + "/#" + props.to + appendix
     }} />
 }
