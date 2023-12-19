@@ -23,6 +23,7 @@ import { xournalPosts } from "./xournalposts.tsx";
 import { gitPosts } from "./gitposts.tsx";
 import { Parallax } from 'react-parallax';
 import { Post, PostData, PostLibrary, generalTexts } from "./Blog.tsx";
+import { postLibrary } from "./PostLibrary.tsx";
 
 export function PostsAsCards({ posts }: { posts: Post[] }) {
     return <Container>
@@ -138,4 +139,15 @@ export function PostPage({ post }: { post: Post }) {
 
     </>
 
+}
+export function PostsWithTagCards({ tagKey }) {
+    var tagInfo = getTagInfo(Tag[tagKey as keyof typeof Tag]);
+    return <>
+        <div className='d-flex justify-content-center'>
+            <h1 className='blur' style={{ color: tagInfo.color, marginTop: "20px", padding: "5px" }}>{tagInfo.translations.title}</h1>
+        </div>
+        <p>{tagInfo.translations.description}</p>
+        <PostsAsCards posts={postLibrary.getPostsWithTag(Tag[tagKey as keyof typeof Tag])} />
+        <br></br>
+    </>;
 }

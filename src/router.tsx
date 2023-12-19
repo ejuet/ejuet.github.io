@@ -9,6 +9,7 @@ import { Tag, getTagInfo, getTags } from './Blog/Tags.tsx';
 import { MyPrivacy } from './MyPrivacy.js';
 import { WithParallax } from './WithParallax.js';
 import { LatestPostCarousel, PostPage, PostsAsCards } from "./Blog/BlogElements.tsx";
+import { PostsWithTagCards } from './Blog/BlogElements.tsx';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -75,17 +76,6 @@ export const router = createHashRouter([
 export function getPathToTag(tagKey) {
     return "/blog/tag/" + tagKey;
 }
-function PostsWithTagCards({ tagKey }) {
-    var tagInfo = getTagInfo(Tag[tagKey as keyof typeof Tag]);
-    return <>
-        <div className='d-flex justify-content-center'>
-            <h1 className='blur' style={{ color: tagInfo.color, marginTop: "20px", padding: "5px" }}>{tagInfo.translations.title}</h1>
-        </div>
-        <p>{tagInfo.translations.description}</p>
-        <PostsAsCards posts={postLibrary.getPostsWithTag(Tag[tagKey as keyof typeof Tag])} />
-        <br></br>
-    </>;
-}
 function PostsWithTagsByQueryParams() {
 
     const [params, setSearchParams] = useSearchParams();
@@ -103,6 +93,7 @@ function PostsWithTagsByQueryParams() {
         <PostsAsCards posts={postLibrary.getPostsWithTags(tags)} />
     </>;
 }
+
 function TagBadge({ tagString }) {
     const [params, setSearchParams] = useSearchParams();
     const active = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")).includes(tagString) : false;
@@ -134,6 +125,7 @@ function TagBadge({ tagString }) {
         </Badge>
     </h2>;
 }
+
 function WithNavbar({ children }) {
     return <>
         <div className='App'>
@@ -145,6 +137,7 @@ function WithNavbar({ children }) {
         </div>
     </>;
 }
+
 function MyNavbar() {
     return <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
         <Container>
@@ -176,6 +169,7 @@ function MyNavbar() {
         </Container>
     </Navbar>;
 }
+
 function MyFooter() {
     const scrollbarIsActive = useScrollbarActive();
 
