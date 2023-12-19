@@ -3,13 +3,13 @@ import { createHashRouter, useSearchParams } from 'react-router-dom';
 import { Container, Nav, Navbar, Col, Row, Badge } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents.js';
-import { postLibrary } from "./Blog/PostLibrary.tsx";
+import { postLibrary } from "./Blog/Content/PostLibrary.tsx";
 import { useScrollbarActive } from './useScrollbarActive.js';
 import { Tag, getTagInfo, getTags } from './Blog/Tags.tsx';
 import { MyPrivacy } from './MyPrivacy.js';
-import { WithParallax } from './WithParallax.js';
-import { LatestPostCarousel, PostPage, PostsAsCards } from "./Blog/BlogElements.tsx";
-import { PostsWithTagCards } from './Blog/BlogElements.tsx';
+import { WithParallax } from './Parallax/WithParallax.js';
+import { LatestPostCarousel, PostPage, PostsAsCards } from "./Blog/BlogComponents.tsx";
+import { PostsWithTagCards } from './Blog/BlogComponents.tsx';
 
 const strings = new MyLocalizedStrings({
     en: {

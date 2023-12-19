@@ -8,22 +8,22 @@ import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
-import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
-import { NavLinkLang } from "../Language/LanguageComponents";
+import { MyLocalizedStrings } from "../Language/MyLocalizedStrings.js";
+import { NavLinkLang } from "../Language/LanguageComponents.js";
 import { Utterances } from "utterances-react-component";
 import { CommentSection } from "./CommentSection.tsx";
 import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { getPathToTag } from '../router.tsx';
-import { chatGPTPosts } from "./chatGPTPosts.tsx";
+import { chatGPTPosts } from "./Content/chatGPTPosts.tsx";
 import { getTagInfo, tagGroups } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
-import { examplePosts } from "./examplePosts.tsx";
-import { xournalPosts } from "./xournalposts.tsx";
-import { gitPosts } from "./gitposts.tsx";
+import { examplePosts } from "./Content/examplePosts.tsx";
+import { xournalPosts } from "./Content/xournalposts.tsx";
+import { gitPosts } from "./Content/gitposts.tsx";
 import { Parallax } from 'react-parallax';
 import { Post, PostData, PostLibrary, generalTexts } from "./Blog.tsx";
-import { postLibrary } from "./PostLibrary.tsx";
+import { postLibrary } from "./Content/PostLibrary.tsx";
 
 export function PostsAsCards({ posts }: { posts: Post[] }) {
     return <Container>
@@ -102,7 +102,7 @@ export function PostPage({ post }: { post: Post }) {
     return <>
         <div className="text-light" style={{
             backgroundColor: post.getColor(),
-            backgroundImage: 'url(' + require('./GreenscreenedSnow.apng') + ')',
+            backgroundImage: 'url(' + require('./img/snow2.apng') + ')',
             backgroundSize: "contain"
         }}>
             <div style={{ fontSize: 60 }}>

@@ -1,7 +1,7 @@
 import React from "react";
-import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
-import { PostData } from "./Blog";
-import { Tag } from "./Tags";
+import { MyLocalizedStrings } from "../../Language/MyLocalizedStrings";
+import { PostData } from "../Blog";
+import { Tag } from "../Tags";
 
 export const examplePosts: PostData[] = [
     //post: title
