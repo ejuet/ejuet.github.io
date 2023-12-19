@@ -75,3 +75,8 @@ pre {
 .wp-block-image > img{
   max-width: 100%;
 }
+
+
+.navbar{
+  background-image: none !important;
+}
