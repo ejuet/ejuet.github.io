@@ -205,15 +205,8 @@ function compareDates(aDate: Date, bDate: Date): 1 | -1 | 0 {
 
 class PostLibrary {
     private posts: Post[]
-    constructor(postData: PostData[], postgroups: PostGroup[] = []) {
-        var postdatas = postData.concat(postgroups.flatMap((project)=>project.getPostDatas()))
-        postdatas.forEach((dat)=>{
-            dat.tags.forEach(tag=>{
-                if(tagGroups.get(tag)!=undefined){
-                    dat.tags=dat.tags.concat(tagGroups.get(tag))
-                }
-            })
-        })
+    constructor(postData: PostData[]) {
+        var postdatas = postData;
         this.posts = postdatas.map((dat, i) => new Post(dat))
     }
 
@@ -275,21 +268,6 @@ class PostLibrary {
     }
 }
 
-class PostGroup {
-    private postDatas: PostData[]
-    constructor(groupName: string, groupTags: Tag[] = [], postData: PostData[]) {
-        this.postDatas = postData.map((dat, i) => dat)
-        this.postDatas.forEach((postdata=>{
-            postdata.tags=postdata.tags.concat(groupTags);
-        }))
-    }
-
-    getPostDatas() {
-        return this.postDatas;
-    }
-}
-
-
 //Posts
 export const postLibrary = new PostLibrary(
     [
@@ -341,7 +319,7 @@ export const postLibrary = new PostLibrary(
             }),
         },
         */
-    ],
+    ]
 )
 
 
