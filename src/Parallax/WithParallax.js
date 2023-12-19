@@ -6,7 +6,7 @@ export function WithParallax({ children }) {
     const scroll = useDelayedScroll();
     const content = useRef();
     const h = useElementHeight(content)
-    const height = Math.max(h, window.innerHeight)
+    const height = Math.max(h ? h : 0, window.innerHeight)
     const w = useElementWidth(content)
     const width = w && w > 0 ? w : 80
 

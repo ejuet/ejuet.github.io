@@ -36,7 +36,7 @@ export const router = createHashRouter([
         path: "/blog_all",
         element: <WithNavbar>
             {getTags().reverse().map((tagKey, index) => {
-                return <PostsWithTagCards tagKey={tagKey} />;
+                return <PostsWithTagCards key={index} tagKey={tagKey} />;
             })}
         </WithNavbar>,
     },
@@ -87,7 +87,7 @@ function PostsWithTagsByQueryParams() {
         <Container className='mb-4'>
             <Row className='mb-3'><h1>{strings.blogPosts}</h1></Row>
             <Row className='justify-content-center'>
-                {getTags().map((tagString) => <TagBadge tagString={tagString} />)}
+                {getTags().map((tagString, index) => <TagBadge key={index} tagString={tagString} />)}
             </Row>
         </Container>
         <PostsAsCards posts={postLibrary.getPostsWithTags(tags)} />
@@ -141,7 +141,7 @@ function WithNavbar({ children }) {
 function MyNavbar() {
     return <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
         <Container>
-            <NavLinkLang activeClassName="holladiewaldfee" to="/">
+            <NavLinkLang to="/">
                 <Navbar.Brand href="" className='navname'>ejuet</Navbar.Brand>
             </NavLinkLang>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

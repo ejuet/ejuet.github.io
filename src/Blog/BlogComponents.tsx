@@ -65,7 +65,7 @@ export function LatestPostCarousel({ library }: { library: PostLibrary }) {
 function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
     return <Container className="m-1">
         <Row className={center ? "justify-content-center" : ""}>
-            {postData.tags.map((tag) => <Col className="col-md-auto p-0">
+            {postData.tags.map((tag, index) => <Col key={index} className="col-md-auto p-0">
                 <NavLinkLang to={getPathToTag(Tag[tag])}>
                     <Badge bg="" pill style={{ backgroundColor: getTagInfo(tag).color, marginRight: "3px" }}>
                         {getTagInfo(tag).translations.title}
