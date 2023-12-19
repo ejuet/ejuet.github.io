@@ -1,15 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.scss';
-import reportWebVitals from './reportWebVitals.js';
 import { RouterProvider, createHashRouter, useSearchParams, } from 'react-router-dom';
 
 
 import { Container, Nav, Navbar, Col, Row, Button, Badge } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents.js';
-import { postLibrary } from "./Blog/Blog"
-import { TableOfContents } from "./TableOfContents/TableOfContents";
+import { postLibrary } from "./Blog/PostLibrary.tsx"
 import { useScrollbarActive } from './useScrollbarActive.js';
 import { Tag, getTagInfo, getTags } from './Blog/Tags';
 import { MyPrivacy } from './MyPrivacy.js';
