@@ -15,15 +15,15 @@ import { CommentSection } from "./CommentSection.tsx";
 import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { getPathToTag } from '../router.tsx';
-import { chatGPTPosts } from "./Content/chatGPTPosts.tsx";
+import { chatGPTPosts } from "../BlogContent/chatGPTPosts.tsx";
 import { getTagInfo, tagGroups } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
-import { examplePosts } from "./Content/examplePosts.tsx";
-import { xournalPosts } from "./Content/xournalposts.tsx";
-import { gitPosts } from "./Content/gitposts.tsx";
+import { examplePosts } from "../BlogContent/examplePosts.tsx";
+import { xournalPosts } from "../BlogContent/xournalposts.tsx";
+import { gitPosts } from "../BlogContent/gitposts.tsx";
 import { Parallax } from 'react-parallax';
 import { Post, PostData, PostLibrary, generalTexts } from "./Blog.tsx";
-import { postLibrary } from "./Content/PostLibrary.tsx";
+import { postLibrary } from "../BlogContent/PostLibrary.tsx";
 
 export function PostsAsCards({ posts }: { posts: Post[] }) {
     return <Container>

@@ -1,8 +1,8 @@
 import React from "react";
-import { MyLocalizedStrings } from "../../Language/MyLocalizedStrings";
-import { PostData } from "../Blog";
-import { Tag } from "../Tags";
-import { EmbedCode } from "../EmgithubCode";
+import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
+import { PostData } from "../Blog/Blog";
+import { Tag } from "../Blog/Tags";
+import { EmbedCode } from "../Blog/EmgithubCode";
 
 export const xournalPosts: PostData[] = [
     {

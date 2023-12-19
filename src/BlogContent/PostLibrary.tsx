@@ -1,11 +1,11 @@
 import React from "react";
-import { MyLocalizedStrings } from "../../Language/MyLocalizedStrings.js";
+import { MyLocalizedStrings } from "../Language/MyLocalizedStrings.js";
 import { chatGPTPosts } from "./chatGPTPosts.tsx";
-import { Tag } from "../Tags.tsx";
+import { Tag } from "../Blog/Tags.tsx";
 import { examplePosts } from "./examplePosts.tsx";
 import { xournalPosts } from "./xournalposts.tsx";
 import { gitPosts } from "./gitposts.tsx";
-import { PostLibrary } from "../Blog.tsx";
+import { PostLibrary } from "../Blog/Blog.tsx";
 
 //Posts
 
@@ -22,7 +22,7 @@ export const postLibrary = new PostLibrary(
 
         {
             published: new Date("2023-12-18"),
-            tags: [Tag.webdev],
+            tags: [Tag.thisWebsite],
             translations: MyLocalizedStrings.create({
                 en: {
                     title: "This website",

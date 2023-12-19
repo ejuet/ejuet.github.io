@@ -10,11 +10,13 @@ export enum Tag {
     java,
     git,
     javaScript,
-    webdev
+    react,
+    typeScript,
+    thisWebsite
 }
 
 export const tagGroups = new Map<Tag, Tag[]>([
-    [Tag.webdev, [Tag.javaScript]]
+    [Tag.thisWebsite, [Tag.javaScript, Tag.typeScript, Tag.react]]
 ]);
 
 export function getTagInfo(tag: Tag): TagInfo {
@@ -83,7 +85,7 @@ export function getTagInfo(tag: Tag): TagInfo {
                 })
             };
         default:
-            return getProgrammingLanguageTagInfo()
+            return getDefault()
     }
 
     function getProgrammingLanguageTagInfo(color="#000000") {
@@ -98,6 +100,24 @@ export function getTagInfo(tag: Tag): TagInfo {
                 de: {
                     title: languageName,
                     description: "Projekte mit " + languageName + " Code",
+                }
+            })
+        };
+    }
+
+    function getDefault() {
+        const color="rgba(0,0,0,0.5)";
+        const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+        return {
+            color: color,
+            translations: MyLocalizedStrings.create({
+                en: {
+                    title: languageName,
+                    description: "Projects with " + languageName ,
+                },
+                de: {
+                    title: languageName,
+                    description: "Projekte mit " + languageName,
                 }
             })
         };
