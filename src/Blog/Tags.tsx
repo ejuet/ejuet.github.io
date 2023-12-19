@@ -19,6 +19,13 @@ export const tagGroups = new Map<Tag, Tag[]>([
     [Tag.thisWebsite, [Tag.current, Tag.javaScript, Tag.typeScript, Tag.react]],
 ]);
 
+export enum TagCategory {
+    projects
+}
+const tagCategories = new Map<TagCategory, Tag[]>([
+    [TagCategory.projects, [Tag.thisWebsite]],
+]);
+
 export function getTagInfo(tag: Tag): TagInfo {
     switch(tag) {
         case Tag.current:
@@ -91,6 +98,7 @@ export function getTagInfo(tag: Tag): TagInfo {
         case Tag.thisWebsite:
             return {
                 color: "var(--bs-primary)",
+                category: TagCategory.projects,
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "This Website",
@@ -106,8 +114,8 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getDefault()
     }
 
-    function getProgrammingLanguageTagInfo(color="#000000") {
-        const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+    function getProgrammingLanguageTagInfo(color = "#000000") {
+        const languageName = getTagName();
         return {
             color: color,
             translations: MyLocalizedStrings.create({
@@ -123,14 +131,14 @@ export function getTagInfo(tag: Tag): TagInfo {
         };
     }
 
-    function getDefault(color="rgba(0,0,0,0.5)") {
-        const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+    function getDefault(color = "rgba(0,0,0,0.5)") {
+        const languageName = getTagName();
         return {
             color: color,
             translations: MyLocalizedStrings.create({
                 en: {
                     title: languageName,
-                    description: "Projects with " + languageName ,
+                    description: "Projects with " + languageName,
                 },
                 de: {
                     title: languageName,
@@ -138,6 +146,10 @@ export function getTagInfo(tag: Tag): TagInfo {
                 }
             })
         };
+    }
+
+    function getTagName() {
+        return Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
     }
 }
 
@@ -152,10 +164,36 @@ export function getTags() {
     }).filter((el) => el);
 }//Tags Logic
 
+export function getTagCategories() {
+    return Object.keys(TagCategory).map((t, index) => {
+        if(!isNaN(Number(t))) {
+            var tag = TagCategory[t as keyof typeof TagCategory];
+            //console.log(tag as Tag);
+            return tag as TagCategory;
+        }
+        return;
+    }).filter((el) => el);
+}
+
+export function getTagsFromTagCategories() {
+    return getTagCategories().map((cat) => {
+        return {
+            category: cat,
+            tags:
+                getTags().filter((tag) => {
+                    var ti = getTagInfo(Tag[tag] as unknown as Tag)
+                    console.log(ti.category)
+                    console.log(cat)
+                    return ti.category == TagCategory[cat] as unknown as TagCategory;
+                })
+        }
+    })
+}
 
 export interface TagInfo {
     color: string;
     translations: TagTranslations;
+    category?: TagCategory
 }
 export interface TagTranslations extends LocalizedStringsMethods {
     title: string;
