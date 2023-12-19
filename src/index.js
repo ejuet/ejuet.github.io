@@ -15,6 +15,8 @@ import { Tag, getTagInfo, getTags } from './Blog/Tags';
 import { MyPrivacy } from './MyPrivacy.js';
 import { WithParallax } from './WithParallax.js';
 
+import {PostsAsCards} from "./Blog/BlogElements.tsx"
+
 const strings = new MyLocalizedStrings({
     en: {
         privacyPolicy: "Privacy Policy",
@@ -41,8 +43,6 @@ const router = createHashRouter([
     {
         path: "/blog_all",
         element: <WithNavbar>
-            {//postLibrary.getPostsAsCards()
-            }
             {
                 getTags().reverse().map((tagKey, index) => {
                     return <PostsWithTagCards tagKey={tagKey} />
@@ -97,7 +97,7 @@ function PostsWithTagCards({ tagKey }) {
         <h1 className='blur' style={{ color: tagInfo.color, marginTop:"20px", padding:"5px" }}>{tagInfo.translations.title}</h1>
     </div>
         <p>{tagInfo.translations.description}</p>
-        {postLibrary.getPostsAsCards(postLibrary.getPostsWithTag(Tag[tagKey]))}
+        <PostsAsCards posts={postLibrary.getPostsWithTag(Tag[tagKey])} />
         <br></br>
     </>
 }
@@ -119,9 +119,7 @@ function PostsWithTagsByQueryParams() {
                 }
             </Row>
         </Container>
-        {
-            postLibrary.getPostsAsCards(postLibrary.getPostsWithTags(tags))
-        }
+        <PostsAsCards posts={postLibrary.getPostsWithTags(tags)} />
     </>
 }
 

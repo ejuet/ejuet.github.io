@@ -57,7 +57,7 @@ export interface PostData {
     ignoreInDisplays?: boolean;
 }
 
-class Post {
+export class Post {
 
     private postData: PostData;
 
@@ -261,20 +261,6 @@ class PostLibrary {
     getAllTags() {
         const tags = this.posts.map((post) => post.getPostData().tags).flat();
         console.log(tags);
-    }
-
-    getPostsAsCards(posts?: Post[]) {
-        if(!posts) { posts = this.posts }
-        return <Container>
-            <Row xs={1} sm={2} md={3} xl={4} className="justify-content-center">
-                {
-                    posts.map((item, i) => <Row key={i}>
-                        {item.getCard()}
-                    </Row>
-                    )
-                }
-            </Row>
-        </Container>
     }
 
     getLatestPostCarousel(posts?: Post[]) {
