@@ -14,7 +14,7 @@ import { Utterances } from "utterances-react-component";
 import { CommentSection } from "./CommentSection.tsx";
 import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { getPathToTag } from "..";
+import { getPathToTag } from '../router.tsx';
 import { chatGPTPosts } from "./chatGPTPosts.tsx";
 import { getTagInfo, tagGroups } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
