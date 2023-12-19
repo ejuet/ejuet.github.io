@@ -18,7 +18,6 @@ export const postLibrary = new PostLibrary(
         ...xournalPosts,
 
         ...gitPosts,
-        
         ...thiswebsite
     ]
 );
