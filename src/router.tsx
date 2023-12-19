@@ -147,12 +147,20 @@ function MyNavbar() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto align-items-center">
-                    <NavLinkLang to="/">Home</NavLinkLang>
-                    <NavLinkLang to="/blog?tags=['current']" search="hello=4">Blog</NavLinkLang>
-                    <NavLinkLang to="/blog_all">All Posts</NavLinkLang>
+                    <Nav.Item>
+                        <NavLinkLang to="/">Home</NavLinkLang>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <NavLinkLang to="/blog?tags=['current']" search="hello=4">Blog</NavLinkLang>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <NavLinkLang to="/blog_all">All Posts</NavLinkLang>
+                    </Nav.Item>
                 </Nav>
                 <Nav className='align-items-center'>
-                    <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
+                    <Nav.Item>
+                        <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
+                    </Nav.Item>
                     <Nav.Item>
                         <LanguageToggle />
                     </Nav.Item>
