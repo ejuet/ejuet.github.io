@@ -223,7 +223,12 @@ class PostLibrary {
     }
 
     getPosts() {
-        this.posts.sort((a, b) => compareDates(a.getPostData().published, b.getPostData().published)).reverse()
+        this.posts.sort((a, b) => {
+            const aData = a.getPostData();
+            const bData = b.getPostData();
+            var d = compareDates(aData.published, bData.published)
+            return d != 0 ? d : aData.translations.title.localeCompare(bData.translations.title)
+        }).reverse()
         return this.posts;
     }
 
