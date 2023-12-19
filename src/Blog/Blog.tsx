@@ -206,7 +206,16 @@ function compareDates(aDate: Date, bDate: Date): 1 | -1 | 0 {
 class PostLibrary {
     private posts: Post[]
     constructor(postData: PostData[]) {
-        var postdatas = postData;
+        var postdatas = postData
+        
+        // add tags from tag groups
+        postdatas.forEach((dat)=>{
+            dat.tags.forEach(tag=>{
+                if(tagGroups.get(tag)!=undefined){
+                    dat.tags=dat.tags.concat(tagGroups.get(tag))
+                }
+            })
+        })
         this.posts = postdatas.map((dat, i) => new Post(dat))
     }
 
