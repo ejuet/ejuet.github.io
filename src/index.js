@@ -15,7 +15,7 @@ import { Tag, getTagInfo, getTags } from './Blog/Tags';
 import { MyPrivacy } from './MyPrivacy.js';
 import { WithParallax } from './WithParallax.js';
 
-import {PostsAsCards} from "./Blog/BlogElements.tsx"
+import {LatestPostCarousel, PostPage, PostsAsCards} from "./Blog/BlogElements.tsx"
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -37,7 +37,7 @@ const router = createHashRouter([
     {
         path: "",
         element: <WithNavbar>
-            {postLibrary.getLatestPostCarousel(postLibrary.getLatestPosts())}
+            <LatestPostCarousel library={postLibrary} />
         </WithNavbar>,
     },
     {
@@ -70,7 +70,7 @@ const router = createHashRouter([
     path: post.getLink(),
     element: <WithNavbar>
         <div className='App'>
-            {post.getPage()}
+            <PostPage post={post} />
         </div>
     </WithNavbar>
 }))).concat(getTags().map((tagKey, index) => {

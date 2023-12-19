@@ -95,102 +95,6 @@ export class Post {
         }
         return "var(--bs-primary)";
     }
-
-    getPage() {
-        return <>
-            <div className="text-light" style={{
-                backgroundColor: this.getColor(),
-                backgroundImage: 'url(' + require('./GreenscreenedSnow.apng') + ')',
-                backgroundSize: "contain"
-            }}>
-                <div style={{ fontSize: 60 }}>
-                    {this.postData.translations.title}
-                </div>
-                <p>{this.postData.translations.subtitle}</p>
-            </div>
-            <div className="page">
-                <Container fluid="xxl">
-                    <Row className="p-0">
-                        <Col xs={12} lg={8} className="d-flex justify-content-center">
-                            <div className="page-content">
-                                <img style={{ maxHeight: "50vh", maxWidth: "100%" }} src={this.getPostData().titleImage} />
-                                {this.TagRow(true)}
-                                {this.postData.published &&
-                                    <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
-                                }
-                                <div>
-                                    {this.getContent()}
-                                </div>
-                                <h1>{generalTexts.comments}</h1>
-                                {generalTexts.pleasecomment}
-                                <CommentSection issueTerm={this.getLink()} />
-
-                            </div>
-                        </Col>
-                        <Col lg={{ span: 3, order: 'last' }} sm={{ order: 'first' }} xs={{ order: 'first' }}>
-                            <TableOfContents />
-                        </Col>
-                    </Row>
-                </Container>
-
-            </div>
-
-        </>
-
-    }
-
-    getCard() {
-        return <NavLinkLang to={this.postData.link}>
-            <Card className="mb-4">
-                <Card.Img src={this.postData.titleImage} style={{ padding: "15px", borderRadius: "20px" }} />
-                <Card.Body>
-                    <Card.Title>{this.postData.translations.title}</Card.Title>
-                    {this.postData.published &&
-                        <small>{generalTexts.published}: {this.postData.published.toLocaleDateString()}</small>
-                    }
-                    {this.TagRow(true)}
-
-                    <Card.Text>{this.postData.translations.subtitle}</Card.Text>
-
-                    <NavLinkLang to={this.postData.link}><Button>{generalTexts.readmore}</Button></NavLinkLang>
-                </Card.Body>
-            </Card>
-        </NavLinkLang>
-
-    }
-
-    private TagRow(center: boolean = false) {
-        return <Container className="m-1">
-            <Row className={center ? "justify-content-center" : ""}>
-                {this.postData.tags.map((tag) => <Col className="col-md-auto p-0">
-                    <NavLinkLang to={getPathToTag(Tag[tag])}>
-                        <Badge bg="" pill style={{ backgroundColor: getTagInfo(tag).color, marginRight: "3px" }}>
-                            {getTagInfo(tag).translations.title}
-                        </Badge>
-
-                    </NavLinkLang>
-
-                </Col>)}
-            </Row>
-        </Container>;
-    }
-
-    getCarouselItem() {
-        return <Carousel.Item key={this.postData.translations.title} interval={3500} style={{ textAlign: "center" }}>
-            <NavLinkLang to={this.postData.link}>
-                <div style={{
-                    backgroundImage: "url(" + this.getPostData().titleImage + ")", backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover", filter: "brightness(50%)",
-                    height: "80vh", width: "100%"
-                }} />
-            </NavLinkLang>
-            <Carousel.Caption>
-                <h5>{this.postData.translations.title}</h5>
-                <p>{this.postData.translations.subtitle}</p>
-                {this.TagRow(true)}
-            </Carousel.Caption>
-        </Carousel.Item>;
-    }
 }
 
 function compareDates(aDate: Date, bDate: Date): 1 | -1 | 0 {
@@ -206,7 +110,7 @@ function compareDates(aDate: Date, bDate: Date): 1 | -1 | 0 {
     return 0;
 };
 
-class PostLibrary {
+export class PostLibrary {
     private posts: Post[]
     constructor(postData: PostData[]) {
         var postdatas = postData
@@ -261,13 +165,6 @@ class PostLibrary {
     getAllTags() {
         const tags = this.posts.map((post) => post.getPostData().tags).flat();
         console.log(tags);
-    }
-
-    getLatestPostCarousel(posts?: Post[]) {
-        if(!posts) { posts = this.posts }
-        return <Carousel className="bg-light">
-            {posts.slice(0, 10).map((post, index) => post.getCarouselItem())}
-        </Carousel>
     }
 }
 
