@@ -37,7 +37,7 @@ function Parallax({ children, layers }) {
 
 }
 
-function Layer({ speed, backgroundSize = "100%", backgroundColor = "transparent", url = require('./sterne.png'), height, width, scroll }) {
+function Layer({ speed, backgroundSize = "100%", backgroundColor = "transparent", url = require('./sterne.png'), height=80, width=80, scroll=0 }) {
     return <div style={{
         backgroundColor: backgroundColor,
         position: "absolute",
@@ -100,7 +100,7 @@ function useDelayedScroll() {
 
     }, [scroll])
     return delayedScroll;
-
+    /*
     function move() {
         var currentVal = delayedScroll;
         var goal = scroll;
@@ -111,6 +111,7 @@ function useDelayedScroll() {
             setIsMoving(false);
         }
     }
+    */
 }
 
 function useElementHeight(ref) {

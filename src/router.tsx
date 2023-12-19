@@ -7,7 +7,7 @@ import { postLibrary } from "./Blog/Content/PostLibrary.tsx";
 import { useScrollbarActive } from './useScrollbarActive.js';
 import { Tag, getTagInfo, getTags } from './Blog/Tags.tsx';
 import { MyPrivacy } from './MyPrivacy.js';
-import { StarParallax } from './Parallax/WithParallax.js';
+import { StarParallax } from './Parallax/Parallax.tsx';
 import { LatestPostCarousel, PostPage, PostsAsCards } from "./Blog/BlogComponents.tsx";
 import { PostsWithTagCards } from './Blog/BlogComponents.tsx';
 
