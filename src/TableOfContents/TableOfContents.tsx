@@ -160,8 +160,8 @@ class Level {
         return <>
             {this.getLink()}
             <div style={{ marginLeft: this.parent ? '20px' : 0 }}>
-                {this.children.map((childLevel) => (
-                    <div style={{ marginLeft: this.parent ? '20px' : 0 }}>
+                {this.children.map((childLevel, index) => (
+                    <div key={childLevel.getLevel()+"-"+index} style={{ marginLeft: this.parent ? '20px' : 0 }}>
                         {childLevel.getAsList()}
                     </div>
                 ))}
