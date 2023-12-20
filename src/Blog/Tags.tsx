@@ -15,7 +15,8 @@ export enum Tag {
     thisWebsite,
 
     //categories:
-    projects
+    projects,
+    programmingLanguages
 }
 
 export const tagGroups = new Map<Tag, Tag[]>([
@@ -107,9 +108,39 @@ export function getTagInfo(tag: Tag): TagInfo {
             };
         case Tag.projects:
             return {
-                ...getDefault(),
+                color: "var(--bs-primary)",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "Projects",
+                        description: "My personal projects.",
+                    },
+                    de: {
+                        title: "Projekte",
+                        description: "Meine persönlichen Projekte",
+                    }
+                }),
                 subcategories: [
                     Tag.thisWebsite
+                ]
+            }
+        case Tag.programmingLanguages:
+            return {
+                color: "var(--bs-primary)",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "Programming Languages",
+                        description: "Programming Languages I've worked with",
+                    },
+                    de: {
+                        title: "Programmiersprachen",
+                        description: "Programmiersprachen, mit denen ich mich befasst habe",
+                    }
+                }),
+                subcategories: [
+                    Tag.javaScript,
+                    Tag.typeScript,
+                    Tag.java,
+                    Tag.lua,
                 ]
             }
         default:
@@ -163,7 +194,13 @@ export function getTags() {
 }//Tags Logic
 
 export function getCategories() {
-    return getTags().filter((tag) => getTagInfo(Tag[tag] as unknown as Tag).subcategories && getTagInfo(Tag[tag] as unknown as Tag).subcategories.length > 0)
+    return getTags().filter((tag) => isCategory(tag)
+    )
+}
+
+function isCategory(tag: Tag): unknown {
+    return getTagInfo(Tag[tag] as unknown as Tag).subcategories &&
+        getTagInfo(Tag[tag] as unknown as Tag).subcategories.length > 0;
 }
 
 export function getTagsWithCategory(cat) {
@@ -173,16 +210,20 @@ export function getTagsWithCategory(cat) {
             if(t == Tag[tag] as unknown as Tag) {
                 return true;
             }
-            return false;
         }
+        return false;
     })
 }
 
-export function getTagsWithoutCategory(){
+export function getTagsWithoutCategory() {
     return getTags().filter((tag) => {
-        return getCategories().filter((cat)=>{
-            return getTagInfo(Tag[cat] as unknown as Tag).subcategories.indexOf(Tag[tag] as unknown as Tag)<0
-        }).length>0
+        if(isCategory(tag)){
+            return false;
+        }
+        return getCategories().filter((cat) => {
+            //only select categories in which tag is present
+            return getTagInfo(Tag[cat] as unknown as Tag).subcategories.indexOf(Tag[tag] as unknown as Tag) >= 0 
+        }).length <= 0 //amount of these categories is 0
     })
 }
 

@@ -17,14 +17,14 @@ const strings = new MyLocalizedStrings({
         language: "Language",
         flag: "🇬🇧",
         blogPosts: "Blog Posts",
-        other:"Other"
+        other: "Other"
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
         flag: "🇩🇪",
         blogPosts: "Beiträge",
-        other:"Andere"
+        other: "Andere"
     },
 });
 export const router = createHashRouter([
@@ -88,25 +88,24 @@ function PostsWithTagsByQueryParams() {
     return <>
         <Container className='mb-4'>
             <Row className='mb-3'><h1>{strings.blogPosts}</h1></Row>
-            <Row className='justify-content-center'>
-                {getTags().map((tagString, index) => <TagBadge key={index} tagString={tagString} />)}
-            </Row>
-            <p>
-                {
-                    getCategories().map((categorytag) => {
-                        return <CategoryTagBadges categoryName={categorytag} tags={getTagsWithCategory(categorytag)} />
-                    })
-                }
-                <CategoryTagBadges categoryName={strings.other} tags={getTagsWithoutCategory()} />
-            </p>
+            {
+                getCategories().map((categorytag) => {
+                    const categoryInfo = getTagInfo(Tag[categorytag] as unknown as Tag);
+                    return <CategoryTagBadges categoryName={categoryInfo.translations.title}
+                        categoryDescription={categoryInfo.translations.description}
+                        tags={getTagsWithCategory(categorytag)} />
+                })
+            }
+            <CategoryTagBadges categoryName={strings.other} categoryDescription="" tags={getTagsWithoutCategory()} />
         </Container>
         <PostsAsCards posts={postLibrary.getPostsWithTags(tags)} />
     </>;
 }
 
-function CategoryTagBadges({ categoryName, tags }) {
+function CategoryTagBadges({ categoryName, categoryDescription, tags }) {
     return <>
-        <Row className='mb-3'><h2>{categoryName}</h2></Row>
+        <Row className=''><h2>{categoryName}</h2></Row>
+        <p className=''>{categoryDescription}</p>
         <Row className='justify-content-center'>
             {
 
