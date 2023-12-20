@@ -3,8 +3,10 @@ import { MyLocalizedStrings } from "../Language/MyLocalizedStrings.js";
 
 //Tags
 export enum Tag {
+    all,
+
+    //add new tags here
     current,
-    school,
     chatgptauthor,
     lua,
     java,
@@ -13,10 +15,12 @@ export enum Tag {
     react,
     typeScript,
     thisWebsite,
+    school,
 
     //categories:
     projects,
-    programmingLanguages
+    programmingLanguages,
+
 }
 
 export const tagGroups = new Map<Tag, Tag[]>([
@@ -27,7 +31,7 @@ export function getTagInfo(tag: Tag): TagInfo {
     switch(tag) {
         case Tag.current:
             return {
-                color: "var(--bs-primary)",
+                color: "var(--bs-success)",
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Current",
@@ -143,6 +147,20 @@ export function getTagInfo(tag: Tag): TagInfo {
                     Tag.lua,
                 ]
             }
+        case Tag.all:
+            return {
+                color: "var(--bs-dark)",
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "General",
+                        description: "All Posts",
+                    },
+                    de: {
+                        title: "Allgemein",
+                        description: "Alle Beiträge",
+                    }
+                })
+            }
         default:
             return getDefault()
     }
@@ -217,12 +235,12 @@ export function getTagsWithCategory(cat) {
 
 export function getTagsWithoutCategory() {
     return getTags().filter((tag) => {
-        if(isCategory(tag)){
+        if(isCategory(tag)) {
             return false;
         }
         return getCategories().filter((cat) => {
             //only select categories in which tag is present
-            return getTagInfo(Tag[cat] as unknown as Tag).subcategories.indexOf(Tag[tag] as unknown as Tag) >= 0 
+            return getTagInfo(Tag[cat] as unknown as Tag).subcategories.indexOf(Tag[tag] as unknown as Tag) >= 0
         }).length <= 0 //amount of these categories is 0
     })
 }

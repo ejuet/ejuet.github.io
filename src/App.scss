@@ -12,7 +12,9 @@ $warning: #f7fa4d;
 // merge with existing $theme-colors map
 $theme-colors: map-merge($theme-colors, (
     "primary": $primary,
-    "dark": $dark
+    "dark": $dark,
+    "success": $success,
+    "warning": $warning,
 ));
 
 // --- set variables depending on theme ---
