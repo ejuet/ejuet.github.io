@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -42,14 +43,15 @@ body {
 }
 
 
-.page-content p{
+.page-content p {
   text-align: left;
 }
 
 .page {
   /* Additional styles for readability, e.g., padding, margin, and background color */
-  padding: 20px; /* Adjust padding as needed */
-  width:100%;
+  padding: 20px;
+  /* Adjust padding as needed */
+  width: 100%;
 }
 
 .page-content {
@@ -58,13 +60,13 @@ body {
   padding-top: 30px;
 }
 
-.table-of-contents{
+.table-of-contents {
   padding: 15px;
 }
 
 .blur,
-.table-of-contents, .page-content
-{
+.table-of-contents,
+.page-content {
   backdrop-filter: blur(6px);
 }
 
@@ -72,11 +74,19 @@ pre {
   text-align: left;
 }
 
-.wp-block-image > img{
+.wp-block-image>img {
   max-width: 100%;
 }
 
 
-.navbar{
+.navbar {
   background-image: none !important;
+}
+
+.navlinklang {
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1))
+}
+
+.navlinklang:hover {
+  --bs-link-color-rgb: var(--bs-link-hover-color-rgb)
 }
