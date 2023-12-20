@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, createHashRouter, useSearchParams } from 'react-router-dom';
 import { Container, Nav, Navbar, Col, Row, Badge } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
-import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents.js';
+import { LanguageToggle} from "./Language/LanguageComponents.js"
+import { NavLinkLang } from './Language/NavLinkLang.js';
 import { postLibrary } from "./BlogContent/PostLibrary.tsx";
 import { useScrollbarActive } from './useScrollbarActive.js';
 import { Tag, getCategories, getTagInfo, getTags, getTagsWithCategory, getTagsWithoutCategory } from './Blog/Tags.tsx';
@@ -87,8 +88,8 @@ function PostsWithTagsByQueryParams() {
     //console.log(params)
     return <>
         <Container className='mb-4'>
-            <Row className='mb-3'><h1>{strings.blogPosts}</h1></Row>
             {
+                //<Row className='mb-3'><h1>{strings.blogPosts}</h1></Row>
                 getCategories().map((categorytag) => {
                     const categoryInfo = getTagInfo(Tag[categorytag] as unknown as Tag);
                     return <CategoryTagBadges categoryName={categoryInfo.translations.title}

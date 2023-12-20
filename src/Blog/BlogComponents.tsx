@@ -9,7 +9,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings.js";
-import { NavLinkLang } from "../Language/LanguageComponents.js";
+import { NavLinkLang } from "../Language/NavLinkLang.js";
 import { Utterances } from "utterances-react-component";
 import { CommentSection } from "./CommentSection.tsx";
 import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
