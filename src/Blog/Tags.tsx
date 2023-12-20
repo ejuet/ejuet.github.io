@@ -20,6 +20,7 @@ export enum Tag {
     unity,
     gamedev,
     android,
+    rust,
 
     //categories:
     projects,
@@ -154,7 +155,8 @@ export function getTagInfo(tag: Tag): TagInfo {
                     Tag.typeScript,
                     Tag.java,
                     Tag.lua,
-                    Tag.csharp
+                    Tag.csharp,
+                    Tag.rust
                 ]
             }
         case Tag.all:
