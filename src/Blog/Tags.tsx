@@ -23,10 +23,6 @@ export enum Tag {
 
 }
 
-export const tagGroups = new Map<Tag, Tag[]>([
-    [Tag.thisWebsite, [Tag.current, Tag.javaScript, Tag.typeScript, Tag.react]],
-]);
-
 export function getTagInfo(tag: Tag): TagInfo {
     switch(tag) {
         case Tag.current:
@@ -99,6 +95,7 @@ export function getTagInfo(tag: Tag): TagInfo {
         case Tag.thisWebsite:
             return {
                 color: "var(--bs-primary)",
+                containsTags: [Tag.current, Tag.javaScript, Tag.typeScript, Tag.react],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "This Website",
@@ -250,6 +247,7 @@ export interface TagInfo {
     color: string;
     translations: TagTranslations;
     subcategories?: Tag[]
+    containsTags?: Tag[]
 }
 export interface TagTranslations extends LocalizedStringsMethods {
     title: string;

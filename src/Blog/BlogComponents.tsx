@@ -16,7 +16,7 @@ import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { getPathToTag } from '../router.tsx';
 import { chatGPTPosts } from "../BlogContent/chatGPTPosts.tsx";
-import { getTagInfo, tagGroups } from "./Tags.tsx";
+import { getTagInfo } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
 import { examplePosts } from "../BlogContent/examplePosts.tsx";
 import { xournalPosts } from "../BlogContent/xournalposts.tsx";

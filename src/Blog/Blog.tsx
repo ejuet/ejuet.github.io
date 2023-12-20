@@ -1,6 +1,6 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
 import { MyLocalizedStrings } from "../Language/MyLocalizedStrings";
-import { getTagInfo, tagGroups } from "./Tags.tsx";
+import { getTagInfo, } from "./Tags.tsx";
 import { Tag } from "./Tags.tsx";
 
 interface BlogTranslations extends LocalizedStringsMethods {
@@ -101,8 +101,9 @@ export class PostLibrary {
         // add tags from tag groups
         postdatas.forEach((dat) => {
             dat.tags.forEach(tag => {
-                if(tagGroups.get(tag) != undefined) {
-                    dat.tags = dat.tags.concat(tagGroups.get(tag))
+                getTagInfo(tag)
+                if(getTagInfo(tag).containsTags && getTagInfo(tag).containsTags.indexOf(tag) < 0) {
+                    dat.tags = dat.tags.concat(getTagInfo(tag).containsTags)
                 }
             })
         })
