@@ -89,6 +89,10 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getDefault({ color: "#a6c447" });
         case Tag.unity:
             return getDefault({ color: "#000000" });
+        case Tag.rust:
+            return getDefault({ color: "#e33b26" });
+        
+        //other
         case Tag.gamedev:
             return getDefault({ color: "#e01b2f", name: "Game Development" });
         case Tag.git:
