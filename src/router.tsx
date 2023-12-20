@@ -92,7 +92,7 @@ function PostsWithTagsByQueryParams() {
                 //<Row className='mb-3'><h1>{strings.blogPosts}</h1></Row>
                 getCategories().map((categorytag) => {
                     const categoryInfo = getTagInfo(Tag[categorytag] as unknown as Tag);
-                    return <CategoryTagBadges categoryName={categoryInfo.translations.title}
+                    return <CategoryTagBadges categoryName={categoryInfo.translations.title} key={categorytag}
                         categoryDescription={categoryInfo.translations.description}
                         tags={getTagsWithCategory(categorytag)} />
                 })
@@ -111,7 +111,7 @@ function CategoryTagBadges({ categoryName, categoryDescription, tags }) {
             {
 
                 tags.map((tag) => {
-                    return <TagBadge tagString={tag} />
+                    return <TagBadge tagString={tag} key={tag} />
                 })
             }
         </Row>

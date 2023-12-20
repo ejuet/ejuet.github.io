@@ -7,6 +7,7 @@ export const thiswebsite = [
     {
         published: new Date("2023-12-19"),
         tags: [Tag.thisWebsite],
+        titleImage: "img/galaxy.jpg",
         translations: MyLocalizedStrings.create({
             en: {
                 title: "Parallax Background in React",
@@ -55,8 +56,9 @@ export const thiswebsite = [
         }),
     },
     {
-        published: new Date("2023-12-19"),
+        published: new Date("2023-10-06"),
         tags: [Tag.thisWebsite],
+        titleImage: "/pexels/language.jpg",
         translations: MyLocalizedStrings.create({
             en: {
                 title: "Localization in React",
