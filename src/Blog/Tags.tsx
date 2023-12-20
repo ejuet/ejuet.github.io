@@ -178,6 +178,14 @@ export function getTagsWithCategory(cat) {
     })
 }
 
+export function getTagsWithoutCategory(){
+    return getTags().filter((tag) => {
+        return getCategories().filter((cat)=>{
+            return getTagInfo(Tag[cat] as unknown as Tag).subcategories.indexOf(Tag[tag] as unknown as Tag)<0
+        }).length>0
+    })
+}
+
 
 export interface TagInfo {
     color: string;

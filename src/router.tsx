@@ -5,7 +5,7 @@ import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
 import { NavLinkLang, LanguageToggle } from './Language/LanguageComponents.js';
 import { postLibrary } from "./BlogContent/PostLibrary.tsx";
 import { useScrollbarActive } from './useScrollbarActive.js';
-import { Tag, getCategories, getTagInfo, getTags, getTagsWithCategory } from './Blog/Tags.tsx';
+import { Tag, getCategories, getTagInfo, getTags, getTagsWithCategory, getTagsWithoutCategory } from './Blog/Tags.tsx';
 import { MyPrivacy } from './MyPrivacy.js';
 import { StarParallax } from './Parallax/Parallax.tsx';
 import { LatestPostCarousel, PostPage, PostsAsCards } from "./Blog/BlogComponents.tsx";
@@ -16,13 +16,15 @@ const strings = new MyLocalizedStrings({
         privacyPolicy: "Privacy Policy",
         language: "Language",
         flag: "🇬🇧",
-        blogPosts: "Blog Posts"
+        blogPosts: "Blog Posts",
+        other:"Other"
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
         flag: "🇩🇪",
-        blogPosts: "Beiträge"
+        blogPosts: "Beiträge",
+        other:"Andere"
     },
 });
 export const router = createHashRouter([
@@ -92,15 +94,28 @@ function PostsWithTagsByQueryParams() {
             <p>
                 {
                     getCategories().map((categorytag) => {
-                        return <p>{categorytag}{
-                            getTagsWithCategory(categorytag).map((tag) => <p>{tag}</p>)
-                        }</p>
+                        return <CategoryTagBadges categoryName={categorytag} tags={getTagsWithCategory(categorytag)} />
                     })
                 }
+                <CategoryTagBadges categoryName={strings.other} tags={getTagsWithoutCategory()} />
             </p>
         </Container>
         <PostsAsCards posts={postLibrary.getPostsWithTags(tags)} />
     </>;
+}
+
+function CategoryTagBadges({ categoryName, tags }) {
+    return <>
+        <Row className='mb-3'><h2>{categoryName}</h2></Row>
+        <Row className='justify-content-center'>
+            {
+
+                tags.map((tag) => {
+                    return <TagBadge tagString={tag} />
+                })
+            }
+        </Row>
+    </>
 }
 
 function TagBadge({ tagString }) {
