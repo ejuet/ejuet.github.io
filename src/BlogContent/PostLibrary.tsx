@@ -84,6 +84,9 @@ export const postLibrary = new PostLibrary(
 
 
                             <h2>Google Play Store</h2>
+                            <img className="mt-2" style={{maxWidth:"30%"}} src="./the-falling-ball/icon.png" />
+                            <br />
+                            <small className="mb-2">App Icon</small>
                             <p>
                                 Nachdem ich die ersten Level erstellt habe, hatte ich das Spiel im Google Play Store für Android veröffentlicht.
                                 In der Developer Konsole konnte ich beobachten, wenn jemand mein Spiel installierte.
@@ -135,6 +138,35 @@ export const postLibrary = new PostLibrary(
                                 <source src="./medieval-rush/rush.mp4" type="video/mp4" />
                             </video>
                             
+                        </>
+                    },
+                }),
+            },
+            {
+                published: new Date("2020-04-15"),
+                tags: [Tag.csharp, Tag.unity, Tag.android],
+                //ursprünglich new LocalizedStrings(), dann auch typecheck TODO fixen sodass new MyLocalizedStrings geht
+                translations: MyLocalizedStrings.create({
+                    de: {
+                        title: "Pinnwand App",
+                        subtitle: "Kalender App",
+                        content: () => <>
+                            <h1>Kalender App</h1>
+                            <p>
+                                In der Schulzeit habe ich meine Hausaufgaben lange auf Haftnotizen aufgeschrieben und an meinen Schrank geklebt,
+                                um einen besseren Überblick zu gewinnen.
+                                Da diese Form des Kalenders wenig mobil ist, aber es auch keine App gab, die Notizen in exakt diesem Layout anzeigen konnte,
+                                habe ich die App selbst programmiert.
+                                Da ich zu diesem Zeitpunkt gerade viel mit Unity gearbeitet habe, habe ich das der Einfachheit halber mit Unity und C# getan.
+                            </p>
+                            <img style={{maxWidth: "30%"}} src="/pinnwand/pins.jpg" />
+                            <p>
+                                Die App nutzt einen nativen Android Dialog zum Auswählen eines Datums, implementiert mithilfe einer Library.
+                                Dieselbe Library stellt das Erstellen von Push-Benachrichtigungen bereit. Diese wollte ich
+                                für Erinnerungen an einzelne Aufgaben verwenden. Da diese aber nur solange funktionierten wie die App im Hintergrund lief,
+                                entfernte ich das Feature.
+                            </p>
+                            <img style={{maxWidth: "30%"}} src="/pinnwand/datepicker.jpg" />
                         </>
                     },
                 }),
