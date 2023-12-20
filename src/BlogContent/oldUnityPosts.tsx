@@ -150,5 +150,21 @@ export const oldUnityPosts = [
                 </>
             },
         }),
+    },
+
+    {
+        published: new Date("2022-04-05"),
+        titleImage: "pixel-runner/run.jpg",
+        tags: [Tag.csharp, Tag.unity, Tag.android, Tag.gamedev],
+        //ursprünglich new LocalizedStrings(), dann auch typecheck TODO fixen sodass new MyLocalizedStrings geht
+        translations: MyLocalizedStrings.create({
+            de: {
+                title: "Pixel Runner",
+                subtitle: "A pixelated 2D mobile Game",
+                content: () => <>
+                    <h1>Pixel Platformer</h1>
+                </>
+            },
+        }),
     }
 ];
