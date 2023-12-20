@@ -45,7 +45,8 @@ export class Post {
         data: PostData
     ) {
         this.postData = data;
-        this.postData.link = this.postData.link || "/" + this.postData.translations.getString("title", "en").replaceAll(" ", "-").replaceAll("/", "-");
+        const postname = this.postData.translations.getString("title", "en") ? this.postData.translations.getString("title", "en") : this.postData.translations.getString("title");
+        this.postData.link = this.postData.link || "/" + postname.replaceAll(" ", "-").replaceAll("/", "-");
         this.postData.titleImage = this.postData.titleImage || "robot.jpg";
         if(this.postData.tags.indexOf(Tag.all) <0){
             this.postData.tags.push(Tag.all);
