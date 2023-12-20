@@ -26,7 +26,7 @@ export const postLibrary = new PostLibrary(
         ...[
             {
                 published: new Date("2019-08-12"),
-                titleImage: "logo512.png",
+                titleImage: "/the-falling-ball/ball.png",
                 tags: [Tag.csharp, Tag.unity, Tag.android, Tag.gamedev],
                 //ursprünglich new LocalizedStrings(), dann auch typecheck TODO fixen sodass new MyLocalizedStrings geht
                 translations: MyLocalizedStrings.create({
@@ -73,6 +73,9 @@ export const postLibrary = new PostLibrary(
                                     Die verschiedenen Levels werden als Unity-<code>Prefabs</code> gespeichert und aus dem <code>Resource</code>-Folder geladen.
                                 </li>
                                 <li>
+                                    Je nach Level ändert sich die Gravitationsbeschleunigung, die Musik und die visuellen Effekte des Balls.
+                                </li>
+                                <li>
                                     Ebenfalls habe ich die damalige Version von <a href="https://unity.com/products/unity-ads">Unity Ads</a> verwendet,
                                     um nach einem Game Over einen kurzen Werbeclip einzublenden. (Sehr zum Leidwesen meiner Freunde,
                                     die das Spiel gespielt haben. Die Werbungen ließen sich aber umgehen, indem man den Flugmodus aktiviert hat.)
@@ -89,6 +92,49 @@ export const postLibrary = new PostLibrary(
                                 Obwohl mein Spiel keine besonderen Berechtigungen erforderte und auch sonst kein Sicherheitsrisiko darstellte,
                                 wurde meine App automatisch offline genommen.
                             </p>
+                        </>
+                    },
+                }),
+            },
+            {
+                published: new Date("2020-04-05"),
+                titleImage: "/medieval-rush/rush.png",
+                tags: [Tag.csharp, Tag.unity, Tag.android, Tag.gamedev],
+                //ursprünglich new LocalizedStrings(), dann auch typecheck TODO fixen sodass new MyLocalizedStrings geht
+                translations: MyLocalizedStrings.create({
+                    de: {
+                        title: "Medieval Rush",
+                        subtitle: "3D Jump-And-Run Spiel in Unity",
+                        content: () => <>
+                            <h1>Medieval Rush</h1>
+                            <p>
+                                Nach "The Falling Ball" habe ich ein weiteres Mobile Game mit Unity entwickelt.
+                                Dieses Mal ein Jump-And-Run Spiel in 3D.
+                                Man spielt einen Banditen in einem mittelalterlichen Dorf, der vermutlich nach einem Verbrechen auf der FLucht ist
+                                und durch ein mittelalterliches Dorf läuft.
+                            </p>
+                            <ul>
+                                <li>
+                                    Das Spiel wird über Touch Gesten und den Gyrosensor gesteuert. Wischt man nach oben, springt der Bandit,
+                                    wischt man nach unten, lässt er sich zu boden fallen.
+                                    Wenn man nach links oder rechts wischt, biegt er bei einer Straßenecke in die jeweilige Richtung ab.
+                                    Beim neigen des Handys läuft der Bandit weiter nach links oder rechts.
+                                </li>
+                                <li>
+                                    Auf dem Weg gibt es Hindernisse, über die man springen oder unter denen man durchrutschen muss.
+                                    Gelegentlich stellen sich einem Trolle in den Weg, auf die man mehrmals drauftippen muss, um sie zu besiegen.
+                                    Tut man das nicht, schlägt der Troll mit seiner Keule zu und das Spiel ist vorbei.
+                                </li>
+                                <li>
+                                    Die Straßen, durch die der Bandit läuft, werden nach und nach generiert und wenn man nirgenwo scheitert, endet das Spiel nie.
+                                    Der Bandit wird nach und nach schneller, was die Schwierigkeit erhöht.
+                                </li>
+                            </ul>
+
+                            <video style={{ maxHeight: "70vh" }} controls>
+                                <source src="./medieval-rush/rush.mp4" type="video/mp4" />
+                            </video>
+                            
                         </>
                     },
                 }),
