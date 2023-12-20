@@ -16,6 +16,10 @@ export enum Tag {
     typeScript,
     thisWebsite,
     school,
+    csharp,
+    unity,
+    gamedev,
+    android,
 
     //categories:
     projects,
@@ -69,15 +73,23 @@ export function getTagInfo(tag: Tag): TagInfo {
             };
         //Programming Languages:
         case Tag.java:
-            return getProgrammingLanguageTagInfo("#f58312");
+            return getProgrammingLanguageTagInfo({ color: "#f58312" });
         case Tag.lua:
-            return getProgrammingLanguageTagInfo("#03027d");
+            return getProgrammingLanguageTagInfo({ color: "#03027d" });
         case Tag.javaScript:
-            return getProgrammingLanguageTagInfo("#f3ce00");
+            return getProgrammingLanguageTagInfo({ color: "#f3ce00" });
         case Tag.typeScript:
-            return getProgrammingLanguageTagInfo("#2f74c0");
+            return getProgrammingLanguageTagInfo({ color: "#2f74c0" });
+        case Tag.csharp:
+            return getProgrammingLanguageTagInfo({ color: "#9c75d5", langName: "C#" });
         case Tag.react:
-            return getDefault("#5ed3f3");
+            return getDefault({ color: "#5ed3f3" });
+        case Tag.android:
+            return getDefault({ color: "#a6c447" });
+        case Tag.unity:
+            return getDefault({ color: "#000000" });
+        case Tag.gamedev:
+            return getDefault({ color: "#e01b2f", name: "Game Development" });
         case Tag.git:
             return {
                 color: "#c9281a",
@@ -142,6 +154,7 @@ export function getTagInfo(tag: Tag): TagInfo {
                     Tag.typeScript,
                     Tag.java,
                     Tag.lua,
+                    Tag.csharp
                 ]
             }
         case Tag.all:
@@ -162,8 +175,8 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getDefault()
     }
 
-    function getProgrammingLanguageTagInfo(color = "#000000") {
-        const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+    function getProgrammingLanguageTagInfo({ color = "#000000", langName = "" }: { color?: string; langName?: string; } = {}) {
+        const languageName = langName != "" ? langName : Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
         return {
             color: color,
             translations: MyLocalizedStrings.create({
@@ -179,18 +192,18 @@ export function getTagInfo(tag: Tag): TagInfo {
         };
     }
 
-    function getDefault(color = "rgba(0,0,0,0.5)") {
-        const languageName = Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+    function getDefault({ color = "rgba(0,0,0,0.5)", name = "" }: { color?: string; name?: string; } = {}) {
+        const displayName = name != "" ? name : Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
         return {
             color: color,
             translations: MyLocalizedStrings.create({
                 en: {
-                    title: languageName,
-                    description: "Projects with " + languageName,
+                    title: displayName,
+                    description: "Projects with " + displayName,
                 },
                 de: {
-                    title: languageName,
-                    description: "Projekte mit " + languageName,
+                    title: displayName,
+                    description: "Projekte mit " + displayName,
                 }
             })
         };
