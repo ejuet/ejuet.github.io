@@ -14,7 +14,7 @@ export const postLibrary = new PostLibrary(
         //example posts i only want to see if im working on the website
         ...(false && window.location.hostname == "localhost" ? examplePosts : []),
 
-        ...chatGPTPosts,
+        ...(false ? chatGPTPosts : [] ),
 
         ...xournalPosts,
 

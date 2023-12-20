@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, createHashRouter, useSearchParams } from 'react-router-dom';
 import { Container, Nav, Navbar, Col, Row, Badge } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
-import { LanguageToggle} from "./Language/LanguageComponents.js"
+import { LanguageToggle } from "./Language/LanguageComponents.js"
 import { NavLinkLang } from './Language/NavLinkLang.js';
 import { postLibrary } from "./BlogContent/PostLibrary.tsx";
 import { useScrollbarActive } from './useScrollbarActive.js';
@@ -105,8 +105,13 @@ function PostsWithTagsByQueryParams() {
 
 function CategoryTagBadges({ categoryName, categoryDescription, tags }) {
     return <>
-        <Row className=''><h2>{categoryName}</h2></Row>
-        <p className=''>{categoryDescription}</p>
+        <div className='blur-weak d-inline-block p-1'>
+            <Row><h2>{categoryName}</h2></Row>
+            {
+                categoryDescription &&
+                <p>{categoryDescription}</p>
+            }
+        </div>
         <Row className='justify-content-center'>
             {
 
@@ -123,7 +128,7 @@ function TagBadge({ tagString }) {
     const active = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")).includes(tagString) : false;
     const tagInfo = getTagInfo(Tag[tagString as keyof typeof Tag]);
 
-    return <TagBadgeElement color={tagInfo.color} active={active} setTag={setTag} title={tagInfo.translations.title}  />
+    return <TagBadgeElement color={tagInfo.color} active={active} setTag={setTag} title={tagInfo.translations.title} />
 
     function setTag() {
         setSearchParams(searchParams => {
@@ -134,9 +139,9 @@ function TagBadge({ tagString }) {
             }
             else {
                 if(!tags.includes(tagString)) tags.push(tagString);
-                if(Tag[tagString as unknown as keyof Tag]!=Tag.all){
-                    tags = tags.filter((tag)=>Tag[tag as unknown as keyof Tag]!=Tag.all)
-                } 
+                if(Tag[tagString as unknown as keyof Tag] != Tag.all) {
+                    tags = tags.filter((tag) => Tag[tag as unknown as keyof Tag] != Tag.all)
+                }
 
             }
             searchParams.set("tags", JSON.stringify(tags).replaceAll("\"", "'"));
@@ -157,7 +162,7 @@ function TagBadgeElement({ color, active, setTag, title }: { color: string; acti
             //muss über useSearchParams passieren weil sonst nicht mit HashRouter umgehen kann
             setTag();
 
-        } }>
+        }}>
             {title}
         </Badge>
     </h2>;

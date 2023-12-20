@@ -70,6 +70,10 @@ body {
   backdrop-filter: blur(6px);
 }
 
+.blur-weak{
+  backdrop-filter: blur(2px);
+}
+
 pre {
   text-align: left;
 }
