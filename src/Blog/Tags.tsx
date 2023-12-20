@@ -149,11 +149,11 @@ export function getTagInfo(tag: Tag): TagInfo {
                 color: "var(--bs-dark)",
                 translations: MyLocalizedStrings.create({
                     en: {
-                        title: "General",
+                        title: "All Posts",
                         description: "All Posts",
                     },
                     de: {
-                        title: "Allgemein",
+                        title: "Alle Beiträge",
                         description: "Alle Beiträge",
                     }
                 })
