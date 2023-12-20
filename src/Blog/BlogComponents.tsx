@@ -41,7 +41,7 @@ export function PostsAsCards({ posts }: { posts: Post[] }) {
 export function LatestPostCarousel({ library }: { library: PostLibrary }) {
     return <Carousel className="bg-light">
         {
-            library.getPosts().slice(0, 10).map((post, index) => {
+            library.getLatestPosts().slice(0, 10).map((post, index) => {
                 var postData = post.getPostData()
                 return <Carousel.Item key={postData.translations.title} interval={3500} style={{ textAlign: "center" }}>
                     <NavLinkLang to={postData.link}>
@@ -55,6 +55,7 @@ export function LatestPostCarousel({ library }: { library: PostLibrary }) {
                         <h5>{postData.translations.title}</h5>
                         <p>{postData.translations.subtitle}</p>
                         <TagRow center={true} postData={postData} />
+                        <small>{postData.published.toLocaleDateString()}</small>
                     </Carousel.Caption>
                 </Carousel.Item>
             })
