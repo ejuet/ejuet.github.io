@@ -122,30 +122,39 @@ function TagBadge({ tagString }) {
     const [params, setSearchParams] = useSearchParams();
     const active = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")).includes(tagString) : false;
     const tagInfo = getTagInfo(Tag[tagString as keyof typeof Tag]);
+
+    return <TagBadgeElement color={tagInfo.color} active={active} setTag={setTag} title={tagInfo.translations.title}  />
+
+    function setTag() {
+        setSearchParams(searchParams => {
+            //const currentTags = (Array.from(searchParams.entries()).filter((elArr) => elArr[0] == "tags").flat()[1].replaceAll("'", "\"")) //instead of searchParams.get("tags") we have to do this so string stays the same
+            var tags = searchParams.get("tags") ? JSON.parse(searchParams.get("tags").replaceAll("'", "\"")) : [];
+            if(active) {
+                tags.splice(tags.indexOf(tagString), 1);
+            }
+            else {
+                if(!tags.includes(tagString)) tags.push(tagString);
+            }
+            searchParams.set("tags", JSON.stringify(tags).replaceAll("\"", "'"));
+            return searchParams;
+        });
+    }
+}
+
+function TagBadgeElement({ color, active, setTag, title }: { color: string; active: any; setTag: () => void; title: string; }) {
     return <h2 style={{ width: "fit-content" }}>
         <Badge as={Link} to={""} pill bg="" style={{
-            "backgroundColor": tagInfo.color,
+            "backgroundColor": color,
             "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
             zIndex: 100
         }} onClick={(e) => {
             e.preventDefault();
 
             //muss über useSearchParams passieren weil sonst nicht mit HashRouter umgehen kann
-            setSearchParams(searchParams => {
-                //const currentTags = (Array.from(searchParams.entries()).filter((elArr) => elArr[0] == "tags").flat()[1].replaceAll("'", "\"")) //instead of searchParams.get("tags") we have to do this so string stays the same
-                var tags = searchParams.get("tags") ? JSON.parse(searchParams.get("tags").replaceAll("'", "\"")) : [];
-                if(active) {
-                    tags.splice(tags.indexOf(tagString), 1);
-                }
-                else {
-                    if(!tags.includes(tagString)) tags.push(tagString);
-                }
-                searchParams.set("tags", JSON.stringify(tags).replaceAll("\"", "'"));
-                return searchParams;
-            });
+            setTag();
 
-        }}>
-            {tagInfo.translations.title}
+        } }>
+            {title}
         </Badge>
     </h2>;
 }
@@ -175,7 +184,7 @@ function MyNavbar() {
                         <NavLinkLang to="/">Home</NavLinkLang>
                     </Nav.Item>
                     <Nav.Item>
-                        <NavLinkLang to="/blog?tags=['current']" search="hello=4">Blog</NavLinkLang>
+                        <NavLinkLang to="/blog?tags=['all']" search="hello=4">Blog</NavLinkLang>
                     </Nav.Item>
                     <Nav.Item>
                         <NavLinkLang to="/blog_all">All Posts</NavLinkLang>
