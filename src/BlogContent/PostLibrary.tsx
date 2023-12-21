@@ -33,7 +33,7 @@ const examplePost: PostData = {
 
 const theRunningBall = [
     {
-        published: new Date("2023-01-01"),
+        published: new Date("2022-08-11"),
         titleImage: "the-running-ball/run.png",
         tags: [Tag.gamedev, Tag.godot, Tag.gdScript],
         translations: MyLocalizedStrings.create({
