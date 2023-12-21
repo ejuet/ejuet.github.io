@@ -24,8 +24,8 @@ export enum Tag {
     swing,
 
     //categories:
-    projects,
     programmingLanguages,
+    frameworks
 
 }
 
@@ -125,21 +125,24 @@ export function getTagInfo(tag: Tag): TagInfo {
                     }
                 })
             };
-        case Tag.projects:
+        case Tag.frameworks:
             return {
                 color: "var(--bs-primary)",
                 translations: MyLocalizedStrings.create({
                     en: {
-                        title: "Projects",
-                        description: "My personal projects.",
+                        title: "Tools",
+                        description: "Frameworks, engines and other tools I have used.",
                     },
                     de: {
-                        title: "Projekte",
-                        description: "Meine persönlichen Projekte",
+                        title: "Tools",
+                        description: "Frameworks, Engines und sonstige Tools, die ich benutzt habe.",
                     }
                 }),
                 subcategories: [
-                    Tag.thisWebsite
+                    Tag.react,
+                    Tag.swing,
+                    Tag.unity,
+                    Tag.git
                 ]
             }
         case Tag.programmingLanguages:
