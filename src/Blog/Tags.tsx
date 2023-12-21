@@ -149,8 +149,8 @@ export function getTagInfo(tagg: Tag): TagInfo {
                     Tag.react,
                     Tag.swing,
                     Tag.unity,
+                    Tag.godot,
                     Tag.git,
-                    Tag.godot
                 ]
             }
         case Tag.programmingLanguages:
@@ -167,12 +167,12 @@ export function getTagInfo(tagg: Tag): TagInfo {
                     }
                 }),
                 subcategories: [
-                    Tag.javaScript,
-                    Tag.typeScript,
                     Tag.java,
-                    Tag.lua,
                     Tag.csharp,
                     Tag.rust,
+                    Tag.javaScript,
+                    Tag.typeScript,
+                    Tag.lua,
                     Tag.gdScript
                 ]
             }
