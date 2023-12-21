@@ -21,6 +21,7 @@ export enum Tag {
     gamedev,
     android,
     rust,
+    swing,
 
     //categories:
     projects,
