@@ -11,7 +11,6 @@ import { MyPrivacy } from './MyPrivacy.js';
 import { StarParallax } from './Parallax/Parallax.tsx';
 import { LatestPostCarousel, PostCard, PostPage, PostsAsCards } from "./Blog/BlogComponents.tsx";
 import { PostsWithTagCards } from './Blog/BlogComponents.tsx';
-import { Masonry } from './TestMasonry/Masonry.tsx';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -48,7 +47,6 @@ export const router = createHashRouter([
         path: "/blog",
         element: <WithNavbar>
             {<PostsWithTagsByQueryParams />}
-            <Masonry />
         </WithNavbar>,
     },
     {
