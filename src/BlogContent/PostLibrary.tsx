@@ -12,6 +12,7 @@ import Gist from "super-react-gist"
 import { rustCalculator } from "./rustCalculator.tsx";
 import { abrechnungsApp } from "./abrechnungsApp.tsx";
 import { theRunningBall } from "./theRunningBall.tsx";
+import { printYourCalendar } from "./printYourCalendar.tsx";
 
 //Posts
 
@@ -32,55 +33,59 @@ const examplePost: PostData = {
     }),
 }
 
-const printYourCalendar = [
+const robot = [
     {
-        published: new Date("2023-10-01"),
-        titleImage: "/print-my-calendar/caltitle.jpg",
-        tags: [Tag.react, Tag.javaScript],
+        published: new Date("2021-06-20"),
+        titleImage: "robot/robot.png",
+        tags: [Tag.elektronik, Tag.c, Tag.cpp, Tag.arduino],
         translations: MyLocalizedStrings.create({
             en: {
-                title: "Print Your Calendar",
-                subtitle: "A Website where you can turn your iCalendar-Files into a printable Calendar",
+                title: "Building a Robot",
+                subtitle: "Building and programming a self-driving robot with an ESP-32",
                 content: () => <>
+                    <p>In spring of 2022, I built a small robot that can drive and programmed it to move around.</p>
+                    <h1>The Robot</h1>
                     <p>
-                        Every year, my mum buys a calendar to hang up in our kitchen.
-                        It has a page for every month that looks like a table, with a row for every day.
-                        Every person in our family gets a column and can add their events there.
-                        But my mom also writes all birthdays and holidays in it, and even the times when the trash cans are emptied.
-                        That takes a lot of effort.
-                        But all that data can either be downloaded online as <code>.iCal</code> files,
-                        or could be added once in an electronic calendar and exported as <code>.iCal</code> files as well.
+                        After some research on what parts I could use, I ordered some things on ebay and went to my favourite hardware stores.
+                        I got 
+                        <ul>
+                            <li>An ESP-32, a small microcontroller to be the brains of my robot.</li>
+                            <li>4 motors with wheels attached to them to mount on the bottom of the robot.</li>
+                            <li>4 motor drivers to be able to control the speed and direction in which the wheels turn.</li>
+                        </ul>
                     </p>
+                    
+                    <h2>First Results</h2>
                     <p>
-                        There are a lot of websites that allow you to upload these files and download a printable calendar.
-                        But none of the ones I found let you use the table-layout our calendar always has.
-                        So i decided to create such a website myself.
+                        First, I tried to use some old motors I had lying around instead of the ones I bought, which I assumed to be too weak.
+                        The general setup of my robot was working well and I was able to control the rotation speed and direction of the motors with some code,
+                        but the motors were too weak to actually move the robot.
+                    </p>
+                    <video controls>
+                        <source src="./robot/motor.mp4" type="video/mp4" />
+                    </video>
+                    <img src="./robot/firstrobot.jpg" />
+                    <p>
+                        To test if the new motors were strong enough, I assembled the robot using 2 of the wheels I bought and some cardboard.
+                        Although this was not the most stable construction, it worked quite well:
+                    </p>
+                    <video controls>
+                        <source src="./robot/run.mp4" type="video/mp4" />
+                    </video>
+                    
+                    <h2>Programming the Robot</h2>
+                    <p>
+                        The code I wrote for this project are C++ Libraries.
+                        Then, I used the <a>Arduino IDE</a> for including these libraries, executing their code and transferring the program onto the ESP-32.
                     </p>
 
-                    <h1>Print My Calendar</h1>
+                    <h3>Motor.cpp</h3>
                     <p>
-                        The website is available at <a href="https://ejuet.github.io/print-my-calendar/">Print My Calendar</a>.
+                        For example, I wrote a library to control each of the 4 available motors.
                     </p>
+                    <Gist url="https://gist.github.com/ejuet/90f30327c96b7806e2da6c0afe6f5af5" />
+                    <Gist url="https://gist.github.com/ejuet/f590e44cb7a8c584f8fb829df729422e" />
 
-                    <h2>
-                        How it works
-                    </h2>
-                    <p>
-                        Users can input their iCal files. By default, one file equals one column in the exported calendar.
-                        Users can merge or split columns and add new ones.
-                        Then, they can decide for which time frame they want to create a printable calendar.
-                        This also allows for using iCal-Events that repeat every year so users can upload the same file each year.
-                        After changing the design of the calendar, users can download their calendar.
-                    </p>
-                    <img src="/print-my-calendar/edit.png" />
-                    <h2>Downloading the Calendar</h2>
-                    <p>
-                        First, the calendar is rendered as an html element, which users can see at the bottom of the page.
-                        Then, <a href="https://www.npmjs.com/package/html2canvas">html2canvas</a> is used to turn the rendered result into a html canvas.
-                        The content of the canvas can be downloaded as an image.
-                        This is done for every month of the specified time frame, so the user can print the pages for each month individually.
-                    </p>
-                    <img src="/print-my-calendar/cal.jpg" />
                 </>
             }
         }),
@@ -107,7 +112,9 @@ export const postLibrary = new PostLibrary(
 
         ...theRunningBall,
 
-        ...printYourCalendar
+        ...printYourCalendar,
+
+        ...robot
     ]
 );
 

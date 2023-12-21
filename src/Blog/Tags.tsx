@@ -25,6 +25,10 @@ export enum Tag {
     godot,
     gdScript,
     firebase,
+    c,
+    cpp,
+    arduino,
+    elektronik,
 
     //categories:
     programmingLanguages,
@@ -92,6 +96,10 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getProgrammingLanguageTagInfo({ color: "#e33b26" });
         case Tag.gdScript:
             return getProgrammingLanguageTagInfo({ color: "#3e8ecc", langName: "GDScript" });
+        case Tag.cpp:
+            return getProgrammingLanguageTagInfo({ color: "#6295cb", langName: "C++" });
+        case Tag.c:
+            return getProgrammingLanguageTagInfo({ color: "#6295cb", });
 
         case Tag.react:
             return getDefault({ color: "#5ed3f3" });
@@ -103,6 +111,9 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getDefault({ color: "#3e8ecc" });
         case Tag.firebase:
             return getDefault({ color: "#f7a212" });
+        case Tag.arduino:
+            return getDefault({ color: "#009297" });
+        
         //other
         case Tag.gamedev:
             return getDefault({ color: "#e01b2f", name: "Game Development" });
@@ -154,6 +165,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
                     Tag.firebase,
                     Tag.unity,
                     Tag.godot,
+                    Tag.arduino,
                     Tag.git,
                 ]
             }
@@ -172,6 +184,8 @@ export function getTagInfo(tagg: Tag): TagInfo {
                 }),
                 subcategories: [
                     Tag.java,
+                    Tag.c,
+                    Tag.cpp,
                     Tag.csharp,
                     Tag.rust,
                     Tag.javaScript,
