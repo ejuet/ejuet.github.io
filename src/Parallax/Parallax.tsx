@@ -118,7 +118,7 @@ function useElementHeight(ref) {
     return useElementProp(ref, (el) => el.scrollHeight)
 }
 
-function useElementWidth(ref) {
+export function useElementWidth(ref) {
     return useElementProp(ref, (el) => el.scrollWidth)
 }
 
