@@ -79,9 +79,9 @@ function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
     </Container>;
 }
 
-export function PostCard({ postData }: { postData: PostData }) {
+export function PostCard({ postData, cardRef }: { postData: PostData, cardRef?:any }) {
     return <NavLinkLang to={postData.link}>
-        <Card className="mb-4">
+        <Card ref={cardRef?cardRef:undefined} className="mb-4">
             <Card.Img src={postData.titleImage} style={{ padding: "15px", borderRadius: "20px" }} />
             <Card.Body>
                 <Card.Title>{postData.translations.title}</Card.Title>
