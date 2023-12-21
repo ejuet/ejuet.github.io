@@ -11,6 +11,7 @@ import { MyLocalizedStrings } from "../Language/MyLocalizedStrings.js";
 import Gist from "super-react-gist"
 import { rustCalculator } from "./rustCalculator.tsx";
 import { abrechnungsApp } from "./abrechnungsApp.tsx";
+import { theRunningBall } from "./theRunningBall.tsx";
 
 //Posts
 
@@ -31,28 +32,55 @@ const examplePost: PostData = {
     }),
 }
 
-const theRunningBall = [
+const printYourCalendar = [
     {
-        published: new Date("2022-08-11"),
-        titleImage: "the-running-ball/run.png",
-        tags: [Tag.gamedev, Tag.godot, Tag.gdScript],
+        published: new Date("2023-10-01"),
+        titleImage: "/print-my-calendar/caltitle.jpg",
+        tags: [Tag.react, Tag.javaScript],
         translations: MyLocalizedStrings.create({
             en: {
-                title: "The Running Ball",
-                subtitle: "3D Game with Godot and GDScript",
+                title: "Print Your Calendar",
+                subtitle: "A Website where you can turn your iCalendar-Files into a printable Calendar",
                 content: () => <>
                     <p>
-                        After "The Falling Ball" was a massive success (only with my friends but still),
-                        it was obvious there needed to be a successor.
+                        Every year, my mum buys a calendar to hang up in our kitchen.
+                        It has a page for every month that looks like a table, with a row for every day.
+                        Every person in our family gets a column and can add their events there.
+                        But my mom also writes all birthdays and holidays in it, and even the times when the trash cans are emptied.
+                        That takes a lot of effort.
+                        But all that data can either be downloaded online as <code>.iCal</code> files,
+                        or could be added once in an electronic calendar and exported as <code>.iCal</code> files as well.
                     </p>
-                    <h1>The Running Ball</h1>
                     <p>
-                        Nach einem Countdown startet das Spiel.
-                        Man läuft eine Straße mit verschiedenen Spuren entlang.
-                        Diese werden zufällig generiert und brechen manchmal ab.
-                        Mithilfe der Pfeiltasten muss man dann die Spur wechseln.
-                        Mit der Leertaste kann man über die auf den Spuren auftauchenden roten und gelben Hindernisse springen.
+                        There are a lot of websites that allow you to upload these files and download a printable calendar.
+                        But none of the ones I found let you use the table-layout our calendar always has.
+                        So i decided to create such a website myself.
                     </p>
+
+                    <h1>Print My Calendar</h1>
+                    <p>
+                        The website is available at <a href="https://ejuet.github.io/print-my-calendar/">Print My Calendar</a>.
+                    </p>
+
+                    <h2>
+                        How it works
+                    </h2>
+                    <p>
+                        Users can input their iCal files. By default, one file equals one column in the exported calendar.
+                        Users can merge or split columns and add new ones.
+                        Then, they can decide for which time frame they want to create a printable calendar.
+                        This also allows for using iCal-Events that repeat every year so users can upload the same file each year.
+                        After changing the design of the calendar, users can download their calendar.
+                    </p>
+                    <img src="/print-my-calendar/edit.png" />
+                    <h2>Downloading the Calendar</h2>
+                    <p>
+                        First, the calendar is rendered as an html element, which users can see at the bottom of the page.
+                        Then, <a href="https://www.npmjs.com/package/html2canvas">html2canvas</a> is used to turn the rendered result into a html canvas.
+                        The content of the canvas can be downloaded as an image.
+                        This is done for every month of the specified time frame, so the user can print the pages for each month individually.
+                    </p>
+                    <img src="/print-my-calendar/cal.jpg" />
                 </>
             }
         }),
@@ -77,7 +105,9 @@ export const postLibrary = new PostLibrary(
 
         ...abrechnungsApp,
 
-        ...theRunningBall
+        ...theRunningBall,
+
+        ...printYourCalendar
     ]
 );
 
