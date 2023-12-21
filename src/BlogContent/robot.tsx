@@ -7,7 +7,7 @@ export const robot = [
     {
         published: new Date("2021-06-20"),
         titleImage: "robot/robot.png",
-        tags: [Tag.elektronik, Tag.c, Tag.cpp, Tag.arduino],
+        tags: [Tag.elektronics, Tag.c, Tag.cpp, Tag.arduino],
         translations: MyLocalizedStrings.create({
             en: {
                 title: "Building a Robot",

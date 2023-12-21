@@ -28,7 +28,7 @@ export enum Tag {
     c,
     cpp,
     arduino,
-    elektronik,
+    elektronics,
 
     //categories:
     programmingLanguages,
@@ -128,6 +128,20 @@ export function getTagInfo(tagg: Tag): TagInfo {
                     de: {
                         title: "Git",
                         description: "Blogposts über git.",
+                    }
+                })
+            };
+        case Tag.elektronics:
+            return {
+                ...getDefault(),
+                translations: MyLocalizedStrings.create({
+                    en: {
+                        title: "Electronics",
+                        description: "Blogposts about projects where I tinkered with electronics.",
+                    },
+                    de: {
+                        title: "Elektronik",
+                        description: "Blogposts über meine Elektronikbasteleien.",
                     }
                 })
             };
