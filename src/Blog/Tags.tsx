@@ -250,21 +250,12 @@ export function getCategories() {
 }
 
 function isCategory(tag: Tag): unknown {
-    return getTagInfo(Tag[tag] as unknown as Tag).subcategories &&
-        getTagInfo(Tag[tag] as unknown as Tag).subcategories.length > 0;
+    return getTagInfo(tag).subcategories &&
+        getTagInfo(tag).subcategories.length > 0;
 }
 
 export function getTagsWithCategory(cat) {
     return getTagInfo(cat).subcategories.map((tag)=>Tag[tag] as unknown as Tag)
-    return getTags().filter((tag) => {
-        for(let x in getTagInfo(Tag[cat] as unknown as Tag).subcategories) {
-            var t = getTagInfo(Tag[cat] as unknown as Tag).subcategories[x]
-            if(t == Tag[tag] as unknown as Tag) {
-                return true;
-            }
-        }
-        return false;
-    })
 }
 
 export function getTagsWithoutCategory() {
@@ -274,7 +265,7 @@ export function getTagsWithoutCategory() {
         }
         return getCategories().filter((cat) => {
             //only select categories in which tag is present
-            return getTagInfo(Tag[cat] as unknown as Tag).subcategories.indexOf(Tag[tag] as unknown as Tag) >= 0
+            return getTagInfo(cat).subcategories.indexOf(Tag[tag] as unknown as Tag) >= 0
         }).length <= 0 //amount of these categories is 0
     })
 }
