@@ -142,6 +142,9 @@ function TagBadge({ tagString }) {
                 if(Tag[tagString as unknown as keyof Tag] != Tag.all) {
                     tags = tags.filter((tag) => Tag[tag as unknown as keyof Tag] != Tag.all)
                 }
+                else{
+                    tags = tags.filter((tag) => Tag[tag as unknown as keyof Tag] == Tag.all)
+                }
 
             }
             searchParams.set("tags", JSON.stringify(tags).replaceAll("\"", "'"));
