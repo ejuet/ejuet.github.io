@@ -22,6 +22,8 @@ export enum Tag {
     android,
     rust,
     swing,
+    godot,
+    gdScript,
 
     //categories:
     programmingLanguages,
@@ -84,15 +86,19 @@ export function getTagInfo(tag: Tag): TagInfo {
             return getProgrammingLanguageTagInfo({ color: "#2f74c0" });
         case Tag.csharp:
             return getProgrammingLanguageTagInfo({ color: "#9c75d5", langName: "C#" });
+        case Tag.rust:
+            return getProgrammingLanguageTagInfo({ color: "#e33b26" });
+        case Tag.gdScript:
+            return getProgrammingLanguageTagInfo({ color: "#3e8ecc", langName: "GDScript" });
+
         case Tag.react:
             return getDefault({ color: "#5ed3f3" });
         case Tag.android:
             return getDefault({ color: "#a6c447" });
         case Tag.unity:
             return getDefault({ color: "#000000" });
-        case Tag.rust:
-            return getDefault({ color: "#e33b26" });
-        
+        case Tag.godot:
+            return getDefault({ color: "#3e8ecc" });
         //other
         case Tag.gamedev:
             return getDefault({ color: "#e01b2f", name: "Game Development" });
@@ -142,7 +148,8 @@ export function getTagInfo(tag: Tag): TagInfo {
                     Tag.react,
                     Tag.swing,
                     Tag.unity,
-                    Tag.git
+                    Tag.git,
+                    Tag.godot
                 ]
             }
         case Tag.programmingLanguages:
@@ -164,7 +171,8 @@ export function getTagInfo(tag: Tag): TagInfo {
                     Tag.java,
                     Tag.lua,
                     Tag.csharp,
-                    Tag.rust
+                    Tag.rust,
+                    Tag.gdScript
                 ]
             }
         case Tag.all:
