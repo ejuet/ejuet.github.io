@@ -31,7 +31,8 @@ export enum Tag {
 
 }
 
-export function getTagInfo(tag: Tag): TagInfo {
+export function getTagInfo(tagg: Tag): TagInfo {
+    var tag = typeof tagg == "number" ? tagg : Tag[tagg]
     switch(tag) {
         case Tag.current:
             return {
@@ -194,7 +195,7 @@ export function getTagInfo(tag: Tag): TagInfo {
     }
 
     function getProgrammingLanguageTagInfo({ color = "#000000", langName = "" }: { color?: string; langName?: string; } = {}) {
-        const languageName = langName != "" ? langName : Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+        const languageName = langName != "" ? langName : getTagName();
         return {
             color: color,
             translations: MyLocalizedStrings.create({
@@ -210,8 +211,12 @@ export function getTagInfo(tag: Tag): TagInfo {
         };
     }
 
+    function getTagName() {
+        return Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+    }
+
     function getDefault({ color = "rgba(0,0,0,0.5)", name = "" }: { color?: string; name?: string; } = {}) {
-        const displayName = name != "" ? name : Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
+        const displayName = name != "" ? name : getTagName();
         return {
             color: color,
             translations: MyLocalizedStrings.create({
@@ -250,6 +255,7 @@ function isCategory(tag: Tag): unknown {
 }
 
 export function getTagsWithCategory(cat) {
+    return getTagInfo(cat).subcategories.map((tag)=>Tag[tag] as unknown as Tag)
     return getTags().filter((tag) => {
         for(let x in getTagInfo(Tag[cat] as unknown as Tag).subcategories) {
             var t = getTagInfo(Tag[cat] as unknown as Tag).subcategories[x]
