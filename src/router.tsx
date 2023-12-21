@@ -18,14 +18,14 @@ const strings = new MyLocalizedStrings({
         language: "Language",
         flag: "🇬🇧",
         blogPosts: "Blog Posts",
-        other: "Other"
+        other: "Other Tags"
     },
     de: {
         privacyPolicy: "Datenschutzerklärung",
         language: "Sprache",
         flag: "🇩🇪",
         blogPosts: "Beiträge",
-        other: "Andere"
+        other: "Weitere Tags"
     },
 });
 export const router = createHashRouter([
