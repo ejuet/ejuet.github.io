@@ -155,7 +155,7 @@ export const oldUnityPosts = [
     {
         published: new Date("2022-04-05"),
         titleImage: "pixel-runner/run.jpg",
-        tags: [Tag.csharp, Tag.unity, Tag.android, Tag.gamedev],
+        tags: [Tag.csharp, Tag.unity, Tag.android, Tag.gamedev, Tag.firebase],
         //ursprünglich new LocalizedStrings(), dann auch typecheck TODO fixen sodass new MyLocalizedStrings geht
         translations: MyLocalizedStrings.create({
             de: {
@@ -163,6 +163,13 @@ export const oldUnityPosts = [
                 subtitle: "A pixelated 2D mobile Game",
                 content: () => <>
                     <h1>Pixel Platformer</h1>
+
+                    <h2>Firebase</h2>
+                    <p>
+                        After a few years of not continuing to work on this game, I picked up the project in early 2022.
+                        Now, users are able to log in with an account in order to compare their highscores online.
+                        Creating the accounts and saving the data is done with Firebase Auth and Firestore.
+                    </p>
                 </>
             },
         }),

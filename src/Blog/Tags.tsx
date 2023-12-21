@@ -24,6 +24,7 @@ export enum Tag {
     swing,
     godot,
     gdScript,
+    firebase,
 
     //categories:
     programmingLanguages,
@@ -100,6 +101,8 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getDefault({ color: "#000000" });
         case Tag.godot:
             return getDefault({ color: "#3e8ecc" });
+        case Tag.firebase:
+            return getDefault({ color: "#f7a212" });
         //other
         case Tag.gamedev:
             return getDefault({ color: "#e01b2f", name: "Game Development" });
@@ -148,6 +151,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
                 subcategories: [
                     Tag.react,
                     Tag.swing,
+                    Tag.firebase,
                     Tag.unity,
                     Tag.godot,
                     Tag.git,
