@@ -14,6 +14,7 @@ import { abrechnungsApp } from "./abrechnungsApp.tsx";
 import { theRunningBall } from "./theRunningBall.tsx";
 import { printYourCalendar } from "./printYourCalendar.tsx";
 import { robot } from "./robot.tsx";
+import { drone } from "./drone.tsx";
 
 //Posts
 
@@ -33,26 +34,6 @@ const examplePost: PostData = {
         }
     }),
 }
-
-//TODO etwas code von drohne + videos und fotos
-const drone=[
-    {
-        published: new Date("2020-02-01"),
-        titleImage: "tello/drone.png",
-        tags: [Tag.school, Tag.python],
-        translations: MyLocalizedStrings.create({
-            de: {
-                title: "Vermisstensuche mit einer Drohne",
-                subtitle: "Programmierung von Suchmustern für die Vermisstensuche für eine DJI Tello Drohne in Python",
-                content: () => <>
-                    <p></p>
-                    <h1></h1>
-                    <Gist url="https://gist.github.com/ejuet/e2f4c58205dbe48e069eb7cb6b1c0d97" />
-                </>
-            }
-        }),
-    }
-]
 
 export const postLibrary = new PostLibrary(
     [

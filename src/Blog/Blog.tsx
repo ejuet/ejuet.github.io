@@ -99,14 +99,27 @@ export class PostLibrary {
     constructor(postData: PostData[]) {
         var postdatas = postData
 
-        // add tags from tag groups
         postdatas.forEach((dat) => {
+            
+            // add tags from tag groups
             dat.tags.forEach(tag => {
-                getTagInfo(tag)
-                if(getTagInfo(tag).containsTags && getTagInfo(tag).containsTags.indexOf(tag) < 0) {
-                    dat.tags = dat.tags.concat(getTagInfo(tag).containsTags)
+                const tagInfo = getTagInfo(tag)
+                if(tagInfo.containsTags && tagInfo.containsTags.indexOf(tag) < 0) {
+                    dat.tags = dat.tags.concat(tagInfo.containsTags)
                 }
             })
+
+            //add current tag
+            const daysForCurrentTag = 120
+            if(Date.now() - dat.published.valueOf() < 1000 * 1 * 60 * 60 * 24 * daysForCurrentTag ){
+                if(dat.tags.indexOf(Tag.current)<0){
+                    dat.tags.push(Tag.current)
+                }
+                else{
+                    console.warn("post "+dat.translations.title+" has tag current set which should be set automatically. "
+                    +"If this is intentional, ignore this warning")
+                }
+            }
         })
         this.posts = postdatas.map((dat, i) => new Post(dat))
     }

@@ -151,7 +151,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
         case Tag.thisWebsite:
             return {
                 color: ["var(--bs-primary)"],
-                containsTags: [Tag.current, Tag.javaScript, Tag.typeScript, Tag.react],
+                containsTags: [Tag.javaScript, Tag.typeScript, Tag.react],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "This Website",
