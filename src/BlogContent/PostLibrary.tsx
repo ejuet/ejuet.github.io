@@ -15,6 +15,8 @@ import { theRunningBall } from "./theRunningBall.tsx";
 import { printYourCalendar } from "./printYourCalendar.tsx";
 import { robot } from "./robot.tsx";
 import { drone } from "./drone.tsx";
+import { infraredSensor } from "./infraredSensor.tsx";
+import { ev3 } from "./ev3.tsx";
 
 //Posts
 
@@ -60,6 +62,10 @@ export const postLibrary = new PostLibrary(
         ...robot,
 
         ...drone,
+
+        ...infraredSensor,
+
+        ...ev3
     ]
 );
 

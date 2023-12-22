@@ -28,8 +28,9 @@ export enum Tag {
     c,
     cpp,
     arduino,
-    elektronics,
+    electronics,
     python,
+    linux,
 
     //categories:
     programmingLanguages,
@@ -134,7 +135,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
                     }
                 })
             };
-        case Tag.elektronics:
+        case Tag.electronics:
             return {
                 ...getDefault(),
                 translations: MyLocalizedStrings.create({
