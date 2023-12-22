@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, createHashRouter, useSearchParams } from 'react-router-dom';
-import { Container, Nav, Navbar, Col, Row, Badge } from 'react-bootstrap';
+import { createHashRouter, useSearchParams } from 'react-router-dom';
+import { Container, Nav, Navbar, Col, Row } from 'react-bootstrap';
 import { MyLocalizedStrings } from './Language/MyLocalizedStrings.js';
 import { LanguageToggle } from "./Language/LanguageComponents.js"
 import { NavLinkLang } from './Language/NavLinkLang.js';
@@ -11,6 +11,7 @@ import { MyPrivacy } from './MyPrivacy.js';
 import { StarParallax } from './Parallax/Parallax.tsx';
 import { LatestPostCarousel, PostCard, PostPage, PostsAsCards } from "./Blog/BlogComponents.tsx";
 import { PostsWithTagCards } from './Blog/BlogComponents.tsx';
+import { TagBadge } from './Blog/BlogComponents.tsx';
 
 const strings = new MyLocalizedStrings({
     en: {
@@ -116,19 +117,19 @@ function CategoryTagBadges({ categoryName, categoryDescription, tags }) {
             {
 
                 tags.map((tag) => {
-                    return <TagBadge tagString={tag} key={tag} />
+                    return <SearchParamTagBadge tagString={tag} key={tag} />
                 })
             }
         </Row>
     </>
 }
 
-function TagBadge({ tagString }) {
+function SearchParamTagBadge({ tagString }) {
     const [params, setSearchParams] = useSearchParams();
     const active = params.get("tags") ? JSON.parse(params.get("tags").replaceAll("'", "\"")).includes(tagString) : false;
     const tagInfo = getTagInfo(Tag[tagString as keyof typeof Tag]);
 
-    return <TagBadgeElement color={tagInfo.color} active={active} setTag={setTag} title={tagInfo.translations.title} />
+    return <H2TagBadge tag={tagString} active={active} setTag={setTag} />
 
     function setTag() {
         setSearchParams(searchParams => {
@@ -153,21 +154,9 @@ function TagBadge({ tagString }) {
     }
 }
 
-function TagBadgeElement({ color, active, setTag, title }: { color: string; active: any; setTag: () => void; title: string; }) {
+function H2TagBadge({ active, setTag, tag }: { active: any; setTag: () => void; tag:Tag }) {
     return <h2 style={{ width: "fit-content" }}>
-        <Badge as={Link} to={""} pill bg="" style={{
-            "backgroundColor": color,
-            "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
-            zIndex: 100
-        }} onClick={(e) => {
-            e.preventDefault();
-
-            //muss über useSearchParams passieren weil sonst nicht mit HashRouter umgehen kann
-            setTag();
-
-        }}>
-            {title}
-        </Badge>
+        {<TagBadge active={active} setTag={setTag} tag={tag} />}
     </h2>;
 }
 

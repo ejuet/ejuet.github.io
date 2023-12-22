@@ -13,7 +13,7 @@ import { NavLinkLang } from "../Language/NavLinkLang.js";
 import { Utterances } from "utterances-react-component";
 import { CommentSection } from "./CommentSection.tsx";
 import { TableOfContents } from "../TableOfContents/TableOfContents.tsx";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { getPathToTag } from '../router.tsx';
 import { chatGPTPosts } from "../BlogContent/chatGPTPosts.tsx";
 import { getTagInfo } from "./Tags.tsx";
@@ -68,7 +68,11 @@ function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
         <Row className={center ? "justify-content-center" : ""}>
             {postData.tags.filter((tag)=>tag!=Tag.all).map((tag, index) => <Col key={index} className="col-md-auto p-0">
                 <NavLinkLang to={getPathToTag(Tag[tag])}>
-                    <Badge bg="" pill style={{ backgroundColor: getTagInfo(tag).color, marginRight: "3px" }}>
+                    <Badge bg="" pill style={{ marginRight: "3px",
+                    
+                    background: getTagInfo(tag).color2 ? "linear-gradient(0deg, "+getTagInfo(tag).color2+" 0%, "+getTagInfo(tag).color+" 40%)" : getTagInfo(tag).color
+                    
+                    }}>
                         {getTagInfo(tag).translations.title}
                     </Badge>
 
@@ -78,6 +82,26 @@ function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
         </Row>
     </Container>;
 }
+
+export function TagBadge({ active, setTag, tag }: { active: boolean; setTag: () => void; tag: Tag; }) {
+    const color = getTagInfo(tag).color
+    const title = getTagInfo(tag).translations.title
+    return <Badge as={Link} to={""} pill bg="" style={{
+        "backgroundColor": color,
+        "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
+        background: getTagInfo(tag).color2 ? "linear-gradient(0deg, "+getTagInfo(tag).color2+" 0%, "+getTagInfo(tag).color+" 40%)" : getTagInfo(tag).color,
+        zIndex: 100
+    }} onClick={(e) => {
+        e.preventDefault();
+
+        //muss über useSearchParams passieren weil sonst nicht mit HashRouter umgehen kann
+        setTag();
+
+    } }>
+        {title}
+    </Badge>;
+}
+
 
 export function PostCard({ postData, cardRef }: { postData: PostData, cardRef?:any }) {
     return <NavLinkLang to={postData.link}>
@@ -152,3 +176,5 @@ export function PostsWithTagCards({ tagKey }) {
         <br></br>
     </>;
 }
+
+

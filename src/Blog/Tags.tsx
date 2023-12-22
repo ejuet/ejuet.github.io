@@ -29,6 +29,7 @@ export enum Tag {
     cpp,
     arduino,
     elektronics,
+    python,
 
     //categories:
     programmingLanguages,
@@ -100,6 +101,8 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getProgrammingLanguageTagInfo({ color: "#6295cb", langName: "C++" });
         case Tag.c:
             return getProgrammingLanguageTagInfo({ color: "#6295cb", });
+        case Tag.python:
+            return getProgrammingLanguageTagInfo({ color : "#3d7aab", color2: "#ffe261" });
 
         case Tag.react:
             return getDefault({ color: "#5ed3f3" });
@@ -201,6 +204,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
                     Tag.c,
                     Tag.cpp,
                     Tag.csharp,
+                    Tag.python,
                     Tag.rust,
                     Tag.javaScript,
                     Tag.typeScript,
@@ -226,10 +230,10 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getDefault()
     }
 
-    function getProgrammingLanguageTagInfo({ color = "#000000", langName = "" }: { color?: string; langName?: string; } = {}) {
+    function getProgrammingLanguageTagInfo({ color = "#000000", langName = "", color2=undefined }: { color?: string; color2?: string; langName?: string; } = {}) {
         const languageName = langName != "" ? langName : getTagName();
         return {
-            color: color,
+            ...getDefault({color:color, color2: color2, name:langName}),
             translations: MyLocalizedStrings.create({
                 en: {
                     title: languageName,
@@ -247,10 +251,11 @@ export function getTagInfo(tagg: Tag): TagInfo {
         return Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
     }
 
-    function getDefault({ color = "rgba(0,0,0,0.5)", name = "" }: { color?: string; name?: string; } = {}) {
+    function getDefault({ color = "rgba(0,0,0,0.5)", name = "", color2=undefined }: { color?: string; color2?: string; name?: string; } = {}) {
         const displayName = name != "" ? name : getTagName();
         return {
             color: color,
+            color2: color2,
             translations: MyLocalizedStrings.create({
                 en: {
                     title: displayName,
@@ -305,6 +310,7 @@ export function getTagsWithoutCategory() {
 
 export interface TagInfo {
     color: string;
+    color2?: string;
     translations: TagTranslations;
     subcategories?: Tag[]
     containsTags?: Tag[]
