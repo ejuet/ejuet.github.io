@@ -85,7 +85,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             };
         //Programming Languages:
         case Tag.java:
-            return getProgrammingLanguageTagInfo({ color: "#f58312" });
+            return getProgrammingLanguageTagInfo({ color: ["#f58312", "#4d7997"] });
         case Tag.lua:
             return getProgrammingLanguageTagInfo({ color: "#03027d" });
         case Tag.javaScript:
@@ -93,15 +93,15 @@ export function getTagInfo(tagg: Tag): TagInfo {
         case Tag.typeScript:
             return getProgrammingLanguageTagInfo({ color: "#2f74c0" });
         case Tag.csharp:
-            return getProgrammingLanguageTagInfo({ color: "#9c75d5", langName: "C#" });
+            return getProgrammingLanguageTagInfo({ color: ["#31007f", "#9c75d5"], langName: "C#" });
         case Tag.rust:
-            return getProgrammingLanguageTagInfo({ color: "#e33b26" });
+            return getProgrammingLanguageTagInfo({ color: ["#e33b26", "#8f1f1d"] });
         case Tag.gdScript:
             return getProgrammingLanguageTagInfo({ color: "#3e8ecc", langName: "GDScript" });
         case Tag.cpp:
-            return getProgrammingLanguageTagInfo({ color: "#6295cb", langName: "C++" });
+            return getProgrammingLanguageTagInfo({ color: ["#00427e","#6295cb"], langName: "C++" });
         case Tag.c:
-            return getProgrammingLanguageTagInfo({ color: "#6295cb", });
+            return getProgrammingLanguageTagInfo({ color: ["#00427e","#6295cb"], });
         case Tag.python:
             return getProgrammingLanguageTagInfo({ color : ["#3d7aab",  "#ffe261"]});
 
@@ -110,11 +110,11 @@ export function getTagInfo(tagg: Tag): TagInfo {
         case Tag.android:
             return getDefault({ color: "#a6c447" });
         case Tag.unity:
-            return getDefault({ color: "#000000" });
+            return getDefault({ color: ["#000000", "grey"] });
         case Tag.godot:
             return getDefault({ color: "#3e8ecc" });
         case Tag.firebase:
-            return getDefault({ color: "#f7a212" });
+            return getDefault({ color: ["#f7c62f", "#f7a212"] });
         case Tag.arduino:
             return getDefault({ color: "#009297" });
         

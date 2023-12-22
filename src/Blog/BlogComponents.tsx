@@ -83,7 +83,7 @@ export function TagBadge({ active, setTag, tag, style }: { active: boolean; setT
         ...style,
         "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
         backgroundColor: getTagInfo(tag).color[0],
-        backgroundImage: getTagInfo(tag).color.length>=2 ? "linear-gradient(180deg, "+getTagInfo(tag).color[1]+" 0%, "+getTagInfo(tag).color[0]+" 40%)" : "var(--bs-gradient)",
+        backgroundImage: getTagInfo(tag).color.length>=2 ? "linear-gradient(0deg, "+getTagInfo(tag).color[0]+" 40%, "+getTagInfo(tag).color[1]+" 100%)" : "var(--bs-gradient)",
         zIndex: 100
     }} onClick={(e) => {
         e.preventDefault();
