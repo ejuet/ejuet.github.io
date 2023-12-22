@@ -68,13 +68,8 @@ function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
         <Row className={center ? "justify-content-center" : ""}>
             {postData.tags.filter((tag)=>tag!=Tag.all).map((tag, index) => <Col key={index} className="col-md-auto p-0">
                 <NavLinkLang to={getPathToTag(Tag[tag])}>
-                    <Badge bg="" pill style={{ marginRight: "3px",
                     
-                    background: getTagInfo(tag).color2 ? "linear-gradient(0deg, "+getTagInfo(tag).color2+" 0%, "+getTagInfo(tag).color+" 40%)" : getTagInfo(tag).color
-                    
-                    }}>
-                        {getTagInfo(tag).translations.title}
-                    </Badge>
+                    <TagBadge active={false} tag={tag} setTag={()=>{}} />
 
                 </NavLinkLang>
 
@@ -84,12 +79,9 @@ function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
 }
 
 export function TagBadge({ active, setTag, tag }: { active: boolean; setTag: () => void; tag: Tag; }) {
-    const color = getTagInfo(tag).color
-    const title = getTagInfo(tag).translations.title
     return <Badge as={Link} to={""} pill bg="" style={{
-        "backgroundColor": color,
         "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
-        background: getTagInfo(tag).color2 ? "linear-gradient(0deg, "+getTagInfo(tag).color2+" 0%, "+getTagInfo(tag).color+" 40%)" : getTagInfo(tag).color,
+        background: getTagInfo(tag).color.length>=2 ? "linear-gradient(180deg, "+getTagInfo(tag).color[1]+" 0%, "+getTagInfo(tag).color[0]+" 40%)" : getTagInfo(tag).color[0],
         zIndex: 100
     }} onClick={(e) => {
         e.preventDefault();
@@ -98,7 +90,7 @@ export function TagBadge({ active, setTag, tag }: { active: boolean; setTag: () 
         setTag();
 
     } }>
-        {title}
+        {getTagInfo(tag).translations.title}
     </Badge>;
 }
 
@@ -126,7 +118,7 @@ export function PostPage({ post }: { post: Post }) {
     const postData = post.getPostData();
     return <>
         <div className="text-light" style={{
-            backgroundColor: post.getColor(),
+            backgroundColor: post.getColor()[0],
             backgroundImage: 'url(' + require('./img/snow2.apng') + ')',
             backgroundSize: "contain"
         }}>
@@ -169,7 +161,7 @@ export function PostsWithTagCards({ tagKey }) {
     var tagInfo = getTagInfo(Tag[tagKey as keyof typeof Tag]);
     return <>
         <div className='d-flex justify-content-center'>
-            <h1 className='blur' style={{ color: tagInfo.color, marginTop: "20px", padding: "5px" }}>{tagInfo.translations.title}</h1>
+            <h1 className='blur' style={{ color: tagInfo.color[0], marginTop: "20px", padding: "5px" }}>{tagInfo.translations.title}</h1>
         </div>
         <p>{tagInfo.translations.description}</p>
         <PostsAsCards posts={postLibrary.getPostsWithTag(Tag[tagKey as keyof typeof Tag])} />

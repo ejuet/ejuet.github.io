@@ -42,7 +42,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
     switch(tag) {
         case Tag.current:
             return {
-                color: "var(--bs-success)",
+                color: ["var(--bs-success)"],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Current",
@@ -56,7 +56,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             };
         case Tag.school:
             return {
-                color: "gray",
+                color: ["gray"],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "School",
@@ -70,7 +70,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             };
         case Tag.chatgptauthor:
             return {
-                color: "#159c7c",
+                color: ["#159c7c"],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Written by ChatGPT",
@@ -102,7 +102,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
         case Tag.c:
             return getProgrammingLanguageTagInfo({ color: "#6295cb", });
         case Tag.python:
-            return getProgrammingLanguageTagInfo({ color : "#3d7aab", color2: "#ffe261" });
+            return getProgrammingLanguageTagInfo({ color : ["#3d7aab",  "#ffe261"]});
 
         case Tag.react:
             return getDefault({ color: "#5ed3f3" });
@@ -122,7 +122,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getDefault({ color: "#e01b2f", name: "Game Development" });
         case Tag.git:
             return {
-                color: "#c9281a",
+                color: ["#c9281a"],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Git",
@@ -150,7 +150,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             };
         case Tag.thisWebsite:
             return {
-                color: "var(--bs-primary)",
+                color: ["var(--bs-primary)"],
                 containsTags: [Tag.current, Tag.javaScript, Tag.typeScript, Tag.react],
                 translations: MyLocalizedStrings.create({
                     en: {
@@ -165,7 +165,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             };
         case Tag.frameworks:
             return {
-                color: "var(--bs-primary)",
+                color: ["var(--bs-primary)"],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Tools",
@@ -188,7 +188,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             }
         case Tag.programmingLanguages:
             return {
-                color: "var(--bs-primary)",
+                color: ["var(--bs-primary)"],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "Programming Languages",
@@ -214,7 +214,7 @@ export function getTagInfo(tagg: Tag): TagInfo {
             }
         case Tag.all:
             return {
-                color: "var(--bs-dark)",
+                color: ["var(--bs-dark)"],
                 translations: MyLocalizedStrings.create({
                     en: {
                         title: "All Posts",
@@ -230,10 +230,10 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getDefault()
     }
 
-    function getProgrammingLanguageTagInfo({ color = "#000000", langName = "", color2=undefined }: { color?: string; color2?: string; langName?: string; } = {}) {
+    function getProgrammingLanguageTagInfo({ color = ["#000000"], langName = ""}: { color?: string[]|string; langName?: string; } = {}) {
         const languageName = langName != "" ? langName : getTagName();
         return {
-            ...getDefault({color:color, color2: color2, name:langName}),
+            ...getDefault({color:color, name:langName}),
             translations: MyLocalizedStrings.create({
                 en: {
                     title: languageName,
@@ -251,11 +251,10 @@ export function getTagInfo(tagg: Tag): TagInfo {
         return Tag[tag].charAt(0).toLocaleUpperCase() + Tag[tag].slice(1);
     }
 
-    function getDefault({ color = "rgba(0,0,0,0.5)", name = "", color2=undefined }: { color?: string; color2?: string; name?: string; } = {}) {
+    function getDefault({ color = ["rgba(0,0,0,0.5)"], name = ""}: { color?: string[]|string; name?: string; } = {}) {
         const displayName = name != "" ? name : getTagName();
         return {
-            color: color,
-            color2: color2,
+            color: typeof color=="string" ? [color] : color,
             translations: MyLocalizedStrings.create({
                 en: {
                     title: displayName,
@@ -309,8 +308,7 @@ export function getTagsWithoutCategory() {
 
 
 export interface TagInfo {
-    color: string;
-    color2?: string;
+    color: string[];
     translations: TagTranslations;
     subcategories?: Tag[]
     containsTags?: Tag[]
