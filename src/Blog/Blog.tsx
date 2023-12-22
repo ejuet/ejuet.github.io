@@ -111,7 +111,7 @@ export class PostLibrary {
 
             //add current tag
             const daysForCurrentTag = 120
-            if(Date.now() - dat.published.valueOf() < 1000 * 1 * 60 * 60 * 24 * daysForCurrentTag ){
+            if(dat.published && Date.now() - dat.published.valueOf() < 1000 * 1 * 60 * 60 * 24 * daysForCurrentTag ){
                 if(dat.tags.indexOf(Tag.current)<0){
                     dat.tags.push(Tag.current)
                 }
