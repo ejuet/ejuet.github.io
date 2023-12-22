@@ -18,6 +18,23 @@ export const theRunningBall = [
                     </p>
                     <h1>The Running Ball</h1>
                     <p>
+                    After a countdown, the game starts.
+                    You run along a road with various lanes. These are randomly generated and sometimes break off.
+                    Using the arrow keys, you have to switch lanes. With the space bar,
+                    you can jump over the red and yellow obstacles that appear on the lanes.
+                    </p>
+                </>
+            },
+            de:{
+                title: "The Running Ball",
+                subtitle: "3D Game mit Godot und GDScript",
+                content: () => <>
+                    <p>
+                        After "The Falling Ball" was a massive success (only with my friends but still),
+                        it was obvious there needed to be a successor.
+                    </p>
+                    <h1>The Running Ball</h1>
+                    <p>
                         Nach einem Countdown startet das Spiel.
                         Man läuft eine Straße mit verschiedenen Spuren entlang.
                         Diese werden zufällig generiert und brechen manchmal ab.
