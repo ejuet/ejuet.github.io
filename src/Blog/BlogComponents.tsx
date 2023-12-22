@@ -69,7 +69,7 @@ function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
             {postData.tags.filter((tag)=>tag!=Tag.all).map((tag, index) => <Col key={index} className="col-md-auto p-0">
                 <NavLinkLang to={getPathToTag(Tag[tag])}>
                     
-                    <TagBadge active={false} tag={tag} setTag={()=>{}} />
+                    <TagBadge active={false} tag={tag} setTag={()=>{}} style={{marginRight: "3px"}} />
 
                 </NavLinkLang>
 
@@ -78,8 +78,9 @@ function TagRow({ center, postData }: { center: boolean, postData: PostData }) {
     </Container>;
 }
 
-export function TagBadge({ active, setTag, tag }: { active: boolean; setTag: () => void; tag: Tag; }) {
+export function TagBadge({ active, setTag, tag, style }: { active: boolean; setTag: () => void; tag: Tag; style?:any }) {
     return <Badge as={Link} to={""} pill bg="" style={{
+        ...style,
         "boxShadow": active ? "0 0 9px 4px var(--bs-primary)" : "",
         backgroundColor: getTagInfo(tag).color[0],
         backgroundImage: getTagInfo(tag).color.length>=2 ? "linear-gradient(180deg, "+getTagInfo(tag).color[1]+" 0%, "+getTagInfo(tag).color[0]+" 40%)" : "var(--bs-gradient)",
