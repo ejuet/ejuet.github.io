@@ -17,6 +17,7 @@ import { robot } from "./robot.tsx";
 import { drone } from "./drone.tsx";
 import { infraredSensor } from "./infraredSensor.tsx";
 import { ev3 } from "./ev3.tsx";
+import { googlebusinessbug } from "./googlebusinessbug.tsx";
 
 //Posts
 
@@ -65,7 +66,9 @@ export const postLibrary = new PostLibrary(
 
         ...infraredSensor,
 
-        ...ev3
+        ...ev3,
+
+        ...googlebusinessbug,
     ]
 );
 

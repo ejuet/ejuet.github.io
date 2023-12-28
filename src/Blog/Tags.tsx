@@ -31,6 +31,7 @@ export enum Tag {
     electronics,
     python,
     linux,
+    googleBusiness,
 
     //categories:
     programmingLanguages,
