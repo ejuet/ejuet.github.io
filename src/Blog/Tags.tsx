@@ -118,6 +118,8 @@ export function getTagInfo(tagg: Tag): TagInfo {
             return getDefault({ color: ["#f7c62f", "#f7a212"] });
         case Tag.arduino:
             return getDefault({ color: "#009297" });
+        case Tag.googleBusiness:
+            return getDefault({ color: ["#4285f4", "#ea4335"], name: "Google Business" });
         
         //other
         case Tag.gamedev:
