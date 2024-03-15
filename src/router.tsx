@@ -216,7 +216,7 @@ function MyFooter() {
         }} className="footer navbar-static-bottom bg-tertiary border-top">
             <Row className='p-3'>
                 <Col xs={12} md={6}>
-                    <p className='m-0'>© ejuet 2023</p>
+                    <p className='m-0'>© ejuet 2024</p>
                 </Col>
                 <Col xs={12} md={6} className='justify-content-end d-flex'>
                     <NavLinkLang to="/privacy">{strings.privacyPolicy}</NavLinkLang>
